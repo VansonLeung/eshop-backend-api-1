@@ -2,19 +2,23 @@ import Sequelize, { DataTypes } from "sequelize"
 import { BasicAttributes } from "./_incl/BasicAttributes.js"
 import { DatedStatusAttributes } from "./_incl/DatedStatusAttributes.js";
 import { ContentAttributes } from "./_incl/ContentAttributes.js";
-import { Settings } from "./_settings/Settings.js";
 import { DatedSoftDeleteStatusAttributes } from "./_incl/DatedSoftDeleteStatusAttributes.js";
+import { ContentAssociations } from "./_incl/ContentAssociations.js";
+import { ProductVariantAttributes } from "./_incl/ProductVariantAttributes.js";
+import { Settings } from "./_settings/Settings.js";
 
-export const EBOrderPayment = {
-    makeAssociations: ({Me, Order}) => {
-        Me.belongsTo(Order, {
-            foreignKey: 'orderId',
-            as: 'order',
+export const EBProductVariant = {
+    makeAssociations: ({Me, Lang, Product}) => {
+        ContentAssociations({ Me, Lang });
+
+        Me.belongsTo(Product, {
+            as: 'product',
+            foreignKey: 'productId',
             constraints: Settings.constraints,
         });
-        Order.hasMany(Me, {
-            foreignKey: 'orderId',
-            as: 'orderPayments',
+        Product.hasMany(Me, {
+            as: 'variants',
+            foreignKey: 'productId',
             constraints: Settings.constraints,
         });
     },
@@ -24,8 +28,9 @@ export const EBOrderPayment = {
             ...BasicAttributes(),
             ...DatedStatusAttributes(),
             ...DatedSoftDeleteStatusAttributes(),
-            orderId: DataTypes.UUID,
+            productId: { type: DataTypes.UUID, index: true },
             ...ContentAttributes(),
+            ...ProductVariantAttributes(),
         }
     },
 };

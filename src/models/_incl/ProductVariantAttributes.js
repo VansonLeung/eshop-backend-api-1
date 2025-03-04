@@ -1,7 +1,11 @@
 import Sequelize, { DataTypes } from "sequelize";
 
-export const ProductAttributes = () => {
+export const ProductVariantAttributes = () => {
     return {
+        sku: {
+            type: DataTypes.STRING(64),
+            index: true,
+        },
         price: {
             type: DataTypes.DECIMAL(10, 2), // Represents a fixed-point number with precision 10 and scale 2
             allowNull: false,
@@ -13,9 +17,6 @@ export const ProductAttributes = () => {
             allowNull: false,
             defaultValue: 0, // Default quantity value is set to 0
             index: true,
-        },
-        variants_json: {
-            type: DataTypes.JSON,
         },
     }
 }

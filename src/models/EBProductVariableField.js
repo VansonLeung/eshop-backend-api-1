@@ -1,21 +1,20 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { BasicAttributes } from "./_incl/BasicAttributes.js";
+import { BasicAttributes } from "./_incl/BasicAttributes.js"
 import { DatedStatusAttributes } from "./_incl/DatedStatusAttributes.js";
+import { ContentAttributes } from "./_incl/ContentAttributes.js";
 import { Settings } from "./_settings/Settings.js";
 import { DatedSoftDeleteStatusAttributes } from "./_incl/DatedSoftDeleteStatusAttributes.js";
 
-export const EBProductTypeProductMapping = {
-    makeAssociations: ({Me, ProductType, Product}) => {
-        ProductType.belongsToMany(Product, { 
-            through: Me,
-            as: 'products',
-            foreignKey: 'productTypeId',
+export const EBProductVariableField = {
+    makeAssociations: ({Me, Product}) => {
+        Me.belongsTo(Product, {
+            foreignKey: 'productId',
+            as: 'product',
             constraints: Settings.constraints,
         });
-        Product.belongsToMany(ProductType, { 
-            through: Me,
-            as: 'productTypes',
+        Product.hasMany(Me, {
             foreignKey: 'productId',
+            as: 'productVariableFields',
             constraints: Settings.constraints,
         });
     },
@@ -24,8 +23,10 @@ export const EBProductTypeProductMapping = {
         return {
             ...BasicAttributes(),
             ...DatedStatusAttributes(),
-            productTypeId: DataTypes.UUID,
-            productId: DataTypes.UUID,
+            ...DatedSoftDeleteStatusAttributes(),
+            productId: {type: DataTypes.UUID, index: true, },
+            ...ContentAttributes(),
         }
     },
-}
+};
+

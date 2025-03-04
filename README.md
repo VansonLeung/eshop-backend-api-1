@@ -2,6 +2,12 @@
 
 This project is an e-commerce backend API built using Node.js, Sequelize, and MySQL. The API manages various entities such as users, products, orders, and shops. This document provides an overview of the model structures used in the project.
 
+## Features
+
+- Support MySQL relational database
+- Support content localization
+- Support nested product types
+
 ## Models
 
 ### ERD

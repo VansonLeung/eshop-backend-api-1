@@ -34,6 +34,10 @@ import { EBShopProductTypeMapping } from "./EBShopProductTypeMapping.js";
 import { EBShopOrderMapping } from "./EBShopOrderMapping.js";
 import { EBCustomerOrderMapping } from './EBCustomerOrderMapping.js';
 import { SchemaToIndexes } from './_helpers/SequelizeSchemaHelper.js';
+import { EBProductVariableField } from './EBProductVariableField.js';
+import { EBProductVariableFieldValue } from './EBProductVariableFieldValue.js';
+import { EBProductVariant } from './EBProductVariant.js';
+import { EBProductVariantVarMapping } from './EBProductVariantVarMapping.js';
 
 
 export const initializeModels = async () => 
@@ -70,6 +74,12 @@ export const initializeModels = async () =>
         const Product = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('Product', EBProduct.makeSchema());
         const ProductType = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ProductType', EBProductType.makeSchema(), { indexes: SchemaToIndexes(EBProductType.makeSchema()), });
     
+        const ProductVariableField = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ProductVariableField', EBProductVariableField.makeSchema());
+        const ProductVariableFieldValue = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ProductVariableFieldValue', EBProductVariableFieldValue.makeSchema());
+
+        const ProductVariant = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ProductVariant', EBProductVariant.makeSchema());
+        const ProductVariantVarMapping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ProductVariantVarMapping', EBProductVariantVarMapping.makeSchema());
+
         const ShopProductMapping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ShopProductMapping', EBShopProductMapping.makeSchema());
         
         const ProductTypeProductMapping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ProductTypeProductMapping', EBProductTypeProductMapping.makeSchema());
@@ -117,6 +127,12 @@ export const initializeModels = async () =>
         EBProduct.makeAssociations({Me: Product, Lang, });
         EBProductType.makeAssociations({Me: ProductType, Lang, });
     
+        EBProductVariableField.makeAssociations({Me: ProductVariableField, Product, });
+        EBProductVariableFieldValue.makeAssociations({Me: ProductVariableFieldValue, ProductVariableField, });
+        
+        EBProductVariant.makeAssociations({Me: ProductVariableFieldValue, Lang, Product, });
+        EBProductVariantVarMapping.makeAssociations({Me: ProductVariantVarMapping, ProductVariant, ProductVariableFieldValue, })
+
         EBShopProductMapping.makeAssociations({Me: ShopProductMapping, Shop, Product, });
     
         EBProductTypeProductMapping.makeAssociations({Me: ProductTypeProductMapping, ProductType, Product, });
@@ -130,7 +146,7 @@ export const initializeModels = async () =>
         EBPostTypePostMapping.makeAssociations({Me: PostTypePostMapping, PostType, Post, });
 
         EBOrder.makeAssociations({Me: Order, Customer: User, });
-        EBOrderItem.makeAssociations({Me: OrderItem, Order, Product, });
+        EBOrderItem.makeAssociations({Me: OrderItem, Order, Product, ProductVariant, });
 
         EBOrderBilling.makeAssociations({Me: OrderBilling, Order, });
         EBOrderShipping.makeAssociations({Me: OrderShipping, Order, });

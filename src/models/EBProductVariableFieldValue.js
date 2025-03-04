@@ -1,20 +1,20 @@
 import Sequelize, { DataTypes } from "sequelize"
 import { BasicAttributes } from "./_incl/BasicAttributes.js"
 import { DatedStatusAttributes } from "./_incl/DatedStatusAttributes.js";
+import { ContentAttributes } from "./_incl/ContentAttributes.js";
 import { Settings } from "./_settings/Settings.js";
 import { DatedSoftDeleteStatusAttributes } from "./_incl/DatedSoftDeleteStatusAttributes.js";
-import { ContactAttributes } from "./_incl/ContactAttributes.js";
 
-export const EBOrderBilling = {
-    makeAssociations: ({Me, Order}) => {
-        Me.belongsTo(Order, {
-            foreignKey: 'orderId',
-            as: 'order',
+export const EBProductVariableFieldValue = {
+    makeAssociations: ({Me, ProductVariableField}) => {
+        Me.belongsTo(ProductVariableField, {
+            foreignKey: 'productVariableFieldId',
+            as: 'productVariableField',
             constraints: Settings.constraints,
         });
-        Order.hasMany(Me, {
-            foreignKey: 'orderId',
-            as: 'orderCustomerBillings',
+        ProductVariableField.hasMany(Me, {
+            foreignKey: 'productVariableFieldId',
+            as: 'productVariableFieldValues',
             constraints: Settings.constraints,
         });
     },
@@ -24,8 +24,8 @@ export const EBOrderBilling = {
             ...BasicAttributes(),
             ...DatedStatusAttributes(),
             ...DatedSoftDeleteStatusAttributes(),
-            orderId: DataTypes.UUID,
-            ...ContactAttributes(),
+            productVariableFieldId: {type: DataTypes.UUID, index: true, },
+            ...ContentAttributes(),
         }
     },
 };
