@@ -6,21 +6,12 @@ import { DatedSoftDeleteStatusAttributes } from "./_incl/DatedSoftDeleteStatusAt
 import { ContentAssociations } from "./_incl/ContentAssociations.js";
 import { ProductVariantAttributes } from "./_incl/ProductVariantAttributes.js";
 import { Settings } from "./_settings/Settings.js";
+import { ProductVariantAssociations } from "./_incl/ProductVariantAssociations.js";
 
 export const EBProductVariant = {
     makeAssociations: ({Me, Lang, Product}) => {
         ContentAssociations({ Me, Lang });
-
-        Me.belongsTo(Product, {
-            as: 'product',
-            foreignKey: 'productId',
-            constraints: Settings.constraints,
-        });
-        Product.hasMany(Me, {
-            as: 'variants',
-            foreignKey: 'productId',
-            constraints: Settings.constraints,
-        });
+        ProductVariantAssociations({ Me, Product, })
     },
 
     makeSchema: () => {
@@ -28,7 +19,6 @@ export const EBProductVariant = {
             ...BasicAttributes(),
             ...DatedStatusAttributes(),
             ...DatedSoftDeleteStatusAttributes(),
-            productId: { type: DataTypes.UUID, index: true },
             ...ContentAttributes(),
             ...ProductVariantAttributes(),
         }
