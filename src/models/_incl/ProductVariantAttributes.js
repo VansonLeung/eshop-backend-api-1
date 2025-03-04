@@ -5,12 +5,12 @@ export const ProductVariantAttributes = () => {
         productId: { 
             type: DataTypes.UUID,
             index: true,
-            indexGroups: [{name: "ps", order: 0}],
+            uniqueGroups: [{name: "ps", order: 0}],
         },
         sku: {
             type: DataTypes.STRING(64),
             index: true,
-            indexGroups: [{name: "ps", order: 1}],
+            uniqueGroups: [{name: "ps", order: 1}],
         },
         price: {
             type: DataTypes.DECIMAL(10, 2), // Represents a fixed-point number with precision 10 and scale 2
