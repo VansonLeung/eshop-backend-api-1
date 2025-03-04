@@ -4,9 +4,11 @@ This project is an e-commerce backend API built using Node.js, Sequelize, and My
 
 ## Models
 
-### User Models
+### ERD
 
 ![erd](./doc/erd.svg)
+
+### User Models
 
 - **EBUser**
   - `id`: UUID (Primary Key)
