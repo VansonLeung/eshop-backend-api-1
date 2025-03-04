@@ -1,0 +1,959 @@
+digraph models_diagram {
+	graph [bb="0,0,4781.6,3561.4",
+		nodesep=.5,
+		overlap=false,
+		pad=0.5,
+		rankdir=TB,
+		ranksep=1
+	];
+	node [fontsize=10,
+		label="\N"
+	];
+	edge [color=black,
+		concentrate=true,
+		penwidth=0.75
+	];
+	UserPermission	 [height=3.6667,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>UserPermission</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">code: STRING</td></tr>
+  </table>>,
+		margin=0,
+		pos="52.5,1961.2",
+		shape=none,
+		width=1.4583];
+	UserRolePermissionMapping	 [height=3.3611,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>UserRolePermissionMapping</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">permissionId: UUID</td></tr>
+<tr><td port="7" align="left">roleId: UUID</td></tr>
+<tr><td port="8" align="left">userPermissionId: UUID</td></tr>
+<tr><td port="9" align="left">userRoleId: UUID</td></tr>
+  </table>>,
+		margin=0,
+		pos="377.5,1961.2",
+		shape=none,
+		width=1.7778];
+	UserPermission -> UserRolePermissionMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=none,
+		dir=both,
+		pos="e,313.26,1961.2 105.08,1961.2 159.96,1961.2 246.34,1961.2 307.09,1961.2"];
+	UserRole	 [height=3.6667,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>UserRole</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">code: STRING</td></tr>
+  </table>>,
+		margin=0,
+		pos="702.5,1961.2",
+		shape=none,
+		width=1.4583];
+	UserRole -> UserRolePermissionMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=none,
+		dir=both,
+		pos="e,441.74,1961.2 649.92,1961.2 595.04,1961.2 508.66,1961.2 447.91,1961.2"];
+	User	 [height=4.2778,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>User</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">userRoleId: UUID</td></tr>
+<tr><td port="11" align="left">username: STRING</td></tr>
+<tr><td port="12" align="left">email: STRING</td></tr>
+  </table>>,
+		margin=0,
+		pos="2614,746.86",
+		shape=none,
+		width=1.4583];
+	User -> UserRole	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,2561.4,780.29 2556.1,783.68 2271.9,964.23 1028,1754.4 755.42,1927.6"];
+	ShopOwnerMapping	 [height=2.75,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>ShopOwnerMapping</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">shopId: UUID</td></tr>
+<tr><td port="7" align="left">userId: UUID</td></tr>
+  </table>>,
+		margin=0,
+		pos="1726,1483.5",
+		shape=none,
+		width=1.2917];
+	User -> ShopOwnerMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=none,
+		dir=both,
+		pos="e,1772.7,1444.8 2561.4,790.47 2403.5,921.49 1934.4,1310.6 1777.6,1440.7"];
+	CustomerOrderMapping	 [height=3.9722,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>CustomerOrderMapping</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">customerId: UUID</td></tr>
+<tr><td port="11" align="left">orderId: UUID</td></tr>
+  </table>>,
+		margin=0,
+		pos="3207.9,766.15",
+		shape=none,
+		width=1.5];
+	User -> CustomerOrderMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=none,
+		dir=both,
+		pos="e,3153.6,764.39 2666.7,748.57 2776.9,752.15 3030.9,760.41 3147.5,764.19"];
+	UserCredential	 [height=4.2778,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>UserCredential</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">userId: UUID</td></tr>
+<tr><td port="11" align="left">type: ENUM</td></tr>
+<tr><td port="12" align="left">password: STRING</td></tr>
+  </table>>,
+		margin=0,
+		pos="1693.7,686.32",
+		shape=none,
+		width=1.4583];
+	UserCredential -> User	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,1746.5,689.79 1752.6,690.19 1920.7,701.25 2401.4,732.87 2561.4,743.4"];
+	UserSession	 [height=4.5833,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>UserSession</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">userId: UUID</td></tr>
+<tr><td port="11" align="left">userCredentialId: UUID</td></tr>
+<tr><td port="12" align="left">access_token: STRING</td></tr>
+<tr><td port="13" align="left">refresh_token: STRING</td></tr>
+  </table>>,
+		margin=0,
+		pos="1519,873.39",
+		shape=none,
+		width=1.4722];
+	UserSession -> User	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,1572.2,867.25 1578.4,866.54 1771.2,844.25 2378.7,774.06 2561.5,752.93"];
+	UserSession -> UserCredential	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,1572.1,816.5 1576.3,812.07 1597.2,789.7 1620.7,764.53 1641.1,742.62"];
+	UserContact	 [height=6.1111,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>UserContact</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">userId: UUID</td></tr>
+<tr><td port="11" align="left">firstName: STRING</td></tr>
+<tr><td port="12" align="left">lastName: STRING</td></tr>
+<tr><td port="13" align="left">email: STRING</td></tr>
+<tr><td port="14" align="left">phone: STRING</td></tr>
+<tr><td port="15" align="left">address: STRING</td></tr>
+<tr><td port="16" align="left">city: STRING</td></tr>
+<tr><td port="17" align="left">state: STRING</td></tr>
+<tr><td port="18" align="left">zip: STRING</td></tr>
+  </table>>,
+		margin=0,
+		pos="1927.2,510.47",
+		shape=none,
+		width=1.4583];
+	UserContact -> User	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,1979.9,528.62 1985.7,530.6 2117.3,575.89 2434.9,685.22 2561.1,728.64"];
+	UserShipping	 [height=6.4167,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>UserShipping</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">userId: UUID</td></tr>
+<tr><td port="11" align="left">is_default: BOOLEAN</td></tr>
+<tr><td port="12" align="left">firstName: STRING</td></tr>
+<tr><td port="13" align="left">lastName: STRING</td></tr>
+<tr><td port="14" align="left">email: STRING</td></tr>
+<tr><td port="15" align="left">phone: STRING</td></tr>
+<tr><td port="16" align="left">address: STRING</td></tr>
+<tr><td port="17" align="left">city: STRING</td></tr>
+<tr><td port="18" align="left">state: STRING</td></tr>
+<tr><td port="19" align="left">zip: STRING</td></tr>
+  </table>>,
+		margin=0,
+		pos="2401.6,295.11",
+		shape=none,
+		width=1.4583];
+	UserShipping -> User	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,2454.1,406.78 2456.8,412.52 2489.1,481.14 2529.6,567.26 2561.4,634.91"];
+	UserBilling	 [height=6.4167,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>UserBilling</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">userId: UUID</td></tr>
+<tr><td port="11" align="left">is_default: BOOLEAN</td></tr>
+<tr><td port="12" align="left">firstName: STRING</td></tr>
+<tr><td port="13" align="left">lastName: STRING</td></tr>
+<tr><td port="14" align="left">email: STRING</td></tr>
+<tr><td port="15" align="left">phone: STRING</td></tr>
+<tr><td port="16" align="left">address: STRING</td></tr>
+<tr><td port="17" align="left">city: STRING</td></tr>
+<tr><td port="18" align="left">state: STRING</td></tr>
+<tr><td port="19" align="left">zip: STRING</td></tr>
+  </table>>,
+		margin=0,
+		pos="2929.6,231",
+		shape=none,
+		width=1.4583];
+	UserBilling -> User	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,2877,317.05 2873.7,322.43 2815.1,418.17 2723.8,567.38 2666.5,661"];
+	UserPayment	 [height=6.4167,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>UserPayment</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">userId: UUID</td></tr>
+<tr><td port="11" align="left">is_default: BOOLEAN</td></tr>
+<tr><td port="12" align="left">desc: TEXT</td></tr>
+<tr><td port="13" align="left">json: JSON</td></tr>
+<tr><td port="14" align="left">baseId: UUID</td></tr>
+<tr><td port="15" align="left">langId: UUID</td></tr>
+<tr><td port="16" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="17" align="left">publishedAt: DATE</td></tr>
+<tr><td port="18" align="left">publishedBy: UUID</td></tr>
+<tr><td port="19" align="left">revision: NUMBER</td></tr>
+  </table>>,
+		margin=0,
+		pos="3452.2,330.21",
+		shape=none,
+		width=1.5139];
+	UserPayment -> User	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,3397.5,357.39 3392,360.11 3235,438.16 2814.7,647.11 2666.6,720.74"];
+	UserCartItem	 [height=4.8889,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>UserCartItem</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">userId: UUID</td></tr>
+<tr><td port="11" align="left">productId: UUID</td></tr>
+<tr><td port="12" align="left">ordered_price: NUMBER</td></tr>
+<tr><td port="13" align="left">ordered_quantity: NUMBER</td></tr>
+<tr><td port="14" align="left">ordered_variants_json: JSON</td></tr>
+  </table>>,
+		margin=0,
+		pos="2079.2,1005.8",
+		shape=none,
+		width=1.7778];
+	UserCartItem -> User	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,2143.4,974.66 2148.9,972.04 2257.3,919.54 2464.2,819.4 2561.2,772.41"];
+	Product	 [height=6.7222,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>Product</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">desc: TEXT</td></tr>
+<tr><td port="11" align="left">json: JSON</td></tr>
+<tr><td port="12" align="left">baseId: UUID</td></tr>
+<tr><td port="13" align="left">langId: UUID</td></tr>
+<tr><td port="14" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="15" align="left">publishedAt: DATE</td></tr>
+<tr><td port="16" align="left">publishedBy: UUID</td></tr>
+<tr><td port="17" align="left">revision: NUMBER</td></tr>
+<tr><td port="18" align="left">price: NUMBER</td></tr>
+<tr><td port="19" align="left">quantity: NUMBER</td></tr>
+<tr><td port="20" align="left">variants_json: JSON</td></tr>
+  </table>>,
+		margin=0,
+		pos="3870,2699.2",
+		shape=none,
+		width=1.5139];
+	UserCartItem -> Product	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,2143.2,1066.3 2147.8,1070.6 2437.1,1344.2 3554,2400.4 3815.2,2647.4"];
+	Shop	 [height=5.8056,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>Shop</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">desc: TEXT</td></tr>
+<tr><td port="11" align="left">json: JSON</td></tr>
+<tr><td port="12" align="left">baseId: UUID</td></tr>
+<tr><td port="13" align="left">langId: UUID</td></tr>
+<tr><td port="14" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="15" align="left">publishedAt: DATE</td></tr>
+<tr><td port="16" align="left">publishedBy: UUID</td></tr>
+<tr><td port="17" align="left">revision: NUMBER</td></tr>
+  </table>>,
+		margin=0,
+		pos="2259.5,3041.1",
+		shape=none,
+		width=1.5139];
+	Shop -> ShopOwnerMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,2204.9,2881.7 e,1760,1582.8 2203,2876.1 2093,2554.9 1853,1854.4 1762,1588.6"];
+	ShopProductMapping	 [height=2.75,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>ShopProductMapping</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">shopId: UUID</td></tr>
+<tr><td port="7" align="left">productId: UUID</td></tr>
+  </table>>,
+		margin=0,
+		pos="2831.5,3202",
+		shape=none,
+		width=1.3472];
+	Shop -> ShopProductMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=none,
+		dir=both,
+		pos="e,2782.9,3188.3 2314.1,3056.5 2423.3,3087.2 2667.6,3155.9 2776.8,3186.6"];
+	ShopProductTypeMapping	 [height=2.75,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>ShopProductTypeMapping</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">shopId: UUID</td></tr>
+<tr><td port="7" align="left">productTypeId: UUID</td></tr>
+  </table>>,
+		margin=0,
+		pos="3724.7,1059.2",
+		shape=none,
+		width=1.6389];
+	Shop -> ShopProductTypeMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=none,
+		dir=both,
+		pos="e,3665.7,1139.1 2314.1,2967.3 2542.1,2658.9 3418.6,1473.3 3661.8,1144.3"];
+	Lang	 [height=3.6667,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>Lang</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">code: STRING</td></tr>
+<tr><td port="3" align="left">createdAt: DATE</td></tr>
+<tr><td port="4" align="left">updatedAt: DATE</td></tr>
+<tr><td port="5" align="left">createdBy: UUID</td></tr>
+<tr><td port="6" align="left">updatedBy: UUID</td></tr>
+<tr><td port="7" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="8" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="9" align="left">deletedAt: DATE</td></tr>
+<tr><td port="10" align="left">deletedBy: UUID</td></tr>
+  </table>>,
+		margin=0,
+		pos="4195.7,1507.7",
+		shape=none,
+		width=1.4583];
+	Shop -> Lang	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,2314.1,2997.9 2319.1,2993.9 2609.1,2764.3 3869.5,1766.1 4143.2,1549.3"];
+	ShopOrderMapping	 [height=2.75,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>ShopOrderMapping</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">shopId: UUID</td></tr>
+<tr><td port="7" align="left">orderId: UUID</td></tr>
+  </table>>,
+		margin=0,
+		pos="1827.8,2632.9",
+		shape=none,
+		width=1.2361];
+	Shop -> ShopOrderMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=none,
+		dir=both,
+		pos="e,1872.5,2675.2 2204.8,2989.4 2120.2,2909.4 1958.7,2756.7 1877.3,2679.7"];
+	Product -> ShopProductMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,3815.3,2725.7 e,2880.1,3178.4 3809.9,2728.3 3624.3,2818.2 3063,3089.9 2885.7,3175.7"];
+	ProductTypeProductMapping	 [height=3.9722,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>ProductTypeProductMapping</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">productTypeId: UUID</td></tr>
+<tr><td port="11" align="left">productId: UUID</td></tr>
+  </table>>,
+		margin=0,
+		pos="4098.7,2150.8",
+		shape=none,
+		width=1.7778];
+	Product -> ProductTypeProductMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=none,
+		dir=both,
+		pos="e,4038.9,2294.2 3924.6,2568.2 3958.3,2487.5 4001.5,2383.8 4036.5,2300"];
+	Product -> Lang	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,3924.5,2499.8 3926.2,2493.7 3993.2,2248.7 4103,1846.8 4159.6,1639.9"];
+	ProductType	 [height=6.1111,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>ProductType</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">desc: TEXT</td></tr>
+<tr><td port="11" align="left">json: JSON</td></tr>
+<tr><td port="12" align="left">baseId: UUID</td></tr>
+<tr><td port="13" align="left">langId: UUID</td></tr>
+<tr><td port="14" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="15" align="left">publishedAt: DATE</td></tr>
+<tr><td port="16" align="left">publishedBy: UUID</td></tr>
+<tr><td port="17" align="left">revision: NUMBER</td></tr>
+<tr><td port="18" align="left">parentId: UUID</td></tr>
+  </table>>,
+		margin=0,
+		pos="3677.5,1685.2",
+		shape=none,
+		width=1.5139];
+	ProductType -> ProductTypeProductMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,3732.1,1745.6 e,4034.5,2079.8 3736.2,1750.2 3813.4,1835.5 3948.7,1985.1 4030.4,2075.3"];
+	ProductType -> ShopProductTypeMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=none,
+		dir=both,
+		pos="e,3717.3,1158.4 3694.1,1465 3701.8,1363 3710.6,1246.7 3716.8,1164.8"];
+	ProductType -> Lang	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,3732.4,1666.4 3738.1,1664.5 3840.5,1629.4 4046,1559 4142.9,1525.8"];
+	Post	 [height=5.8056,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>Post</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">desc: TEXT</td></tr>
+<tr><td port="11" align="left">json: JSON</td></tr>
+<tr><td port="12" align="left">baseId: UUID</td></tr>
+<tr><td port="13" align="left">langId: UUID</td></tr>
+<tr><td port="14" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="15" align="left">publishedAt: DATE</td></tr>
+<tr><td port="16" align="left">publishedBy: UUID</td></tr>
+<tr><td port="17" align="left">revision: NUMBER</td></tr>
+  </table>>,
+		margin=0,
+		pos="4528.3,1738.3",
+		shape=none,
+		width=1.5139];
+	Post -> Lang	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,4473.8,1700.5 4468.6,1696.9 4405.9,1653.4 4308.3,1585.7 4248.4,1544.2"];
+	PostTypePostMapping	 [height=2.75,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>PostTypePostMapping</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">postTypeId: UUID</td></tr>
+<tr><td port="7" align="left">postId: UUID</td></tr>
+  </table>>,
+		margin=0,
+		pos="4731.1,1324.3",
+		shape=none,
+		width=1.4028];
+	Post -> PostTypePostMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,4582.9,1626.8 e,4682.4,1423.6 4585.7,1621.2 4615.2,1560.8 4651,1487.8 4679.7,1429.3"];
+	PostType	 [height=6.1111,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>PostType</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">desc: TEXT</td></tr>
+<tr><td port="11" align="left">json: JSON</td></tr>
+<tr><td port="12" align="left">baseId: UUID</td></tr>
+<tr><td port="13" align="left">langId: UUID</td></tr>
+<tr><td port="14" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="15" align="left">publishedAt: DATE</td></tr>
+<tr><td port="16" align="left">publishedBy: UUID</td></tr>
+<tr><td port="17" align="left">revision: NUMBER</td></tr>
+<tr><td port="18" align="left">parentId: UUID</td></tr>
+  </table>>,
+		margin=0,
+		pos="4317.1,1121.6",
+		shape=none,
+		width=1.5139];
+	PostType -> Lang	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,4262.5,1295.2 4260.6,1301.2 4252.7,1326.3 4244.8,1351.7 4237.2,1375.7"];
+	PostType -> PostTypePostMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,4371.6,1148.3 e,4680.3,1299.5 4377.4,1151.1 4457.3,1190.3 4597,1258.7 4674.8,1296.8"];
+	Order	 [height=6.1111,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>Order</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">desc: TEXT</td></tr>
+<tr><td port="11" align="left">json: JSON</td></tr>
+<tr><td port="12" align="left">baseId: UUID</td></tr>
+<tr><td port="13" align="left">langId: UUID</td></tr>
+<tr><td port="14" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="15" align="left">publishedAt: DATE</td></tr>
+<tr><td port="16" align="left">publishedBy: UUID</td></tr>
+<tr><td port="17" align="left">revision: NUMBER</td></tr>
+<tr><td port="18" align="left">customerId: UUID</td></tr>
+  </table>>,
+		margin=0,
+		pos="1635.2,2070.8",
+		shape=none,
+		width=1.5139];
+	Order -> ShopOrderMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=none,
+		dir=both,
+		pos="e,1793.8,2533.8 1689.8,2230 1722.5,2325.5 1763.2,2444.3 1791.9,2528"];
+	Order -> CustomerOrderMapping	 [arrowhead=crow,
+		arrowsize=0.6,
+		arrowtail=none,
+		dir=both,
+		pos="e,3153.6,811.16 1689.8,2025.5 1930.9,1825.5 2899.3,1022.2 3148.9,815.06"];
+	OrderItem	 [height=7.3333,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>OrderItem</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">desc: TEXT</td></tr>
+<tr><td port="11" align="left">json: JSON</td></tr>
+<tr><td port="12" align="left">baseId: UUID</td></tr>
+<tr><td port="13" align="left">langId: UUID</td></tr>
+<tr><td port="14" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="15" align="left">publishedAt: DATE</td></tr>
+<tr><td port="16" align="left">publishedBy: UUID</td></tr>
+<tr><td port="17" align="left">revision: NUMBER</td></tr>
+<tr><td port="18" align="left">orderId: UUID</td></tr>
+<tr><td port="19" align="left">productId: UUID</td></tr>
+<tr><td port="20" align="left">ordered_price: NUMBER</td></tr>
+<tr><td port="21" align="left">ordered_quantity: NUMBER</td></tr>
+<tr><td port="22" align="left">ordered_variants_json: JSON</td></tr>
+  </table>>,
+		margin=0,
+		pos="3412.7,3078.6",
+		shape=none,
+		width=1.7778];
+	OrderItem -> Product	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,3476.8,3025.4 3481.6,3021.4 3572.8,2945.7 3731.9,2813.8 3815.3,2744.6"];
+	OrderItem -> Order	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,3348.7,3042.3 3343.2,3039.2 3054.1,2875.2 1949.5,2248.9 1690,2101.8"];
+	OrderBilling	 [height=6.1111,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>OrderBilling</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">orderId: UUID</td></tr>
+<tr><td port="11" align="left">firstName: STRING</td></tr>
+<tr><td port="12" align="left">lastName: STRING</td></tr>
+<tr><td port="13" align="left">email: STRING</td></tr>
+<tr><td port="14" align="left">phone: STRING</td></tr>
+<tr><td port="15" align="left">address: STRING</td></tr>
+<tr><td port="16" align="left">city: STRING</td></tr>
+<tr><td port="17" align="left">state: STRING</td></tr>
+<tr><td port="18" align="left">zip: STRING</td></tr>
+  </table>>,
+		margin=0,
+		pos="1539.7,3047.5",
+		shape=none,
+		width=1.4583];
+	OrderBilling -> Order	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,1561.3,2827.4 1561.9,2821.2 1577.5,2661.7 1598.2,2449.1 1613.7,2290.9"];
+	OrderShipping	 [height=6.1111,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>OrderShipping</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">orderId: UUID</td></tr>
+<tr><td port="11" align="left">firstName: STRING</td></tr>
+<tr><td port="12" align="left">lastName: STRING</td></tr>
+<tr><td port="13" align="left">email: STRING</td></tr>
+<tr><td port="14" align="left">phone: STRING</td></tr>
+<tr><td port="15" align="left">address: STRING</td></tr>
+<tr><td port="16" align="left">city: STRING</td></tr>
+<tr><td port="17" align="left">state: STRING</td></tr>
+<tr><td port="18" align="left">zip: STRING</td></tr>
+  </table>>,
+		margin=0,
+		pos="1279.6,2608.7",
+		shape=none,
+		width=1.4583];
+	OrderShipping -> Order	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,1332.3,2529 1335.6,2524 1402.6,2422.6 1514.1,2253.9 1580.6,2153.5"];
+	OrderPayment	 [height=6.1111,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>OrderPayment</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">orderId: UUID</td></tr>
+<tr><td port="11" align="left">desc: TEXT</td></tr>
+<tr><td port="12" align="left">json: JSON</td></tr>
+<tr><td port="13" align="left">baseId: UUID</td></tr>
+<tr><td port="14" align="left">langId: UUID</td></tr>
+<tr><td port="15" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="16" align="left">publishedAt: DATE</td></tr>
+<tr><td port="17" align="left">publishedBy: UUID</td></tr>
+<tr><td port="18" align="left">revision: NUMBER</td></tr>
+  </table>>,
+		margin=0,
+		pos="1159.7,2112.9",
+		shape=none,
+		width=1.5139];
+	OrderPayment -> Order	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,1214.2,2108 1220.2,2107.5 1313.6,2099.2 1491,2083.5 1580.6,2075.6"];
+	OrderInvoice	 [height=6.1111,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>OrderInvoice</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">orderId: UUID</td></tr>
+<tr><td port="11" align="left">desc: TEXT</td></tr>
+<tr><td port="12" align="left">json: JSON</td></tr>
+<tr><td port="13" align="left">baseId: UUID</td></tr>
+<tr><td port="14" align="left">langId: UUID</td></tr>
+<tr><td port="15" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="16" align="left">publishedAt: DATE</td></tr>
+<tr><td port="17" align="left">publishedBy: UUID</td></tr>
+<tr><td port="18" align="left">revision: NUMBER</td></tr>
+  </table>>,
+		margin=0,
+		pos="1190.6,1603.7",
+		shape=none,
+		width=1.5139];
+	OrderInvoice -> Order	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,1245.1,1661 1249.4,1665.5 1336,1756.5 1496.5,1925 1580.6,2013.4"];
+	OrderStatus	 [height=6.1111,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>OrderStatus</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">orderId: UUID</td></tr>
+<tr><td port="11" align="left">desc: TEXT</td></tr>
+<tr><td port="12" align="left">json: JSON</td></tr>
+<tr><td port="13" align="left">baseId: UUID</td></tr>
+<tr><td port="14" align="left">langId: UUID</td></tr>
+<tr><td port="15" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="16" align="left">publishedAt: DATE</td></tr>
+<tr><td port="17" align="left">publishedBy: UUID</td></tr>
+<tr><td port="18" align="left">revision: NUMBER</td></tr>
+  </table>>,
+		margin=0,
+		pos="1369.5,1126",
+		shape=none,
+		width=1.5139];
+	OrderStatus -> Order	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,1424.1,1320.1 1425.8,1326.3 1471.5,1488.7 1535.5,1716.3 1580.7,1877"];
+	OrderItemStatus	 [height=6.1111,
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><b>OrderItemStatus</b></td></tr>
+    <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
+<tr><td port="1" align="left">name: STRING</td></tr>
+<tr><td port="2" align="left">createdAt: DATE</td></tr>
+<tr><td port="3" align="left">updatedAt: DATE</td></tr>
+<tr><td port="4" align="left">createdBy: UUID</td></tr>
+<tr><td port="5" align="left">updatedBy: UUID</td></tr>
+<tr><td port="6" align="left">isDeleted: BOOLEAN</td></tr>
+<tr><td port="7" align="left">isDisabled: BOOLEAN</td></tr>
+<tr><td port="8" align="left">deletedAt: DATE</td></tr>
+<tr><td port="9" align="left">deletedBy: UUID</td></tr>
+<tr><td port="10" align="left">orderItemId: UUID</td></tr>
+<tr><td port="11" align="left">desc: TEXT</td></tr>
+<tr><td port="12" align="left">json: JSON</td></tr>
+<tr><td port="13" align="left">baseId: UUID</td></tr>
+<tr><td port="14" align="left">langId: UUID</td></tr>
+<tr><td port="15" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="16" align="left">publishedAt: DATE</td></tr>
+<tr><td port="17" align="left">publishedBy: UUID</td></tr>
+<tr><td port="18" align="left">revision: NUMBER</td></tr>
+  </table>>,
+		margin=0,
+		pos="3540,3341.4",
+		shape=none,
+		width=1.5139];
+	OrderItemStatus -> OrderItem	 [arrowhead=none,
+		arrowsize=0.6,
+		arrowtail=crow,
+		dir=both,
+		pos="s,3485.4,3228.8 3482.8,3223.3 3480.8,3219.3 3478.9,3215.2 3476.9,3211.1"];
+}
