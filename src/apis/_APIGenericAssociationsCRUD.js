@@ -1,3 +1,5 @@
+import { Op } from 'sequelize';
+
 export const _APIGenericAssociations = {
     initialize: ({
         app,
@@ -144,6 +146,13 @@ export const _APIGenericAssociations = {
                                 const keys = Object.keys(whereClause);
                                 for (var k in keys) {
                                     if (keys[k] === "$like") { whereClause[Op.like] = whereClause.$like; delete whereClause.$like; }
+                                    else if (keys[k] === "$gt") { whereClause[Op.gt] = whereClause.$gt; delete whereClause.$gt; }
+                                    else if (keys[k] === "$lt") { whereClause[Op.lt] = whereClause.$lt; delete whereClause.$lt; }
+                                    else if (keys[k] === "$gte") { whereClause[Op.gte] = whereClause.$gte; delete whereClause.$gte; }
+                                    else if (keys[k] === "$lte") { whereClause[Op.lte] = whereClause.$lte; delete whereClause.$lte; }
+                                    else if (keys[k] === "$in") { whereClause[Op.in] = whereClause.$in; delete whereClause.$in; }
+                                    else if (keys[k] === "$not") { whereClause[Op.not] = whereClause.$not; delete whereClause.$not; }
+                                    else if (keys[k] === "$notIn") { whereClause[Op.notIn] = whereClause.$notIn; delete whereClause.$notIn; }
                                 }
                                 for (var k in whereClause) {
                                     const val = whereClause[k];
@@ -152,7 +161,11 @@ export const _APIGenericAssociations = {
                                     }
                                 }
                             }
-            
+
+                            if (whereClause) {
+                                recursiveMassageWhereClause(whereClause);
+                            }
+        
                             // Build the order clause for sorting
                             // format: ['title', 'DESC']
                             // format: [['title', 'DESC'], ['max(age)', 'DESC']]
@@ -211,6 +224,13 @@ export const _APIGenericAssociations = {
                                     const keys = Object.keys(whereClause);
                                     for (var k in keys) {
                                         if (keys[k] === "$like") { whereClause[Op.like] = whereClause.$like; delete whereClause.$like; }
+                                        else if (keys[k] === "$gt") { whereClause[Op.gt] = whereClause.$gt; delete whereClause.$gt; }
+                                        else if (keys[k] === "$lt") { whereClause[Op.lt] = whereClause.$lt; delete whereClause.$lt; }
+                                        else if (keys[k] === "$gte") { whereClause[Op.gte] = whereClause.$gte; delete whereClause.$gte; }
+                                        else if (keys[k] === "$lte") { whereClause[Op.lte] = whereClause.$lte; delete whereClause.$lte; }
+                                        else if (keys[k] === "$in") { whereClause[Op.in] = whereClause.$in; delete whereClause.$in; }
+                                        else if (keys[k] === "$not") { whereClause[Op.not] = whereClause.$not; delete whereClause.$not; }
+                                        else if (keys[k] === "$notIn") { whereClause[Op.notIn] = whereClause.$notIn; delete whereClause.$notIn; }
                                     }
                                     for (var k in whereClause) {
                                         const val = whereClause[k];
@@ -218,6 +238,10 @@ export const _APIGenericAssociations = {
                                             recursiveMassageWhereClause(val);
                                         }
                                     }
+                                }
+
+                                if (whereClause) {
+                                    recursiveMassageWhereClause(whereClause);
                                 }
                 
                                 // Build the order clause for sorting

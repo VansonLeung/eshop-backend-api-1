@@ -5,6 +5,8 @@ import { ContentAttributes } from "./_incl/ContentAttributes.js";
 import { OrderItemAttributes } from "./_incl/OrderItemAttribtes.js";
 import { Settings } from "./_settings/Settings.js";
 import { DatedSoftDeleteStatusAttributes } from "./_incl/DatedSoftDeleteStatusAttributes.js";
+import { ParentChildAssociations } from "./_incl/ParentChildAssociations.js";
+import { ParentChildAttributes } from "./_incl/ParentChildAttributes.js";
 
 export const EBOrderItem = {
     makeAssociations: ({Me, Order, Product, ProductVariant}) => {
@@ -40,6 +42,8 @@ export const EBOrderItem = {
             as: 'orderItems',
             constraints: Settings.constraints,
         });
+
+        ParentChildAssociations({ Me });
     },
 
     makeSchema: () => {
@@ -47,11 +51,11 @@ export const EBOrderItem = {
             ...BasicAttributes(),
             ...DatedStatusAttributes(),
             ...DatedSoftDeleteStatusAttributes(),
-            ...ContentAttributes(),
             orderId: DataTypes.UUID,
             productId: DataTypes.UUID,
             productVariantId: DataTypes.UUID,
             ...OrderItemAttributes(),
+            ...ParentChildAttributes(),
         }
     },
 };

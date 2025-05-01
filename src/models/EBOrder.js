@@ -4,6 +4,7 @@ import { DatedStatusAttributes } from "./_incl/DatedStatusAttributes.js";
 import { ContentAttributes } from "./_incl/ContentAttributes.js";
 import { Settings } from "./_settings/Settings.js";
 import { DatedSoftDeleteStatusAttributes } from "./_incl/DatedSoftDeleteStatusAttributes.js";
+import { OrderAttributes } from "./_incl/OrderAttributes.js";
 
 export const EBOrder = {
     makeAssociations: ({Me, }) => {
@@ -15,7 +16,7 @@ export const EBOrder = {
             ...BasicAttributes(),
             ...DatedStatusAttributes(),
             ...DatedSoftDeleteStatusAttributes(),
-            ...ContentAttributes(),
+            ...OrderAttributes(),
             customerId: DataTypes.UUID,
         }
     },
