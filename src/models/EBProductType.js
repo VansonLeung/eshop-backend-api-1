@@ -7,9 +7,11 @@ import { DatedSoftDeleteStatusAttributes } from "./_incl/DatedSoftDeleteStatusAt
 import { ContentAssociations } from "./_incl/ContentAssociations.js";
 import { ParentChildAssociations } from "./_incl/ParentChildAssociations.js";
 import { ParentChildAttributes } from "./_incl/ParentChildAttributes.js";
+import { CodeAttributes } from "./_incl/CodeAttributes.js";
 
 export const EBProductType = {
     makeAssociations: ({Me, Lang}) => {
+        CodeAttributes();
         ContentAssociations({ Me, Lang });
         ParentChildAssociations({ Me });
     },

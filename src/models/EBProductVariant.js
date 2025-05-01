@@ -7,11 +7,13 @@ import { ContentAssociations } from "./_incl/ContentAssociations.js";
 import { ProductVariantAttributes } from "./_incl/ProductVariantAttributes.js";
 import { Settings } from "./_settings/Settings.js";
 import { ProductVariantAssociations } from "./_incl/ProductVariantAssociations.js";
+import { CodeAttributes } from "./_incl/CodeAttributes.js";
 
 export const EBProductVariant = {
     makeAssociations: ({Me, Lang, Product}) => {
+        CodeAttributes();
         ContentAssociations({ Me, Lang });
-        ProductVariantAssociations({ Me, Product, })
+        ProductVariantAssociations({ Me, Product, });
     },
 
     makeSchema: () => {

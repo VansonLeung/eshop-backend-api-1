@@ -8,6 +8,15 @@ export const BasicAttributes = () => {
             allowNull: false,
             primaryKey: true,
         },
+        seqId: {
+          type: DataTypes.BIGINT,
+          autoIncrement: true,
+          unique: true,
+        },
+        seq: {
+            type: DataTypes.BIGINT,
+            index: true,
+        },
         name: DataTypes.STRING(256),
     }
 }

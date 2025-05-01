@@ -13,7 +13,7 @@ export const ProductVariantAttributes = () => {
             uniqueGroups: [{name: "ps", order: 1}],
         },
         price: {
-            type: DataTypes.DECIMAL(10, 2), // Represents a fixed-point number with precision 10 and scale 2
+            type: DataTypes.DOUBLE, // Represents a fixed-point number with precision 10 and scale 2
             allowNull: false,
             defaultValue: 0.00, // Default price value is set to 0.00
             index: true,

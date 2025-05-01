@@ -3,7 +3,7 @@ import Sequelize, { DataTypes } from "sequelize";
 export const OrderItemAttributes = () => {
     return {
         orderedItemPrice: {
-            type: DataTypes.DECIMAL(10, 2), // Represents a fixed-point number with precision 10 and scale 2
+            type: DataTypes.DOUBLE, // Represents a fixed-point number with precision 10 and scale 2
             allowNull: false,
         },
         orderedItemQuantity: {

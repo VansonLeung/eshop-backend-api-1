@@ -130,7 +130,7 @@ export const initializeModels = async () =>
         EBProductVariableField.makeAssociations({Me: ProductVariableField, Product, });
         EBProductVariableFieldValue.makeAssociations({Me: ProductVariableFieldValue, ProductVariableField, });
         
-        EBProductVariant.makeAssociations({Me: ProductVariableFieldValue, Lang, Product, });
+        EBProductVariant.makeAssociations({Me: ProductVariant, Lang, Product, });
         EBProductVariantVarMapping.makeAssociations({Me: ProductVariantVarMapping, ProductVariant, ProductVariableFieldValue, })
 
         EBShopProductMapping.makeAssociations({Me: ShopProductMapping, Shop, Product, });
@@ -177,6 +177,9 @@ export const initializeModels = async () =>
         })();
 
 
+
+
+        /*
         
 
         const role1 = await UserRole.create({
@@ -474,6 +477,7 @@ export const initializeModels = async () =>
         }
 
 
+        */
 
 
         return {
@@ -492,6 +496,10 @@ export const initializeModels = async () =>
             ShopOwnerMapping,
             Product,
             ProductType,
+            ProductVariableField,
+            ProductVariableFieldValue,
+            ProductVariant,
+            ProductVariantVarMapping,
             ShopProductMapping,
             ProductTypeProductMapping,
             ShopProductTypeMapping,
