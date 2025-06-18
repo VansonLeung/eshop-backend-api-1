@@ -11,9 +11,9 @@ export const initializeSwagger = ({
     swaggerDefinition: {
       openapi: '3.0.0', // Specify the version of OpenAPI
       info: {
-        title: 'API Documentation',
+        title: 'EShop Backend API 1 - API Documentation',
         version: '1.0.0',
-        description: 'API documentation for my application',
+        description: 'API documentation for eshop backend API 1 (2025 06 18)',
       },
     },
     apis: [], // Will be filled with API routes later
@@ -29,6 +29,7 @@ export const initializeSwagger = ({
   // Generate Swagger paths
   const paths = expressListRoutes(app, { logger: true });
   paths.forEach((endpoint) => {
+    endpoint.path = endpoint.path.substring(2);
     apiEndpoints.push({
       url: endpoint.path,
       method: endpoint.method,
@@ -62,7 +63,14 @@ export const initializeSwagger = ({
   // Serve Swagger UI
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
   
+  // Serve swagger.json
+  app.get('/swagger.json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerDocs);
+  });
+  
   console.log("Swagger URL: /api-docs");
+  console.log("Swagger JSON URL: /swagger.json");
   
 }
 

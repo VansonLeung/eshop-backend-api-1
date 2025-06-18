@@ -1,5 +1,5 @@
 digraph models_diagram {
-	graph [bb="0,0,6895.2,4533.3",
+	graph [bb="0,0,6218.7,4077.4",
 		nodesep=.5,
 		overlap=false,
 		pad=0.5,
@@ -31,7 +31,7 @@ digraph models_diagram {
 <tr><td port="12" align="left">code: STRING</td></tr>
   </table>>,
 		margin=0,
-		pos="52.5,2211.4",
+		pos="52.5,1996.7",
 		shape=none,
 		width=1.4583];
 	UserRolePermissionMapping	 [height=3.9722,
@@ -51,14 +51,14 @@ digraph models_diagram {
 <tr><td port="11" align="left">userRoleId: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="516.11,1387.2",
+		pos="504.2,1881.4",
 		shape=none,
 		width=1.7778];
 	UserPermission -> UserRolePermissionMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=none,
 		dir=both,
-		pos="e,452.07,1501 105.01,2118 189.61,1967.6 356,1671.8 449.07,1506.4"];
+		pos="e,439.86,1897.8 105.2,1983.2 186.61,1962.4 343.03,1922.5 433.96,1899.3"];
 	UserRole	 [height=4.2778,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>UserRole</b></td></tr>
@@ -77,14 +77,14 @@ digraph models_diagram {
 <tr><td port="12" align="left">code: STRING</td></tr>
   </table>>,
 		margin=0,
-		pos="1211.6,2308.9",
+		pos="957.59,1991.8",
 		shape=none,
 		width=1.4583];
 	UserRole -> UserRolePermissionMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=none,
 		dir=both,
-		pos="e,580.35,1472.3 1159,2239.3 1034.7,2074.4 722.4,1660.6 583.99,1477.1"];
+		pos="e,568.4,1897 904.7,1978.9 822.86,1959 665.53,1920.7 574.31,1898.5"];
 	User	 [height=4.8889,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>User</b></td></tr>
@@ -105,14 +105,14 @@ digraph models_diagram {
 <tr><td port="14" align="left">email: STRING</td></tr>
   </table>>,
 		margin=0,
-		pos="3193.5,2279.1",
+		pos="2657.2,2008.9",
 		shape=none,
 		width=1.4583];
 	User -> UserRole	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,3140.7,2279.9 3134.4,2280 2840.9,2284.4 1542.8,2303.9 1264.3,2308.1"];
+		pos="s,2604.4,2008.4 2598.4,2008.3 2334.4,2005.7 1260.8,1994.8 1010.1,1992.3"];
 	ShopOwnerMapping	 [height=3.3611,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>ShopOwnerMapping</b></td></tr>
@@ -128,14 +128,14 @@ digraph models_diagram {
 <tr><td port="9" align="left">userId: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="3413.1,1849.2",
+		pos="2820.2,1595",
 		shape=none,
 		width=1.2917];
 	User -> ShopOwnerMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=none,
 		dir=both,
-		pos="e,3366.5,1940.3 3246.1,2176.1 3281.7,2106.3 3328.6,2014.6 3363.6,1946.1"];
+		pos="e,2773.6,1713.1 2709.8,1875.4 2729.6,1825.1 2752,1768.2 2771.4,1718.8"];
 	CustomerOrderMapping	 [height=4.5833,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>CustomerOrderMapping</b></td></tr>
@@ -155,14 +155,14 @@ digraph models_diagram {
 <tr><td port="13" align="left">orderId: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="5447.4,2947.7",
+		pos="5062.1,2703.3",
 		shape=none,
 		width=1.5];
 	User -> CustomerOrderMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=none,
 		dir=both,
-		pos="e,5393.4,2931.7 3246.1,2294.7 3548.9,2384.5 5065.5,2834.4 5387.3,2929.9"];
+		pos="e,5008,2687.7 2709.9,2024.1 3026,2115.4 4667,2589.2 5002.2,2686"];
 	UserCredential	 [height=4.8889,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>UserCredential</b></td></tr>
@@ -183,14 +183,14 @@ digraph models_diagram {
 <tr><td port="14" align="left">password: STRING</td></tr>
   </table>>,
 		margin=0,
-		pos="816.17,4000.3",
+		pos="1016.5,3585.4",
 		shape=none,
 		width=1.4583];
 	UserCredential -> User	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,868.87,3962.1 874.08,3958.3 1202.4,3720.6 2826.8,2544.6 3140.8,2317.2"];
+		pos="s,1069.2,3534.7 1073.6,3530.4 1328.5,3285.6 2359.4,2295 2604.6,2059.4"];
 	UserSession	 [height=5.1944,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>UserSession</b></td></tr>
@@ -208,23 +208,23 @@ digraph models_diagram {
 <tr><td port="11" align="left">deletedBy: UUID</td></tr>
 <tr><td port="12" align="left">userId: UUID</td></tr>
 <tr><td port="13" align="left">userCredentialId: UUID</td></tr>
-<tr><td port="14" align="left">access_token: STRING</td></tr>
-<tr><td port="15" align="left">refresh_token: STRING</td></tr>
+<tr><td port="14" align="left">accessToken: STRING</td></tr>
+<tr><td port="15" align="left">refreshToken: STRING</td></tr>
   </table>>,
 		margin=0,
-		pos="2275.3,3999",
+		pos="1916.9,3579.2",
 		shape=none,
 		width=1.4722];
 	UserSession -> User	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,2328.5,3899.5 2331.4,3894 2496.6,3584.5 2980.4,2678.3 3141,2377.5"];
+		pos="s,1970,3466.5 1972.6,3461 2111.1,3167.2 2469.6,2406.9 2604.6,2120.3"];
 	UserSession -> UserCredential	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,2222.1,3999.1 2215.9,3999.1 1977.8,3999.3 1094.3,4000 868.83,4000.2"];
+		pos="s,1863.6,3579.5 1857.4,3579.6 1691.5,3580.7 1226.1,3583.9 1069,3585"];
 	UserContact	 [height=6.7222,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>UserContact</b></td></tr>
@@ -251,14 +251,14 @@ digraph models_diagram {
 <tr><td port="20" align="left">zip: STRING</td></tr>
   </table>>,
 		margin=0,
-		pos="1855,2854.1",
+		pos="1584.9,2491.6",
 		shape=none,
 		width=1.4583];
 	UserContact -> User	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,1907.9,2831.4 1913.7,2828.9 2136.5,2733.2 2928.2,2393 3140.7,2301.8"];
+		pos="s,1637.7,2467.9 1643.5,2465.3 1832.4,2380.2 2424.3,2113.7 2604.6,2032.6"];
 	UserShipping	 [height=7.0278,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>UserShipping</b></td></tr>
@@ -275,7 +275,7 @@ digraph models_diagram {
 <tr><td port="10" align="left">deletedAt: DATE</td></tr>
 <tr><td port="11" align="left">deletedBy: UUID</td></tr>
 <tr><td port="12" align="left">userId: UUID</td></tr>
-<tr><td port="13" align="left">is_default: BOOLEAN</td></tr>
+<tr><td port="13" align="left">isDefault: BOOLEAN</td></tr>
 <tr><td port="14" align="left">firstName: STRING</td></tr>
 <tr><td port="15" align="left">lastName: STRING</td></tr>
 <tr><td port="16" align="left">email: STRING</td></tr>
@@ -286,14 +286,14 @@ digraph models_diagram {
 <tr><td port="21" align="left">zip: STRING</td></tr>
   </table>>,
 		margin=0,
-		pos="2099.7,2035.4",
+		pos="1669.5,1922.5",
 		shape=none,
 		width=1.4583];
 	UserShipping -> User	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,2152.4,2047.1 2158.6,2048.5 2350.8,2091.3 2958.1,2226.7 3140.9,2267.4"];
+		pos="s,1722.2,1927.1 1728.4,1927.6 1906.2,1943.2 2435.6,1989.5 2604.6,2004.3"];
 	UserBilling	 [height=7.0278,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>UserBilling</b></td></tr>
@@ -310,7 +310,7 @@ digraph models_diagram {
 <tr><td port="10" align="left">deletedAt: DATE</td></tr>
 <tr><td port="11" align="left">deletedBy: UUID</td></tr>
 <tr><td port="12" align="left">userId: UUID</td></tr>
-<tr><td port="13" align="left">is_default: BOOLEAN</td></tr>
+<tr><td port="13" align="left">isDefault: BOOLEAN</td></tr>
 <tr><td port="14" align="left">firstName: STRING</td></tr>
 <tr><td port="15" align="left">lastName: STRING</td></tr>
 <tr><td port="16" align="left">email: STRING</td></tr>
@@ -321,14 +321,14 @@ digraph models_diagram {
 <tr><td port="21" align="left">zip: STRING</td></tr>
   </table>>,
 		margin=0,
-		pos="1345.7,1056.9",
+		pos="1364.7,1042.1",
 		shape=none,
 		width=1.4583];
 	UserBilling -> User	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,1398.5,1091.8 1403.7,1095.3 1681.7,1279.2 2874.8,2068.3 3140.8,2244.3"];
+		pos="s,1417.4,1081.5 1422.4,1085.2 1638.3,1246.8 2397.6,1814.7 2604.7,1969.6"];
 	UserPayment	 [height=7.0278,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>UserPayment</b></td></tr>
@@ -345,7 +345,7 @@ digraph models_diagram {
 <tr><td port="10" align="left">deletedAt: DATE</td></tr>
 <tr><td port="11" align="left">deletedBy: UUID</td></tr>
 <tr><td port="12" align="left">userId: UUID</td></tr>
-<tr><td port="13" align="left">is_default: BOOLEAN</td></tr>
+<tr><td port="13" align="left">isDefault: BOOLEAN</td></tr>
 <tr><td port="14" align="left">desc: TEXT</td></tr>
 <tr><td port="15" align="left">json: JSON</td></tr>
 <tr><td port="16" align="left">baseId: UUID</td></tr>
@@ -356,14 +356,14 @@ digraph models_diagram {
 <tr><td port="21" align="left">revision: NUMBER</td></tr>
   </table>>,
 		margin=0,
-		pos="1734.3,303.6",
+		pos="1720.2,404.24",
 		shape=none,
 		width=1.5139];
 	UserPayment -> User	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,1788.8,377.43 1792.6,382.55 2029.2,702.82 2915.4,1902.6 3141,2208"];
+		pos="s,1774.8,497.75 1778,503.24 1947.6,793.68 2442.1,1640.5 2604.7,1919"];
 	UserCartItem	 [height=5.1944,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>UserCartItem</b></td></tr>
@@ -385,14 +385,14 @@ digraph models_diagram {
 <tr><td port="15" align="left">orderedItemQuantity: NUMBER</td></tr>
   </table>>,
 		margin=0,
-		pos="2923.9,2716.1",
+		pos="2600.4,2468.5",
 		shape=none,
 		width=1.9583];
 	UserCartItem -> User	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,2994.5,2601.6 2997.8,2596.3 3043.1,2522.8 3100.1,2430.4 3140.9,2364.3"];
+		pos="s,2623.5,2281.2 2624.3,2275.2 2628,2245.3 2631.8,2214.5 2635.4,2185"];
 	Product	 [height=6.4167,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>Product</b></td></tr>
@@ -418,14 +418,14 @@ digraph models_diagram {
 <tr><td port="19" align="left">revision: NUMBER</td></tr>
   </table>>,
 		margin=0,
-		pos="3362.2,3080.5",
+		pos="2774.3,2935.7",
 		shape=none,
 		width=1.5139];
 	UserCartItem -> Product	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,2994.8,2775.1 2999.4,2778.9 3087.3,2851.9 3230,2970.6 3307.7,3035.2"];
+		pos="s,2670,2655.5 2672.2,2661.2 2688.1,2704 2704.7,2748.6 2719.8,2789.1"];
 	Shop	 [height=6.4167,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>Shop</b></td></tr>
@@ -451,14 +451,14 @@ digraph models_diagram {
 <tr><td port="19" align="left">revision: NUMBER</td></tr>
   </table>>,
 		margin=0,
-		pos="3626.6,483.38",
+		pos="3398.6,694.32",
 		shape=none,
 		width=1.5139];
 	Shop -> ShopOwnerMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,3590.5,714.68 e,3432,1728 3589.5,720.71 3544,1011.6 3468.6,1493.8 3433,1722"];
+		pos="s,3343.9,779.46 e,2866.8,1522.3 3340.6,784.68 3227,961.53 2977.1,1350.6 2870.3,1517"];
 	ShopProductMapping	 [height=3.3611,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>ShopProductMapping</b></td></tr>
@@ -474,14 +474,14 @@ digraph models_diagram {
 <tr><td port="9" align="left">productId: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="3180.7,1101.2",
+		pos="2987.2,975.5",
 		shape=none,
 		width=1.3472];
 	Shop -> ShopProductMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=none,
 		dir=both,
-		pos="e,3229.4,1033.8 3572,559.13 3485.5,678.98 3318.1,910.77 3233.1,1028.6"];
+		pos="e,3035.9,942.17 3344,731.66 3264.9,785.67 3119.6,884.99 3041,938.7"];
 	ShopProductTypeMapping	 [height=3.3611,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>ShopProductTypeMapping</b></td></tr>
@@ -497,14 +497,14 @@ digraph models_diagram {
 <tr><td port="9" align="left">productTypeId: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="4375.1,645.65",
+		pos="4001.3,694.32",
 		shape=none,
 		width=1.6389];
 	Shop -> ShopProductTypeMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=none,
 		dir=both,
-		pos="e,4316,632.85 3681.4,495.25 3816.4,524.52 4165,600.09 4310.1,631.56"];
+		pos="e,3942,694.32 3453.1,694.32 3564.2,694.32 3816,694.32 3935.7,694.32"];
 	Lang	 [height=4.2778,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>Lang</b></td></tr>
@@ -523,14 +523,14 @@ digraph models_diagram {
 <tr><td port="12" align="left">deletedBy: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="5797.9,1065.3",
+		pos="5397.2,858.94",
 		shape=none,
 		width=1.4583];
 	Shop -> Lang	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,3681.4,498.06 3687.3,499.64 4002.5,584.11 5450,972.07 5745.3,1051.2"];
+		pos="s,3453.4,698.83 3459.4,699.32 3757.9,723.91 5065.4,831.62 5344.6,854.61"];
 	ShopOrderMapping	 [height=3.3611,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>ShopOrderMapping</b></td></tr>
@@ -546,19 +546,19 @@ digraph models_diagram {
 <tr><td port="9" align="left">orderId: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="5499.1,1963.1",
+		pos="5072.8,1758.3",
 		shape=none,
 		width=1.2361];
 	Shop -> ShopOrderMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=none,
 		dir=both,
-		pos="e,5454.4,1927.8 3681.2,526.47 3956,743.64 5186.4,1716 5449.5,1923.9"];
+		pos="e,5028.1,1729.9 3453.3,729.11 3708.4,891.22 4778.3,1571.1 5022.9,1726.5"];
 	Product -> ShopProductMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,3341,2849.1 e,3191.8,1222.3 3340.4,2842.9 3301.7,2420.8 3222.3,1554.1 3192.4,1228.5"];
+		pos="s,2799.4,2704.6 e,2974,1096.7 2800.1,2698.4 2845.5,2280.2 2938.3,1425.6 2973.4,1102.8"];
 	ProductTypeProductMapping	 [height=3.3611,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>ProductTypeProductMapping</b></td></tr>
@@ -574,19 +574,19 @@ digraph models_diagram {
 <tr><td port="9" align="left">productId: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="4885.4,1023.9",
+		pos="4489.2,882.06",
 		shape=none,
 		width=1.7778];
 	Product -> ProductTypeProductMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=none,
 		dir=both,
-		pos="e,4821.4,1110.3 3416.9,3006.7 3650,2691.9 4560.9,1462.1 4817.7,1115.3"];
+		pos="e,4425.1,958.82 2829,2870.3 3082.2,2567.1 4141.1,1299 4421.1,963.69"];
 	Product -> Lang	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,3416.8,3035.3 3421.7,3031.3 3758.8,2752.4 5427,1372.2 5745.3,1108.8"];
+		pos="s,2829.1,2892.3 2834,2888.5 3188.1,2608.1 5010.7,1164.9 5344.6,900.57"];
 	ProductType	 [height=6.7222,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>ProductType</b></td></tr>
@@ -613,24 +613,24 @@ digraph models_diagram {
 <tr><td port="20" align="left">parentId: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="4833,1801.8",
+		pos="4769.1,1400.3",
 		shape=none,
 		width=1.5139];
 	ProductType -> ProductTypeProductMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,4849.3,1559.7 e,4877.3,1145 4849.7,1553.6 4858.7,1419.6 4869.5,1259.9 4876.8,1151.2"];
+		pos="s,4714.4,1299.1 e,4553.3,1000.6 4711.6,1293.8 4666.5,1210.3 4603.6,1093.9 4556.2,1006.1"];
 	ProductType -> ShopProductTypeMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=none,
 		dir=both,
-		pos="e,4423,766.74 4778.4,1664.1 4688.9,1437.9 4512,991.32 4425.3,772.5"];
+		pos="e,4060.3,748.59 4714.5,1350.1 4576.2,1222.9 4212.7,888.73 4065.1,752.94"];
 	ProductType -> Lang	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,4887.6,1760.1 4892.4,1756.4 5067.6,1622.7 5579.4,1232 5745.3,1105.4"];
+		pos="s,4823.7,1353.2 4828.3,1349.2 4950.4,1244 5228.1,1004.6 5344.4,904.39"];
 	ProductVariableField	 [height=6.7222,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>ProductVariableField</b></td></tr>
@@ -657,14 +657,14 @@ digraph models_diagram {
 <tr><td port="20" align="left">revision: NUMBER</td></tr>
   </table>>,
 		margin=0,
-		pos="3106.9,4102.8",
+		pos="2822.6,3570.8",
 		shape=none,
 		width=1.5139];
 	ProductVariableField -> Product	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,3161.4,3884.4 3162.9,3878.6 3205.9,3706.3 3265,3469.8 3307.6,3299"];
+		pos="s,2804.2,3328.4 2803.7,3322.2 2799.8,3271.1 2795.8,3217.4 2791.9,3166.9"];
 	ProductVariableFieldValue	 [height=6.7222,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>ProductVariableFieldValue</b></td></tr>
@@ -691,14 +691,14 @@ digraph models_diagram {
 <tr><td port="20" align="left">revision: NUMBER</td></tr>
   </table>>,
 		margin=0,
-		pos="3795.7,3971",
+		pos="3448.1,3607.8",
 		shape=none,
 		width=1.8611];
 	ProductVariableFieldValue -> ProductVariableField	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,3728.4,3983.9 3722.3,3985.1 3583.4,4011.6 3285,4068.7 3161.8,4092.3"];
+		pos="s,3380.9,3603.8 3374.6,3603.4 3247.5,3595.9 2989.8,3580.7 2877.3,3574"];
 	ProductVariantVarMapping	 [height=3.3611,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>ProductVariantVarMapping</b></td></tr>
@@ -714,14 +714,14 @@ digraph models_diagram {
 <tr><td port="9" align="left">variableFieldValueId: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="4337.5,3857.4",
+		pos="3985.2,3607.8",
 		shape=none,
 		width=1.7361];
 	ProductVariableFieldValue -> ProductVariantVarMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=none,
 		dir=both,
-		pos="e,4275,3870.5 3863,3956.9 3966.6,3935.2 4164.3,3893.7 4268.8,3871.8"];
+		pos="e,3922.5,3607.8 3515.3,3607.8 3618,3607.8 3812.8,3607.8 3916.4,3607.8"];
 	ProductVariant	 [height=7.6389,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>ProductVariant</b></td></tr>
@@ -751,24 +751,24 @@ digraph models_diagram {
 <tr><td port="23" align="left">quantity: NUMBER</td></tr>
   </table>>,
 		margin=0,
-		pos="4957.3,4074.3",
+		pos="4510.7,3560.5",
 		shape=none,
 		width=1.5139];
 	ProductVariant -> Product	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,4902.4,4040.1 4897.3,4036.9 4643.4,3878.7 3660.2,3266.1 3416.9,3114.6"];
+		pos="s,4455.8,3540.7 4450,3538.6 4179.7,3441.4 3087.3,3048.3 2829.2,2955.5"];
 	ProductVariant -> ProductVariantVarMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,4902.6,4055.1 e,4400.2,3879.4 4896.8,4053.1 4780.7,4012.5 4527.9,3924 4405.9,3881.4"];
+		pos="s,4455.9,3565.4 e,4048,3602.1 4449.7,3565.9 4351.2,3574.8 4157.4,3592.3 4054,3601.6"];
 	ProductVariant -> Lang	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,5011.8,3879.2 5013.6,3873 5171.1,3309 5614.6,1721.6 5754.8,1219.6"];
+		pos="s,4565.2,3394.3 4567.1,3388.5 4728.8,2895.6 5192.4,1483 5346.6,1013.1"];
 	Post	 [height=6.4167,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>Post</b></td></tr>
@@ -794,14 +794,14 @@ digraph models_diagram {
 <tr><td port="19" align="left">revision: NUMBER</td></tr>
   </table>>,
 		margin=0,
-		pos="6840.7,947.58",
+		pos="6133.6,807.08",
 		shape=none,
 		width=1.5139];
 	Post -> Lang	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,6786.1,953.74 6779.9,954.45 6592.5,975.6 6026,1039.5 5850.4,1059.4"];
+		pos="s,6078.9,810.94 6072.7,811.37 5931.3,821.33 5582.7,845.88 5449.8,855.24"];
 	PostTypePostMapping	 [height=3.3611,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>PostTypePostMapping</b></td></tr>
@@ -817,14 +817,14 @@ digraph models_diagram {
 <tr><td port="9" align="left">postId: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="6667.7,241.36",
+		pos="6025.8,259.5",
 		shape=none,
 		width=1.4028];
 	Post -> PostTypePostMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,6786.2,725.1 e,6697.4,362.6 6784.8,719.11 6756.3,602.91 6722.8,466.05 6698.9,368.67"];
+		pos="s,6088.1,576.05 e,6049.7,380.67 6087,570.14 6074.6,507.04 6061.6,441.28 6050.8,386.6"];
 	PostType	 [height=6.7222,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>PostType</b></td></tr>
@@ -851,19 +851,19 @@ digraph models_diagram {
 <tr><td port="20" align="left">parentId: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="5484.1,242",
+		pos="5243.9,242",
 		shape=none,
 		width=1.5139];
 	PostType -> Lang	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,5538.7,385.41 5541,391.25 5599.1,543.84 5688.7,778.92 5745.3,927.3"];
+		pos="s,5298.5,461.68 5300,467.82 5319.5,546.51 5341,632.96 5358.8,704.52"];
 	PostType -> PostTypePostMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,5538.8,241.97 e,6616.9,241.39 5545.1,241.97 5750,241.86 6412.3,241.5 6610.9,241.39"];
+		pos="s,5298.6,243.22 e,5975.2,258.37 5304.6,243.36 5451.8,246.65 5825.9,255.03 5968.9,258.23"];
 	Order	 [height=6.4167,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>Order</b></td></tr>
@@ -889,61 +889,54 @@ digraph models_diagram {
 <tr><td port="19" align="left">customerId: UUID</td></tr>
   </table>>,
 		margin=0,
-		pos="5471.5,2458.3",
+		pos="5154.6,2234.2",
 		shape=none,
 		width=1.9167];
 	Order -> ShopOrderMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=none,
 		dir=both,
-		pos="e,5492.4,2084.2 5484.4,2227 5487,2180 5489.7,2132.1 5492,2090.3"];
+		pos="e,5093.6,1879.3 5114.9,2003.2 5107.9,1962.7 5100.9,1921.9 5094.7,1885.5"];
 	Order -> CustomerOrderMapping	 [arrowhead=crow,
 		arrowsize=0.6,
 		arrowtail=none,
 		dir=both,
-		pos="e,5455.6,2782.5 5460.1,2689.4 5458.7,2718.6 5457.2,2748.1 5455.9,2776.1"];
-	OrderItem	 [height=5.8056,
+		pos="e,5094.6,2538.3 5109,2465.3 5104.6,2487.8 5100.1,2510.4 5095.8,2532.2"];
+	OrderItem	 [height=3.6667,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>OrderItem</b></td></tr>
     <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
-<tr><td port="1" align="left">seqId: NUMBER</td></tr>
-<tr><td port="2" align="left">seq: NUMBER</td></tr>
-<tr><td port="3" align="left">name: STRING</td></tr>
-<tr><td port="4" align="left">createdAt: DATE</td></tr>
-<tr><td port="5" align="left">updatedAt: DATE</td></tr>
-<tr><td port="6" align="left">createdBy: UUID</td></tr>
-<tr><td port="7" align="left">updatedBy: UUID</td></tr>
-<tr><td port="8" align="left">isDeleted: BOOLEAN</td></tr>
-<tr><td port="9" align="left">isDisabled: BOOLEAN</td></tr>
-<tr><td port="10" align="left">deletedAt: DATE</td></tr>
-<tr><td port="11" align="left">deletedBy: UUID</td></tr>
-<tr><td port="12" align="left">orderId: UUID</td></tr>
-<tr><td port="13" align="left">productId: UUID</td></tr>
-<tr><td port="14" align="left">productVariantId: UUID</td></tr>
-<tr><td port="15" align="left">orderedItemPrice: NUMBER</td></tr>
-<tr><td port="16" align="left">orderedItemQuantity: NUMBER</td></tr>
-<tr><td port="17" align="left">parentId: UUID</td></tr>
+<tr><td port="1" align="left">seq: NUMBER</td></tr>
+<tr><td port="2" align="left">name: STRING</td></tr>
+<tr><td port="3" align="left">orderId: UUID</td></tr>
+<tr><td port="4" align="left">productId: UUID</td></tr>
+<tr><td port="5" align="left">productVariantId: UUID</td></tr>
+<tr><td port="6" align="left">orderedItemPrice: NUMBER</td></tr>
+<tr><td port="7" align="left">orderedItemQuantity: NUMBER</td></tr>
+<tr><td port="8" align="left">parentId: UUID</td></tr>
+<tr><td port="9" align="left">createdAt: DATE</td></tr>
+<tr><td port="10" align="left">updatedAt: DATE</td></tr>
   </table>>,
 		margin=0,
-		pos="4995,3203.6",
+		pos="4764.3,3065.2",
 		shape=none,
 		width=1.9583];
 	OrderItem -> Product	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,4924.3,3198.3 4918.2,3197.8 4635.8,3176.5 3659.1,3102.9 3416.9,3084.6"];
+		pos="s,4693.8,3060.6 4687.7,3060.2 4363.4,3039.1 3107.5,2957.4 2829.2,2939.3"];
 	OrderItem -> ProductVariant	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,4985.9,3412.7 4985.7,3418.9 4980.7,3533.7 4974.6,3676.2 4969.2,3799"];
+		pos="s,4696.7,3197.3 4693.8,3202.9 4653.2,3282.2 4602.9,3380.4 4565.3,3453.7"];
 	OrderItem -> Order	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,5065.6,3093.2 5069,3087.8 5160.1,2945.3 5313.6,2705.3 5402.3,2566.5"];
-	OrderBilling	 [height=6.7222,
+		pos="s,4826.4,2933.1 4829.1,2927.3 4899.9,2776.4 5013,2535.6 5085.5,2381.2"];
+	OrderBilling	 [height=5.5,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>OrderBilling</b></td></tr>
     <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
@@ -954,29 +947,25 @@ digraph models_diagram {
 <tr><td port="5" align="left">updatedAt: DATE</td></tr>
 <tr><td port="6" align="left">createdBy: UUID</td></tr>
 <tr><td port="7" align="left">updatedBy: UUID</td></tr>
-<tr><td port="8" align="left">isDeleted: BOOLEAN</td></tr>
-<tr><td port="9" align="left">isDisabled: BOOLEAN</td></tr>
-<tr><td port="10" align="left">deletedAt: DATE</td></tr>
-<tr><td port="11" align="left">deletedBy: UUID</td></tr>
-<tr><td port="12" align="left">orderId: UUID</td></tr>
-<tr><td port="13" align="left">firstName: STRING</td></tr>
-<tr><td port="14" align="left">lastName: STRING</td></tr>
-<tr><td port="15" align="left">email: STRING</td></tr>
-<tr><td port="16" align="left">phone: STRING</td></tr>
-<tr><td port="17" align="left">address: STRING</td></tr>
-<tr><td port="18" align="left">city: STRING</td></tr>
-<tr><td port="19" align="left">state: STRING</td></tr>
-<tr><td port="20" align="left">zip: STRING</td></tr>
+<tr><td port="8" align="left">orderId: UUID</td></tr>
+<tr><td port="9" align="left">firstName: STRING</td></tr>
+<tr><td port="10" align="left">lastName: STRING</td></tr>
+<tr><td port="11" align="left">email: STRING</td></tr>
+<tr><td port="12" align="left">phone: STRING</td></tr>
+<tr><td port="13" align="left">address: STRING</td></tr>
+<tr><td port="14" align="left">city: STRING</td></tr>
+<tr><td port="15" align="left">state: STRING</td></tr>
+<tr><td port="16" align="left">zip: STRING</td></tr>
   </table>>,
 		margin=0,
-		pos="6511.6,1452.7",
+		pos="6007.9,1242",
 		shape=none,
-		width=1.4583];
+		width=1.2639];
 	OrderBilling -> Order	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,6458.9,1503.6 6454.6,1507.8 6276.9,1679.6 5733.8,2204.7 5540.6,2391.5"];
+		pos="s,5962.3,1295 5958.1,1299.9 5813,1468.6 5390.5,1959.9 5223.6,2154"];
 	OrderShipping	 [height=6.7222,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>OrderShipping</b></td></tr>
@@ -1003,14 +992,14 @@ digraph models_diagram {
 <tr><td port="20" align="left">zip: STRING</td></tr>
   </table>>,
 		margin=0,
-		pos="6698.8,1903.4",
+		pos="6110,1695.8",
 		shape=none,
 		width=1.4583];
 	OrderShipping -> Order	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,6646,1927.3 6640.4,1929.8 6437.2,2021.7 5760.4,2327.7 5540.9,2426.9"];
+		pos="s,6057.3,1725.5 6051.9,1728.5 5884.9,1822.6 5403.7,2093.8 5223.6,2195.3"];
 	OrderPayment	 [height=6.7222,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>OrderPayment</b></td></tr>
@@ -1037,15 +1026,15 @@ digraph models_diagram {
 <tr><td port="20" align="left">revision: NUMBER</td></tr>
   </table>>,
 		margin=0,
-		pos="6734.8,2463.6",
+		pos="6164.2,2223.5",
 		shape=none,
 		width=1.5139];
 	OrderPayment -> Order	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,6680.1,2463.4 6674.1,2463.3 6463.3,2462.4 5764.4,2459.5 5540.9,2458.6"];
-	OrderInvoice	 [height=6.7222,
+		pos="s,6109.6,2224.1 6103.4,2224.1 5926.2,2226 5411,2231.5 5223.7,2233.5"];
+	OrderInvoice	 [height=5.5,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>OrderInvoice</b></td></tr>
     <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
@@ -1056,29 +1045,25 @@ digraph models_diagram {
 <tr><td port="5" align="left">updatedAt: DATE</td></tr>
 <tr><td port="6" align="left">createdBy: UUID</td></tr>
 <tr><td port="7" align="left">updatedBy: UUID</td></tr>
-<tr><td port="8" align="left">isDeleted: BOOLEAN</td></tr>
-<tr><td port="9" align="left">isDisabled: BOOLEAN</td></tr>
-<tr><td port="10" align="left">deletedAt: DATE</td></tr>
-<tr><td port="11" align="left">deletedBy: UUID</td></tr>
-<tr><td port="12" align="left">orderId: UUID</td></tr>
-<tr><td port="13" align="left">desc: TEXT</td></tr>
-<tr><td port="14" align="left">json: JSON</td></tr>
-<tr><td port="15" align="left">baseId: UUID</td></tr>
-<tr><td port="16" align="left">langId: UUID</td></tr>
-<tr><td port="17" align="left">isPublished: BOOLEAN</td></tr>
-<tr><td port="18" align="left">publishedAt: DATE</td></tr>
-<tr><td port="19" align="left">publishedBy: UUID</td></tr>
-<tr><td port="20" align="left">revision: NUMBER</td></tr>
+<tr><td port="8" align="left">orderId: UUID</td></tr>
+<tr><td port="9" align="left">desc: TEXT</td></tr>
+<tr><td port="10" align="left">json: JSON</td></tr>
+<tr><td port="11" align="left">baseId: UUID</td></tr>
+<tr><td port="12" align="left">langId: UUID</td></tr>
+<tr><td port="13" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="14" align="left">publishedAt: DATE</td></tr>
+<tr><td port="15" align="left">publishedBy: UUID</td></tr>
+<tr><td port="16" align="left">revision: NUMBER</td></tr>
   </table>>,
 		margin=0,
-		pos="6667.1,3079.4",
+		pos="6126.7,2767",
 		shape=none,
 		width=1.5139];
 	OrderInvoice -> Order	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,6612.2,3050.9 6606.7,3048 6404.9,2943.2 5755,2605.6 5540.7,2494.2"];
+		pos="s,6072,2737.1 6066.5,2734.1 5895.2,2640.2 5405.5,2371.8 5223.6,2272.1"];
 	OrderStatus	 [height=6.7222,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>OrderStatus</b></td></tr>
@@ -1105,46 +1090,41 @@ digraph models_diagram {
 <tr><td port="20" align="left">revision: NUMBER</td></tr>
   </table>>,
 		margin=0,
-		pos="6779.1,3955.9",
+		pos="6090.1,3541.9",
 		shape=none,
 		width=1.5139];
 	OrderStatus -> Order	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,6724.6,3893.4 6720.5,3888.8 6507.1,3644.3 5771,2801.3 5540.8,2537.7"];
-	OrderItemStatus	 [height=6.7222,
+		pos="s,6035.4,3465.5 6031.8,3460.5 5867.5,3230.8 5400.8,2578.5 5223.8,2331"];
+	OrderItemStatus	 [height=5.1944,
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><b>OrderItemStatus</b></td></tr>
     <tr><td port="0" align="left"><u>id</u>: UUID</td></tr>
-<tr><td port="1" align="left">seqId: NUMBER</td></tr>
-<tr><td port="2" align="left">seq: NUMBER</td></tr>
-<tr><td port="3" align="left">name: STRING</td></tr>
-<tr><td port="4" align="left">createdAt: DATE</td></tr>
-<tr><td port="5" align="left">updatedAt: DATE</td></tr>
-<tr><td port="6" align="left">createdBy: UUID</td></tr>
-<tr><td port="7" align="left">updatedBy: UUID</td></tr>
-<tr><td port="8" align="left">isDeleted: BOOLEAN</td></tr>
-<tr><td port="9" align="left">isDisabled: BOOLEAN</td></tr>
-<tr><td port="10" align="left">deletedAt: DATE</td></tr>
-<tr><td port="11" align="left">deletedBy: UUID</td></tr>
-<tr><td port="12" align="left">orderItemId: UUID</td></tr>
-<tr><td port="13" align="left">desc: TEXT</td></tr>
-<tr><td port="14" align="left">json: JSON</td></tr>
-<tr><td port="15" align="left">baseId: UUID</td></tr>
-<tr><td port="16" align="left">langId: UUID</td></tr>
-<tr><td port="17" align="left">isPublished: BOOLEAN</td></tr>
-<tr><td port="18" align="left">publishedAt: DATE</td></tr>
-<tr><td port="19" align="left">publishedBy: UUID</td></tr>
-<tr><td port="20" align="left">revision: NUMBER</td></tr>
+<tr><td port="1" align="left">seq: NUMBER</td></tr>
+<tr><td port="2" align="left">name: STRING</td></tr>
+<tr><td port="3" align="left">createdAt: DATE</td></tr>
+<tr><td port="4" align="left">updatedAt: DATE</td></tr>
+<tr><td port="5" align="left">createdBy: UUID</td></tr>
+<tr><td port="6" align="left">updatedBy: UUID</td></tr>
+<tr><td port="7" align="left">orderItemId: UUID</td></tr>
+<tr><td port="8" align="left">desc: TEXT</td></tr>
+<tr><td port="9" align="left">json: JSON</td></tr>
+<tr><td port="10" align="left">baseId: UUID</td></tr>
+<tr><td port="11" align="left">langId: UUID</td></tr>
+<tr><td port="12" align="left">isPublished: BOOLEAN</td></tr>
+<tr><td port="13" align="left">publishedAt: DATE</td></tr>
+<tr><td port="14" align="left">publishedBy: UUID</td></tr>
+<tr><td port="15" align="left">revision: NUMBER</td></tr>
   </table>>,
 		margin=0,
-		pos="5926.8,4291.3",
+		pos="5508.1,3890.4",
 		shape=none,
 		width=1.5139];
 	OrderItemStatus -> OrderItem	 [arrowhead=none,
 		arrowsize=0.6,
 		arrowtail=crow,
 		dir=both,
-		pos="s,5872,4227.3 5868,4222.6 5704,4031.2 5242.7,3492.7 5065.5,3285.9"];
+		pos="s,5453.4,3829.7 5449.1,3824.9 5313.7,3674.6 4981.1,3305.7 4835.1,3143.7"];
 }

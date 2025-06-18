@@ -23,7 +23,6 @@ export const EBOrderBilling = {
         return {
             ...BasicAttributes(),
             ...DatedStatusAttributes(),
-            ...DatedSoftDeleteStatusAttributes(),
             orderId: DataTypes.UUID,
             ...ContactAttributes(),
         }

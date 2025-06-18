@@ -1,17 +1,12 @@
 import Sequelize, { DataTypes } from "sequelize";
 
-export const BasicAttributes = () => {
+export const BasicSeqIdlessAttributes = () => {
     return {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             allowNull: false,
             primaryKey: true,
-        },
-        seqId: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            unique: true,
         },
         seq: {
             type: DataTypes.INTEGER,

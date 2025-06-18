@@ -23,7 +23,6 @@ export const EBOrderInvoice = {
         return {
             ...BasicAttributes(),
             ...DatedStatusAttributes(),
-            ...DatedSoftDeleteStatusAttributes(),
             orderId: DataTypes.UUID,
             ...ContentAttributes(),
         }

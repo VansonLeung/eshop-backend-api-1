@@ -7,11 +7,15 @@ import { APIProductVariableField } from "./APIProductVariableField.js";
 import { APIProductVariableFieldValue } from "./APIProductVariableFieldValue.js";
 import { APIProductVariant } from "./APIProductVariant.js";
 import { APIShop } from "./APIShop.js";
+import { APIUser } from './APIUser.js';
+import { APIUserAuth } from './APIUserAuth.js';
 
 export const Router = {
     initialize: ({ models }) => {
         const router = express.Router()
  
+        APIUserAuth.initialize({ app: router, models });
+        APIUser.initialize({ app: router, models });
         APIOrder.initialize({ app: router, models });
         APIOrderItem.initialize({ app: router, models });
         APIProduct.initialize({ app: router, models });

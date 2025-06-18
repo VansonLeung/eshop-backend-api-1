@@ -36,12 +36,12 @@ export const EBUserSession = {
             ...DatedSoftDeleteStatusAttributes(),
             userId: DataTypes.UUID,
             userCredentialId: DataTypes.UUID,
-            access_token: {
+            accessToken: {
                 type: DataTypes.STRING(256),
                 allowNull: false,
                 unique: true,
             },
-            refresh_token: {
+            refreshToken: {
                 type: DataTypes.STRING(256),
                 allowNull: false,
                 unique: true,

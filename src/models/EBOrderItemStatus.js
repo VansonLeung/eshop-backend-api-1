@@ -4,6 +4,7 @@ import { DatedStatusAttributes } from "./_incl/DatedStatusAttributes.js";
 import { ContentAttributes } from "./_incl/ContentAttributes.js";
 import { Settings } from "./_settings/Settings.js";
 import { DatedSoftDeleteStatusAttributes } from "./_incl/DatedSoftDeleteStatusAttributes.js";
+import { BasicSeqIdlessAttributes } from "./_incl/BasicSeqIdLessAttributes.js";
 
 export const EBOrderItemStatus = {
     makeAssociations: ({Me, OrderItem}) => {
@@ -21,9 +22,8 @@ export const EBOrderItemStatus = {
 
     makeSchema: () => {
         return {
-            ...BasicAttributes(),
+            ...BasicSeqIdlessAttributes(),
             ...DatedStatusAttributes(),
-            ...DatedSoftDeleteStatusAttributes(),
             orderItemId: DataTypes.UUID,
             ...ContentAttributes(),
         }

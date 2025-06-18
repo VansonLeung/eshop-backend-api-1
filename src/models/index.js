@@ -160,8 +160,8 @@ export const initializeModels = async () =>
         EBCustomerOrderMapping.makeAssociations({Me: CustomerOrderMapping, Customer: User, Order, });
 
         await sequelize.sync({
-            force: true,
-            alter: true,
+            force: false,
+            alter: false,
         });
 
 

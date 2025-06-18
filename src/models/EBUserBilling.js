@@ -25,7 +25,7 @@ export const EBUserBilling = {
             ...DatedStatusAttributes(),
             ...DatedSoftDeleteStatusAttributes(),
             userId: DataTypes.UUID,
-            is_default: {
+            isDefault: {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: false,

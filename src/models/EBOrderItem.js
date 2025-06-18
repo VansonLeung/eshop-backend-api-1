@@ -7,6 +7,7 @@ import { Settings } from "./_settings/Settings.js";
 import { DatedSoftDeleteStatusAttributes } from "./_incl/DatedSoftDeleteStatusAttributes.js";
 import { ParentChildAssociations } from "./_incl/ParentChildAssociations.js";
 import { ParentChildAttributes } from "./_incl/ParentChildAttributes.js";
+import { BasicSeqIdlessAttributes } from "./_incl/BasicSeqIdLessAttributes.js";
 
 export const EBOrderItem = {
     makeAssociations: ({Me, Order, Product, ProductVariant}) => {
@@ -48,12 +49,19 @@ export const EBOrderItem = {
 
     makeSchema: () => {
         return {
-            ...BasicAttributes(),
-            ...DatedStatusAttributes(),
-            ...DatedSoftDeleteStatusAttributes(),
-            orderId: DataTypes.UUID,
-            productId: DataTypes.UUID,
-            productVariantId: DataTypes.UUID,
+            ...BasicSeqIdlessAttributes(),
+            orderId: {
+                type: DataTypes.UUID,
+                index: true,
+            },
+            productId: {
+                type: DataTypes.UUID,
+                index: true,
+            },
+            productVariantId: {
+                type: DataTypes.UUID,
+                index: true,
+            },
             ...OrderItemAttributes(),
             ...ParentChildAttributes(),
         }
