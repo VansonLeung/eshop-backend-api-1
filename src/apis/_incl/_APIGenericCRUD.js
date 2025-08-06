@@ -8,7 +8,7 @@ export const _APIGenericCRUD = {
         collectionName,
         collectionModel,
     }) => {
-                
+
         // Create a Item
         appWithMeta.post(`/api/${collectionName}`, {
             requestBody: {
@@ -24,9 +24,9 @@ export const _APIGenericCRUD = {
         }, async (req, res) => {
             try {
                 const item = await collectionModel.create(req.body);
-                res.status(201).json(item);
+                res.sendResponse({status: 201, data: item, });
             } catch (error) {
-                res.status(400).json({ error: error.message });
+                res.sendError({error, });
                 throw error;
             }
         });
@@ -99,8 +99,8 @@ export const _APIGenericCRUD = {
                         ...offsetClause !== undefined ? {offset: Number(offsetClause)} : null,
                         ...limitClause !== undefined ? {limit: Number(limitClause)} : null,
                     });
-                    res.json(count);
-                    return;    
+                    res.sendResponse({status: 200, data: {count}, });
+                    return;
                 }
 
                 const items = await collectionModel.findAll({
@@ -111,9 +111,9 @@ export const _APIGenericCRUD = {
                     ...offsetClause !== undefined ? {offset: Number(offsetClause)} : null,
                     ...limitClause !== undefined ? {limit: Number(limitClause)} : null,
                 });
-                res.json(items);
+                res.sendResponse({status: 200, data: items, });
             } catch (error) {
-                res.status(500).json({ error: error.message });
+                res.sendError({error, });
                 throw error;
             }
         });
@@ -127,12 +127,12 @@ export const _APIGenericCRUD = {
             try {
                 const item = await collectionModel.findByPk(req.params.id);
                 if (item) {
-                    res.json(item);
+                    res.sendResponse({status: 200, data: item, });
                 } else {
-                    res.status(404).json({ error: `${collectionName} not found` });
+                    res.sendError({status: 404, error: new Error(`${collectionName} not found`), });
                 }
             } catch (error) {
-                res.status(500).json({ error: error.message });
+                res.sendError({error, });
                 throw error;
             }
         });
@@ -159,12 +159,12 @@ export const _APIGenericCRUD = {
                 });
                 if (updated) {
                     const updatedItem = await collectionModel.findByPk(req.params.id);
-                    res.json(updatedItem);
+                    res.sendResponse({status: 201, data: updatedItem, });
                 } else {
-                    res.status(404).json({ error: `${collectionName} not found` });
+                    res.sendError({status: 404, error: new Error(`${collectionName} not found`), });
                 }
             } catch (error) {
-                res.status(400).json({ error: error.message });
+                res.sendError({error, });
                 throw error;
             }
         });
@@ -173,19 +173,19 @@ export const _APIGenericCRUD = {
         appWithMeta.delete(`/api/${collectionName}/:id`, {
             parameters: [
                 { name: 'id', in: 'path', required: true, schema: { type: 'string' } }
-            ],            
+            ],
         }, async (req, res) => {
             try {
                 const deleted = await collectionModel.destroy({
                     where: { id: req.params.id }
                 });
                 if (deleted) {
-                    res.status(204).send();
+                    res.sendResponse({status: 204});
                 } else {
-                    res.status(404).json({ error: `${collectionName} not found` });
+                    res.sendError({status: 404, error: new Error(`${collectionName} not found`), });
                 }
             } catch (error) {
-                res.status(500).json({ error: error.message });
+                res.sendError({error, });
                 throw error;
             }
         });

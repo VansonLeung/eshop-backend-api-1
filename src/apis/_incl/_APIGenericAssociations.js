@@ -45,9 +45,9 @@ export const _APIGenericAssociations = {
                         try {
                             const srcItem = await collectionModel.findByPk(req.params.id);
                             const item = await srcItem[itemActionFnKey](req.body);
-                            res.status(201).json(item);
+                            res.sendResponse({status: 201, data: item, });
                         } catch (error) {
-                            res.status(400).json({ error: error.message });
+                            res.sendError({error, });
                         }
                     });
                 }
@@ -75,35 +75,35 @@ export const _APIGenericAssociations = {
                                 const srcItem = await collectionModel.findByPk(req.params.id);
     
                                 if (!srcItem) {
-                                    res.status(404).json({ error: `${collectionName} ${req.params.id} not found` });
+                                    res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
                                     return;
                                 }
 
                                 const targetItemIds = req.params.targetIds.split(",");
     
                                 const response = await srcItem[itemActionFnKey](targetItemIds);
-                                res.json(response);
+                                res.sendResponse({status: 201, data: response, });
     
                             } else {
                                 const srcItem = await collectionModel.findByPk(req.params.id);
                                 const targetItem = await targetModel.findByPk(req.params.targetIds);
     
                                 if (!srcItem) {
-                                    res.status(404).json({ error: `${collectionName} ${req.params.id} not found` });
+                                    res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
                                     return;
                                 }
     
                                 if (!targetItem) {
-                                    res.status(404).json({ error: `${key} ${req.params.targetIds} not found` });
+                                    res.sendError({status: 404, error: new Error(`${key} ${req.params.targetIds} not found`), });
                                     return;
                                 }
     
                                 const response = await srcItem[itemActionFnKey](targetItem);
-                                res.json(response);
+                                res.sendResponse({status: 201, data: response, });
     
                             }
                         } catch (error) {
-                            res.status(400).json({ error: error.message });
+                            res.sendError({error, });
                         }
                     });
                 }
@@ -121,19 +121,24 @@ export const _APIGenericAssociations = {
                             const targetItem = await targetModel.findByPk(req.params.targetId);
 
                             if (!srcItem) {
-                                res.status(404).json({ error: `${collectionName} ${req.params.id} not found` });
+                                res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
                                 return;
                             }
 
                             if (!targetItem) {
-                                res.status(404).json({ error: `${key} ${req.params.targetId} not found` });
+                                res.sendError({status: 404, error: new Error(`${key} ${req.params.targetId} not found`), });
                                 return;
                             }
 
                             const response = await srcItem[itemActionFnKey](targetItem);
-                            res.json(response);
+
+                            if (actionKey === "add") {
+                                res.sendResponse({status: 201, data: response, });
+                            } else if (actionKey === "remove") {
+                                res.sendResponse({status: 204, data: response, });
+                            }
                         } catch (error) {
-                            res.status(400).json({ error: error.message });
+                            res.sendError({error, });
                         }
                     });
                 }
@@ -150,17 +155,17 @@ export const _APIGenericAssociations = {
                             const srcItem = await collectionModel.findByPk(req.params.id);
     
                             if (!srcItem) {
-                                res.status(404).json({ error: `${collectionName} ${req.params.id} not found` });
+                                res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
                                 return;
                             }
 
                             const targetItemIds = req.params.targetIds.split(",");
 
                             const response = await srcItem[itemActionFnKey](targetItemIds);
-                            res.json(response);
+                            res.sendResponse({status: 200, data: response, });
     
                         } catch (error) {
-                            res.status(400).json({ error: error.message });
+                            res.sendError({error, });
                         }
                     });
                 }
@@ -183,7 +188,7 @@ export const _APIGenericAssociations = {
                             const srcItem = await collectionModel.findByPk(req.params.id);
 
                             if (!srcItem) {
-                                res.status(404).json({ error: `${collectionName} ${req.params.id} not found` });
+                                res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
                                 return;
                             }
 
@@ -244,10 +249,10 @@ export const _APIGenericAssociations = {
                                 ...offsetClause !== undefined ? {offset: Number(offsetClause)} : null,
                                 ...limitClause !== undefined ? {limit: Number(limitClause)} : null,
                             });
-                            res.json(targetItems);
+                            res.sendResponse({status: 200, data: targetItemsresponse, });
 
                         } catch (error) {
-                            res.status(400).json({ error: error.message });
+                            res.sendError({error, });
                         }
                     });
                 }
@@ -272,7 +277,7 @@ export const _APIGenericAssociations = {
                                 const srcItem = await collectionModel.findByPk(req.params.id);
     
                                 if (!srcItem) {
-                                    res.status(404).json({ error: `${collectionName} ${req.params.id} not found` });
+                                    res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
                                     return;
                                 }
 
@@ -333,10 +338,10 @@ export const _APIGenericAssociations = {
                                     ...offsetClause !== undefined ? {offset: Number(offsetClause)} : null,
                                     ...limitClause !== undefined ? {limit: Number(limitClause)} : null,
                                 });
-                                res.json(targetItems);
+                                res.sendResponse({status: 200, data: targetItemsresponse, });
     
                             } catch (error) {
-                                res.status(400).json({ error: error.message });
+                                res.sendError({error, });
                             }
                         });
     
@@ -351,21 +356,21 @@ export const _APIGenericAssociations = {
                                 const srcItem = await collectionModel.findByPk(req.params.id);
     
                                 if (!srcItem) {
-                                    res.status(404).json({ error: `${collectionName} ${req.params.id} not found` });
+                                    res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
                                     return;
                                 }
     
                                 const targetItem = await srcItem[itemActionFnKey]();
     
                                 if (!targetItem) {
-                                    res.status(404).json({ error: `${key} not found` });
+                                    res.sendError({status: 404, error: new Error(`${key} not found`), });
                                     return;
                                 }
 
-                                res.json(targetItem);
+                                res.sendResponse({status: 200, data: targetItemresponse, });
     
                             } catch (error) {
-                                res.status(400).json({ error: error.message });
+                                res.sendError({error, });
                             }
                         });
     
