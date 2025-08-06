@@ -1,10 +1,10 @@
 import { UserAuthDao } from "../dao/user/UserAuthDao.js";
-import { _APIGenericMiddlewaresACL } from "./_APIGenericMiddlewaresACL.js";
+import { _APIGenericMiddlewaresACL } from "./_incl";
 
 export const APIUserAuth = {
-    initialize: ({ app, models }) => {
+    initialize: ({ app, appWithMeta, models }) => {
 
-        app.post(`/api/auth/login`, async (req, res) => {
+        appWithMeta.post(`/api/auth/login`, {}, async (req, res) => {
             try {
                 const { username, password } = req.body;
                 const { user, session, } = await UserAuthDao.loginUser({ models, username, password, });
@@ -15,7 +15,7 @@ export const APIUserAuth = {
             }
         });
         
-        app.post(`/api/auth/logout`, 
+        appWithMeta.post(`/api/auth/logout`, {}, 
 
             _APIGenericMiddlewaresACL.applyMiddlewareACL({ 
                 models, 
@@ -34,7 +34,7 @@ export const APIUserAuth = {
             },
         );
         
-        app.post(`/api/auth/register`, async (req, res) => {
+        appWithMeta.post(`/api/auth/register`, {}, async (req, res) => {
             try {
                 const user = req.body;
                 const { user: newUser, session, } = await UserAuthDao.registerUser({ models, user, });

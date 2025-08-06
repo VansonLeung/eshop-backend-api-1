@@ -4,6 +4,8 @@ import expressListRoutes from 'express-list-routes';
 
 export const initializeSwagger = ({
   app,
+  models,
+  packageJson,
 }) => {
   
   // Define the Swagger options
@@ -11,10 +13,16 @@ export const initializeSwagger = ({
     swaggerDefinition: {
       openapi: '3.0.0', // Specify the version of OpenAPI
       info: {
-        title: 'EShop Backend API 1 - API Documentation',
-        version: '1.0.0',
-        description: 'API documentation for eshop backend API 1 (2025 06 18)',
+        title: packageJson.title || packageJson.name || '',
+        version: packageJson.version || '',
+        description: packageJson.description || '',
       },
+      servers: [
+        {
+          url: "http://localhost:3000",
+          description: "localhost",
+        }
+      ],
     },
     apis: [], // Will be filled with API routes later
   };
@@ -27,6 +35,7 @@ export const initializeSwagger = ({
   const apiEndpoints = [];
   
   // Generate Swagger paths
+  const meta = app.meta;
   const paths = expressListRoutes(app, { logger: true });
   paths.forEach((endpoint) => {
     endpoint.path = endpoint.path.substring(2);
@@ -43,7 +52,6 @@ export const initializeSwagger = ({
       ...paths[url],
       [method.toLowerCase()]: {
         summary: description,
-        parameters: method === 'GET' ? [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }] : [],
         responses: {
           200: {
             description: 'Successful response',
@@ -52,14 +60,87 @@ export const initializeSwagger = ({
             description: 'Not found',
           },
         },
+        ...meta[`${method} ${url}`],
       },
     };
   });
   
   // Add paths to Swagger documentation
   swaggerDocs.paths = { ...swaggerDocs.paths, ...paths };
-  
-  
+
+
+  const schemaTypeMapping = {
+    "uuid": "string",
+    "varchar": "string",
+    "timestamp": "string",
+  }
+
+  for (var k in models) {
+    swaggerDocs.components = swaggerDocs.components || {};
+    swaggerDocs.components.schemas = swaggerDocs.components.schemas || {};
+
+    const schema = {
+      type: 'object',
+      properties: {},
+    };
+
+    for (var m in models[k].tableAttributes) {
+      const attribute = models[k].tableAttributes[m];
+
+      var type = attribute.type.__proto__.key.toLowerCase();
+      var description = attribute.description || '';
+
+      if (type === 'enum') {
+        type = "string";
+        description = `${description}<br/>${JSON.stringify(attribute.type.values)}`.trim();
+      }
+
+      var defaultValue = attribute.defaultValue?.toString() || "";
+      var autoIncrement = attribute.autoIncrement;
+      var primaryKey = attribute.primaryKey;
+
+      if (autoIncrement) {
+        continue;
+      }
+
+      if (primaryKey && defaultValue) {
+        continue;
+      }
+
+      if (type.indexOf("timestamp") === 0) {
+        if (defaultValue) {
+          continue;
+        }
+      }
+
+      for (var key in schemaTypeMapping) {
+        if (type.indexOf(key) === 0) {
+          type = schemaTypeMapping[key];
+        }
+      }
+
+      schema.properties[m] = {
+        type,
+        default: defaultValue,
+        description,
+      };
+    }
+
+    swaggerDocs.components.schemas[k] = schema;
+
+
+    swaggerDocs.components.headers = {
+      accesstoken: {
+        description: "Access token for authorization",
+        type: "string",
+      },
+    }
+
+    swaggerDocs.security = {
+      accesstoken: [],
+    }
+  }
+
   // Serve Swagger UI
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
   

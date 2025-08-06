@@ -1,9 +1,10 @@
-import { _APIGenericCRUD } from "./_APIGenericCRUD.js";
+import { _APIGenericCRUD } from "./_incl";
 
 export const APIOrderItem = {
-    initialize: ({ app, models }) => {
+    initialize: ({ app, appWithMeta, models }) => {
         _APIGenericCRUD.initialize({ 
             app,
+            appWithMeta,
             collectionName: `OrderItem`,
             collectionModel: models.OrderItem,
         })

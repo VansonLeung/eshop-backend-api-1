@@ -1,4 +1,5 @@
 import express from 'express';
+import { _routerWithMeta } from './_incl';
 import { APIOrder } from "./APIOrder.js";
 import { APIOrderItem } from "./APIOrderItem.js";
 import { APIProduct } from "./APIProduct.js";
@@ -11,20 +12,24 @@ import { APIUser } from './APIUser.js';
 import { APIUserAuth } from './APIUserAuth.js';
 
 export const Router = {
-    initialize: ({ models }) => {
+    initialize: ({ app, models }) => {
         const router = express.Router()
- 
-        APIUserAuth.initialize({ app: router, models });
-        APIUser.initialize({ app: router, models });
-        APIOrder.initialize({ app: router, models });
-        APIOrderItem.initialize({ app: router, models });
-        APIProduct.initialize({ app: router, models });
-        APIProductType.initialize({ app: router, models });
-        APIProductVariableField.initialize({ app: router, models });
-        APIProductVariableFieldValue.initialize({ app: router, models });
-        APIProductVariant.initialize({ app: router, models });
-        APIShop.initialize({ app: router, models });
+        const meta = {}
+        const routerWithMeta = _routerWithMeta({ router, meta });
+
+        APIUserAuth.initialize({ app: router, appWithMeta: routerWithMeta, models });
+        APIUser.initialize({ app: router, appWithMeta: routerWithMeta, models });
+        APIOrder.initialize({ app: router, appWithMeta: routerWithMeta, models });
+        APIOrderItem.initialize({ app: router, appWithMeta: routerWithMeta, models });
+        APIProduct.initialize({ app: router, appWithMeta: routerWithMeta, models });
+        APIProductType.initialize({ app: router, appWithMeta: routerWithMeta, models });
+        APIProductVariableField.initialize({ app: router, appWithMeta: routerWithMeta, models });
+        APIProductVariableFieldValue.initialize({ app: router, appWithMeta: routerWithMeta, models });
+        APIProductVariant.initialize({ app: router, appWithMeta: routerWithMeta, models });
+        APIShop.initialize({ app: router, appWithMeta: routerWithMeta, models });
         
+        app.meta = meta;
+
         return router;
     },
 }

@@ -9,8 +9,9 @@ export const initializeAPIs = ({
     const app = express();
     
     // Middleware to parse JSON requests
+    app.use(express.static('public'))
     app.use(bodyParser.json());
-    app.use(Router.initialize({ models }));
+    app.use(Router.initialize({ app, models }));
     
     return app;
 }
