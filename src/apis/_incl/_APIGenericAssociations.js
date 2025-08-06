@@ -28,7 +28,7 @@ export const _APIGenericAssociations = {
                 if (actionKey === "create") {
                     appWithMeta.post(`/api/${collectionName}/:id/${key}/${actionKey}`, {
                         parameters: [
-                            { name: 'id', in: 'path', required: true, schema: { type: 'string' } }
+                            { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } }
                         ],
                         requestBody: {
                             required: true,
@@ -55,8 +55,8 @@ export const _APIGenericAssociations = {
                 else if (actionKey === "set") {
                     appWithMeta.patch(`/api/${collectionName}/:id/${key}/${actionKey}/:targetIds`, {
                         parameters: [
-                            { name: 'id', in: 'path', required: true, schema: { type: 'string' } },
-                            { name: 'targetIds', in: 'path', required: true, schema: { type: 'string' }, description: "id value(s) separated by `,`", },
+                            { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } },
+                            { name: 'targetIds', in: 'path', required: true, schema: { type: 'string', default: "" }, description: "id value(s) separated by `,`", },
                         ],
                         requestBody: {
                             required: true,
@@ -111,8 +111,8 @@ export const _APIGenericAssociations = {
                 else if (actionKey === "add" || actionKey === "remove") {
                     appWithMeta.patch(`/api/${collectionName}/:id/${key}/${actionKey}/:targetId`, {
                         parameters: [
-                            { name: 'id', in: 'path', required: true, schema: { type: 'string' } },
-                            { name: 'targetId', in: 'path', required: true, schema: { type: 'string' } },
+                            { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } },
+                            { name: 'targetId', in: 'path', required: true, schema: { type: 'string', default: "" } },
                         ],
                     }, async (req, res) => {
                         console.log(req.route.path);
@@ -146,8 +146,8 @@ export const _APIGenericAssociations = {
                 else if (actionKey === "addMultiple" || actionKey === "removeMultiple") {
                     appWithMeta.patch(`/api/${collectionName}/:id/${key}/${actionKey}/:targetIds`, {
                         parameters: [
-                            { name: 'id', in: 'path', required: true, schema: { type: 'string' } },
-                            { name: 'targetIds', in: 'path', required: true, schema: { type: 'string' }, description: "id value(s) separated by `,`", },
+                            { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } },
+                            { name: 'targetIds', in: 'path', required: true, schema: { type: 'string', default: "" }, description: "id value(s) separated by `,`", },
                         ],
                     }, async (req, res) => {
                         console.log(req.route.path);
@@ -173,14 +173,14 @@ export const _APIGenericAssociations = {
                 else if (actionKey === "count") {
                     appWithMeta.get(`/api/${collectionName}/:id/${key}/countlist`, {
                         parameters: [
-                            { name: 'id', in: 'path', required: true, schema: { type: 'string' } },
-                            { in: "query", name: "filter", schema: {type: "string"}, description: "`whereClause` as *JSON string*, recursive; Supports: `$like`, `$gt`, `$lt`, `$gte`, `$lte`, `$in`, `$not`, `$notIn`<br/>Example: <br/>`{  \"where\": {  \"$or\": [{ \"authorId\": 12 }, { \"authorId\": 13 }]  } }` ", },
-                            { in: "query", name: "sort", schema: {type: "string"}, description: "`orderClause` as *JSON string*, <br/>Example: <br/>`['title', 'DESC']`<br/>`[['title', 'ASC'], ['max(age)', 'ASC']]` ", },
-                            { in: "query", name: "group", schema: {type: "string"}, description: "`groupClause` as *string*", },
-                            { in: "query", name: "join", schema: {type: "string"}, description: "`includeClause` as *JSON string*, <br/>Example: <br/>`{ include: { association: 'Instruments' } }` ", },
-                            { in: "query", name: "offset", schema: {type: "number"}, description: "`offsetClause` as *number*, <br/>Example: <br/>`10` ", },
-                            { in: "query", name: "limit", schema: {type: "number"}, description: "`limitClause` as *number*, <br/>Example: <br/>`5` ", },
-                            { in: "query", name: "isCount", schema: {type: "boolean"}, description: "if `isCount` is `true`, the response data shall be a count of the query rows.", },
+                            { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } },
+                            { in: "query", name: "filter", schema: {type: "string", default: ""}, description: "`whereClause` as *JSON string*, recursive; Supports: `$like`, `$gt`, `$lt`, `$gte`, `$lte`, `$in`, `$not`, `$notIn`<br/>Example: <br/>`{  \"where\": {  \"$or\": [{ \"authorId\": 12 }, { \"authorId\": 13 }]  } }` ", },
+                            { in: "query", name: "sort", schema: {type: "string", default: ""}, description: "`orderClause` as *JSON string*, <br/>Example: <br/>`['title', 'DESC']`<br/>`[['title', 'ASC'], ['max(age)', 'ASC']]` ", },
+                            { in: "query", name: "group", schema: {type: "string", default: ""}, description: "`groupClause` as *string*", },
+                            { in: "query", name: "join", schema: {type: "string", default: ""}, description: "`includeClause` as *JSON string*, <br/>Example: <br/>`{ include: { association: 'Instruments' } }` ", },
+                            { in: "query", name: "offset", schema: {type: "number", default: ""}, description: "`offsetClause` as *number*, <br/>Example: <br/>`10` ", },
+                            { in: "query", name: "limit", schema: {type: "number", default: ""}, description: "`limitClause` as *number*, <br/>Example: <br/>`5` ", },
+                            { in: "query", name: "isCount", schema: {type: "boolean", default: ""}, description: "if `isCount` is `true`, the response data shall be a count of the query rows.", },
                         ],
                     }, async (req, res) => {
                         console.log(req.route.path);
@@ -249,7 +249,7 @@ export const _APIGenericAssociations = {
                                 ...offsetClause !== undefined ? {offset: Number(offsetClause)} : null,
                                 ...limitClause !== undefined ? {limit: Number(limitClause)} : null,
                             });
-                            res.sendResponse({status: 200, data: targetItemsresponse, });
+                            res.sendResponse({status: 200, data: targetItems, });
 
                         } catch (error) {
                             res.sendError({error, });
@@ -262,14 +262,14 @@ export const _APIGenericAssociations = {
                     if (isMultiple) {
                         appWithMeta.get(`/api/${collectionName}/:id/${key}/getlist`, {
                             parameters: [
-                                { name: 'id', in: 'path', required: true, schema: { type: 'string' } },
-                                { in: "query", name: "filter", schema: {type: "string"}, description: "`whereClause` as *JSON string*, recursive; Supports: `$like`, `$gt`, `$lt`, `$gte`, `$lte`, `$in`, `$not`, `$notIn`<br/>Example: <br/>`{  \"where\": {  \"$or\": [{ \"authorId\": 12 }, { \"authorId\": 13 }]  } }` ", },
-                                { in: "query", name: "sort", schema: {type: "string"}, description: "`orderClause` as *JSON string*, <br/>Example: <br/>`['title', 'DESC']`<br/>`[['title', 'ASC'], ['max(age)', 'ASC']]` ", },
-                                { in: "query", name: "group", schema: {type: "string"}, description: "`groupClause` as *string*", },
-                                { in: "query", name: "join", schema: {type: "string"}, description: "`includeClause` as *JSON string*, <br/>Example: <br/>`{ include: { association: 'Instruments' } }` ", },
-                                { in: "query", name: "offset", schema: {type: "number"}, description: "`offsetClause` as *number*, <br/>Example: <br/>`10` ", },
-                                { in: "query", name: "limit", schema: {type: "number"}, description: "`limitClause` as *number*, <br/>Example: <br/>`5` ", },
-                                { in: "query", name: "isCount", schema: {type: "boolean"}, description: "if `isCount` is `true`, the response data shall be a count of the query rows.", },
+                                { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } },
+                                { in: "query", name: "filter", schema: {type: "string", default: ""}, description: "`whereClause` as *JSON string*, recursive; Supports: `$like`, `$gt`, `$lt`, `$gte`, `$lte`, `$in`, `$not`, `$notIn`<br/>Example: <br/>`{  \"where\": {  \"$or\": [{ \"authorId\": 12 }, { \"authorId\": 13 }]  } }` ", },
+                                { in: "query", name: "sort", schema: {type: "string", default: ""}, description: "`orderClause` as *JSON string*, <br/>Example: <br/>`['title', 'DESC']`<br/>`[['title', 'ASC'], ['max(age)', 'ASC']]` ", },
+                                { in: "query", name: "group", schema: {type: "string", default: ""}, description: "`groupClause` as *string*", },
+                                { in: "query", name: "join", schema: {type: "string", default: ""}, description: "`includeClause` as *JSON string*, <br/>Example: <br/>`{ include: { association: 'Instruments' } }` ", },
+                                { in: "query", name: "offset", schema: {type: "number", default: ""}, description: "`offsetClause` as *number*, <br/>Example: <br/>`10` ", },
+                                { in: "query", name: "limit", schema: {type: "number", default: ""}, description: "`limitClause` as *number*, <br/>Example: <br/>`5` ", },
+                                { in: "query", name: "isCount", schema: {type: "boolean", default: ""}, description: "if `isCount` is `true`, the response data shall be a count of the query rows.", },
                             ],
                         }, async (req, res) => {
                             console.log(req.route.path);
@@ -338,7 +338,7 @@ export const _APIGenericAssociations = {
                                     ...offsetClause !== undefined ? {offset: Number(offsetClause)} : null,
                                     ...limitClause !== undefined ? {limit: Number(limitClause)} : null,
                                 });
-                                res.sendResponse({status: 200, data: targetItemsresponse, });
+                                res.sendResponse({status: 200, data: targetItems, });
     
                             } catch (error) {
                                 res.sendError({error, });
@@ -348,7 +348,7 @@ export const _APIGenericAssociations = {
                     } else {
                         appWithMeta.get(`/api/${collectionName}/:id/${key}/get`, {
                             parameters: [
-                                { name: 'id', in: 'path', required: true, schema: { type: 'string' } },
+                                { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } },
                             ],
                         }, async (req, res) => {
                             console.log(req.route.path);
@@ -367,7 +367,7 @@ export const _APIGenericAssociations = {
                                     return;
                                 }
 
-                                res.sendResponse({status: 200, data: targetItemresponse, });
+                                res.sendResponse({status: 200, data: targetItem, });
     
                             } catch (error) {
                                 res.sendError({error, });

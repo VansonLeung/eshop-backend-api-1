@@ -121,7 +121,7 @@ export const _APIGenericCRUD = {
         // Read a Item by ID
         appWithMeta.get(`/api/${collectionName}/:id`, {
             parameters: [
-                { name: 'id', in: 'path', required: true, schema: { type: 'string' } }
+                { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } }
             ],
         }, async (req, res) => {
             try {
@@ -140,7 +140,7 @@ export const _APIGenericCRUD = {
         // Update a Item
         appWithMeta.put(`/api/${collectionName}/:id`, {
             parameters: [
-                { name: 'id', in: 'path', required: true, schema: { type: 'string' } }
+                { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } }
             ],
             requestBody: {
                 required: true,
@@ -172,7 +172,7 @@ export const _APIGenericCRUD = {
         // Delete a Item
         appWithMeta.delete(`/api/${collectionName}/:id`, {
             parameters: [
-                { name: 'id', in: 'path', required: true, schema: { type: 'string' } }
+                { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } }
             ],
         }, async (req, res) => {
             try {
