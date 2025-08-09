@@ -1,5 +1,6 @@
 import { _APIGenericAssociations } from "./_APIGenericAssociations.js";
-import { Op } from 'sequelize';
+import { recursiveMassageIncludeClause } from "./_APIQueryIncludeClauseMassager.js";
+import { recursiveMassageWhereClause } from './_APIQueryWhereClauseMassager.js';
 
 export const _APIGenericCRUD = {
     initialize: ({
@@ -49,26 +50,6 @@ export const _APIGenericCRUD = {
                 // Build the where clause for filtering
                 const whereClause = filter ? JSON.parse(filter) : undefined; // Assuming filter is a JSON string
 
-                const recursiveMassageWhereClause = (whereClause) => {
-                    const keys = Object.keys(whereClause);
-                    for (var k in keys) {
-                        if (keys[k] === "$like") { whereClause[Op.like] = whereClause.$like; delete whereClause.$like; }
-                        else if (keys[k] === "$gt") { whereClause[Op.gt] = whereClause.$gt; delete whereClause.$gt; }
-                        else if (keys[k] === "$lt") { whereClause[Op.lt] = whereClause.$lt; delete whereClause.$lt; }
-                        else if (keys[k] === "$gte") { whereClause[Op.gte] = whereClause.$gte; delete whereClause.$gte; }
-                        else if (keys[k] === "$lte") { whereClause[Op.lte] = whereClause.$lte; delete whereClause.$lte; }
-                        else if (keys[k] === "$in") { whereClause[Op.in] = whereClause.$in; delete whereClause.$in; }
-                        else if (keys[k] === "$not") { whereClause[Op.not] = whereClause.$not; delete whereClause.$not; }
-                        else if (keys[k] === "$notIn") { whereClause[Op.notIn] = whereClause.$notIn; delete whereClause.$notIn; }
-                    }
-                    for (var k in whereClause) {
-                        const val = whereClause[k];
-                        if (val && typeof(val) === 'object') {
-                            recursiveMassageWhereClause(val);
-                        }
-                    }
-                }
-
                 if (whereClause) {
                     recursiveMassageWhereClause(whereClause);
                 }
@@ -83,6 +64,10 @@ export const _APIGenericCRUD = {
                 
                 // Build the include clause for joining
                 const includeClause = join ? JSON.parse(join) : undefined;
+
+                if (includeClause) {
+                    recursiveMassageIncludeClause(includeClause);
+                }
 
                 // Build the offset clause for offseting
                 const offsetClause = offset || undefined;

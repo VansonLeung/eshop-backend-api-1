@@ -4,35 +4,35 @@ export const ContactAttributes = () => {
     return {
         firstName: {
             type: DataTypes.STRING(128),
-            allowNull: false,
+            allowNull: true,
         },
         lastName: {
             type: DataTypes.STRING(128),
-            allowNull: false,
+            allowNull: true,
         },
         email: {
             type: DataTypes.STRING(512),
-            allowNull: false,
+            allowNull: true,
         },
         phone: {
             type: DataTypes.STRING(32),
-            allowNull: false,
+            allowNull: true,
         },
         address: {
             type: DataTypes.STRING(1024),
-            allowNull: false,
+            allowNull: true,
         },
         city: {
             type: DataTypes.STRING(256),
-            allowNull: false,
+            allowNull: true,
         },
         state: {
             type: DataTypes.STRING(256),
-            allowNull: false,
+            allowNull: true,
         },
         zip: {
             type: DataTypes.STRING(16),
-            allowNull: false,
+            allowNull: true,
         },
     }
 }
