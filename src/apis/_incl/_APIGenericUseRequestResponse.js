@@ -17,7 +17,7 @@ export const _APIGenericUseRequestResponse = {
                     status: status || 500,
                     success: false,
                     message: message || error.message,
-                    stack: (error && error.stack) ? error.stack.split("\n") : undefined,
+                    stack: (error && error.stack) ? error.stack : undefined,
                 });
             };
 

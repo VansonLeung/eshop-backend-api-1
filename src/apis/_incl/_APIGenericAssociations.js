@@ -110,6 +110,7 @@ export const _APIGenericAssociations = {
                 }
 
                 else if (actionKey === "add" || actionKey === "remove") {
+                    const __actionKey = actionKey;
                     appWithMeta.patch(`/api/${collectionName}/:id/${key}/${actionKey}/:targetId`, {
                         parameters: [
                             { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } },
@@ -133,10 +134,12 @@ export const _APIGenericAssociations = {
 
                             const response = await srcItem[itemActionFnKey](targetItem);
 
-                            if (actionKey === "add") {
-                                res.sendResponse({status: 201, data: response, });
-                            } else if (actionKey === "remove") {
-                                res.sendResponse({status: 204, data: response, });
+                            if (__actionKey === "add") {
+                                res.sendResponse({status: 201, });
+                            } else if (__actionKey === "remove") {
+                                res.sendResponse({status: 201, });
+                            } else {
+                                res.sendResponse({status: 200, });
                             }
                         } catch (error) {
                             res.sendError({error, });
@@ -145,6 +148,7 @@ export const _APIGenericAssociations = {
                 }
 
                 else if (actionKey === "addMultiple" || actionKey === "removeMultiple") {
+                    const __actionKey = actionKey;
                     appWithMeta.patch(`/api/${collectionName}/:id/${key}/${actionKey}/:targetIds`, {
                         parameters: [
                             { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } },
@@ -163,7 +167,14 @@ export const _APIGenericAssociations = {
                             const targetItemIds = req.params.targetIds.split(",");
 
                             const response = await srcItem[itemActionFnKey](targetItemIds);
-                            res.sendResponse({status: 200, });
+
+                            if (__actionKey === "addMultiple") {
+                                res.sendResponse({status: 201, });
+                            } else if (__actionKey === "removeMultiple") {
+                                res.sendResponse({status: 201, });
+                            } else {
+                                res.sendResponse({status: 200, });
+                            }
     
                         } catch (error) {
                             res.sendError({error, });
@@ -234,7 +245,7 @@ export const _APIGenericAssociations = {
                                 ...offsetClause !== undefined ? {offset: Number(offsetClause)} : null,
                                 ...limitClause !== undefined ? {limit: Number(limitClause)} : null,
                             });
-                            res.sendResponse({status: 200, data: targetItems, });
+                            res.sendResponse({status: 200, data: targetItems.count, });
 
                         } catch (error) {
                             res.sendError({error, });
@@ -243,7 +254,6 @@ export const _APIGenericAssociations = {
                 }
 
                 else if (actionKey === "get") {
-
                     if (isMultiple) {
                         appWithMeta.get(`/api/${collectionName}/:id/${key}/getlist`, {
                             parameters: [

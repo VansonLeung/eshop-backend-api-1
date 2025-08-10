@@ -84,7 +84,7 @@ export const _APIGenericCRUD = {
                         ...offsetClause !== undefined ? {offset: Number(offsetClause)} : null,
                         ...limitClause !== undefined ? {limit: Number(limitClause)} : null,
                     });
-                    res.sendResponse({status: 200, data: {count}, });
+                    res.sendResponse({status: 200, data: count, });
                     return;
                 }
 
