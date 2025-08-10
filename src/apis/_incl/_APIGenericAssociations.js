@@ -163,7 +163,7 @@ export const _APIGenericAssociations = {
                             const targetItemIds = req.params.targetIds.split(",");
 
                             const response = await srcItem[itemActionFnKey](targetItemIds);
-                            res.sendResponse({status: 200, data: response, });
+                            res.sendResponse({status: 200, });
     
                         } catch (error) {
                             res.sendError({error, });
@@ -318,11 +318,23 @@ export const _APIGenericAssociations = {
                         appWithMeta.get(`/api/${collectionName}/:id/${key}/get`, {
                             parameters: [
                                 { name: 'id', in: 'path', required: true, schema: { type: 'string', default: "" } },
+                                { in: "query", name: "join", schema: {type: "string", default: ""}, description: "`includeClause` as *JSON string*, <br/>Example: <br/>`{ include: { association: 'Instruments' } }` ", },
                             ],
                         }, async (req, res) => {
                             console.log(req.route.path);
                             try {
-                                const srcItem = await collectionModel.findByPk(req.params.id);
+                                const { join, } = req.query;
+
+                                // Build the include clause for joining
+                                const includeClause = join ? JSON.parse(join) : undefined;
+
+                                if (includeClause) {
+                                    recursiveMassageIncludeClause(includeClause);
+                                }
+
+                                const srcItem = await collectionModel.findByPk(req.params.id, {
+                                    ...includeClause ? {include: includeClause} : null,
+                                });
     
                                 if (!srcItem) {
                                     res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
