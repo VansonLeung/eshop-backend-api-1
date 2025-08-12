@@ -47,7 +47,7 @@ import {
 
 export const initializeModels = async () => 
 {
-    const sequelize = new Sequelize('eshopcms1_dev', 'root', 'password', {
+    const sequelize = new Sequelize('disny_eshopcms1_dev', 'root', 'root', {
         dialect: 'mysql',
         host: "127.0.0.1",
         dialectOptions: {
