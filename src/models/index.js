@@ -53,9 +53,7 @@ export const initializeModels = async () =>
         dialectOptions: {
           // Your mysql2 options here
         //   socketPath: '/tmp/mysql.sock',
-            useUTC: false, // for reading from database
         },
-        timezone: '+08:00', // for writing to database
     });
     
     try {
