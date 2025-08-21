@@ -75,7 +75,7 @@ export const _APIGenericCRUD = {
                 // Build the limit clause for limiting
                 const limitClause = limit || undefined;
 
-                if (isCount) {
+                if (isCount && !(isCount === "false" || isCount === "False")) {
                     const count = await collectionModel.count({
                         ...whereClause ? {where: whereClause} : null,
                         ...orderClause ? {order: orderClause} : null,
