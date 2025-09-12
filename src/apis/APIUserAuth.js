@@ -1,5 +1,5 @@
 import { UserAuthDao } from "../dao/user/UserAuthDao.js";
-import { _APIGenericMiddlewaresACL } from "./_incl";
+import { _APIGenericMiddlewaresACL } from "./_incl/index.js";
 
 export const APIUserAuth = {
     initialize: ({ app, appWithMeta, models }) => {

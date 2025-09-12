@@ -5,7 +5,7 @@ import { BasicAttributes,
     ContentAttributes,
     DatedSoftDeleteStatusAttributes,
     DatedStatusAttributes,
-} from "../_incl";
+} from "../_incl/index.js";
 
 export const EBProduct = {
     makeAssociations: ({Me, Lang}) => {

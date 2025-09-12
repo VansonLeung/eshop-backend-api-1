@@ -1,10 +1,10 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings";
+import { Settings } from "../_settings/index.js";
 import { 
     BasicAttributes,
     DatedSoftDeleteStatusAttributes,
     DatedStatusAttributes,
-} from "../_incl";
+} from "../_incl/index.js";
 
 export const EBUserSession = {
     makeAssociations: ({Me, User, UserCredential}) => {

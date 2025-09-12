@@ -1,11 +1,11 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings";
+import { Settings } from "../_settings/index.js";
 import { 
     BasicAttributes, 
     ContentAttributes, 
     DatedSoftDeleteStatusAttributes, 
     DatedStatusAttributes,
-} from "../_incl";
+} from "../_incl/index.js";
 
 export const EBOrderPayment = {
     makeAssociations: ({Me, Order}) => {

@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-import { recursiveMassageWhereClause } from './_APIQueryWhereClauseMassager';
+import { recursiveMassageWhereClause } from './_APIQueryWhereClauseMassager.js';
 
 export const recursiveMassageIncludeClause = (includeClause) => {
     if (includeClause) {

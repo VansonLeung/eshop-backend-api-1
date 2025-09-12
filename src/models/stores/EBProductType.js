@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings";
+import { Settings } from "../_settings/index.js";
 import { 
     BasicAttributes,
     CodeAttributes,
@@ -9,7 +9,7 @@ import {
     DatedStatusAttributes,
     ParentChildAssociations,
     ParentChildAttributes,
-} from "../_incl";
+} from "../_incl/index.js";
 
 export const EBProductType = {
     makeAssociations: ({Me, Lang}) => {

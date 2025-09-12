@@ -1,5 +1,5 @@
 import express from 'express';
-import { _routerWithMeta } from './_incl';
+import { _routerWithMeta } from './_incl/index.js';
 import { APIOrder } from "./APIOrder.js";
 import { APIOrderItem } from "./APIOrderItem.js";
 import { APIProduct } from "./APIProduct.js";

@@ -1,11 +1,11 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings";
+import { Settings } from "../_settings/index.js";
 import { 
     BasicAttributes, 
     CodeAttributes, 
     DatedSoftDeleteStatusAttributes, 
     DatedStatusAttributes,
-} from "../_incl";
+} from "../_incl/index.js";
 
 export const EBLang = {
     makeAssociations: ({Me}) => {

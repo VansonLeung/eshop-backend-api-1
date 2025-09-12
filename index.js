@@ -1,9 +1,9 @@
 import packageJson from './package.json' assert { type: 'json' };
 
-import { initializeModels } from "./src/models";
-import { initializeAPIs } from "./src/apis";
+import { initializeModels } from "./src/models/index.js";
+import { initializeAPIs } from "./src/apis/index.js";
 import { initializeSwagger } from "./src/apis/swagger.js";
-import { initializeMigrations } from './src/models/migrations';
+import { initializeMigrations } from './src/models/migrations/index.js';
 
 const app = await (async () => {
   

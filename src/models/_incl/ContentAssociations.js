@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize";
-import { Settings } from "../_settings";
+import { Settings } from "../_settings/index.js";
 
 export const ContentAssociations = ({Me, Lang}) => {
     const MeBase = Me.belongsTo(Me, {

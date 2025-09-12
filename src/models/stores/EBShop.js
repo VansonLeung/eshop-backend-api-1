@@ -5,7 +5,7 @@ import {
     ContentAttributes,
     DatedSoftDeleteStatusAttributes,
     DatedStatusAttributes,
-} from "../_incl";
+} from "../_incl/index.js";
 
 export const EBShop = {
     makeAssociations: ({Me, Lang}) => {

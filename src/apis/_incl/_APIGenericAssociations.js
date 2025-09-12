@@ -1,5 +1,5 @@
-import { recursiveMassageIncludeClause } from './_APIQueryIncludeClauseMassager';
-import { recursiveMassageWhereClause } from './_APIQueryWhereClauseMassager';
+import { recursiveMassageIncludeClause } from './_APIQueryIncludeClauseMassager.js';
+import { recursiveMassageWhereClause } from './_APIQueryWhereClauseMassager.js';
 
 export const _APIGenericAssociations = {
     initialize: ({

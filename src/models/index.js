@@ -43,7 +43,7 @@ import {
     EBUserSession,
     EBUserShipping,
     EBUserStatus,
-} from './stores';
+} from './stores/index.js';
 
 export const initializeModels = async () => 
 {

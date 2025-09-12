@@ -1,4 +1,4 @@
-import { _APIGenericCRUD } from "./_incl"
+import { _APIGenericCRUD } from "./_incl/index.js"
 
 export const APIOrder = {
     initialize: ({ app, appWithMeta, models }) => {

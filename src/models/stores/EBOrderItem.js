@@ -1,11 +1,11 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings";
+import { Settings } from "../_settings/index.js";
 import { 
     BasicSeqIdlessAttributes, 
     OrderItemAttributes, 
     ParentChildAssociations, 
     ParentChildAttributes,
-} from "../_incl";
+} from "../_incl/index.js";
 
 export const EBOrderItem = {
     makeAssociations: ({Me, Order, Product, ProductVariant}) => {

@@ -187,6 +187,63 @@ export const _APIGenericCRUD = {
             }
         });
 
+        // Bulk create / update items
+        appWithMeta.post(`/api/${collectionName}/bulk`, {
+            requestBody: {
+                required: true,
+                content: {
+                    "application/json": {
+                        schema: {
+                            type: "array",
+                            items: {
+                                $ref: `#/components/schemas/${collectionName}`,
+                            }
+                        }
+                    }
+                }
+            }
+        }, async (req, res) => {
+            try {
+                const responseData = [];
+                for (const item of req.body) {
+                    const [upsertedItem, isCreated] = await collectionModel.upsert(item);
+                    responseData.push({upsertedItem, isCreated});
+                }
+                res.sendResponse({status: 201, data: true, });
+            } catch (error) {
+                res.sendError({error, });
+                throw error;
+            }
+        });
+
+
+        // Bulk delete items
+        appWithMeta.delete(`/api/${collectionName}/:ids/bulk`, {
+            parameters: [
+                { name: 'ids', in: 'path', required: true, schema: { type: 'array', default: [] } }
+            ],  
+        }, async (req, res) => {
+            try {
+                if (!req.params.ids || req.params.ids.length === 0) {
+                    res.sendResponse({status: 400, error: new Error(`No IDs provided`), });
+                    return;
+                }
+
+                const deleted = await collectionModel.destroy({
+                    where: { id: req.params.ids || [] }
+                });
+
+                if (deleted) {
+                    res.sendResponse({status: 204});
+                } else {
+                    res.sendError({status: 404, error: new Error(`${collectionName} not found`), });
+                }
+            } catch (error) {
+                res.sendError({error, });
+                throw error;
+            }
+        });
+
         _APIGenericAssociations.initialize({
             app,
             appWithMeta,
