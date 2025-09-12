@@ -1,6 +1,6 @@
-import { _APIGenericAssociations } from "./_APIGenericAssociations.js";
-import { recursiveMassageIncludeClause } from "./_APIQueryIncludeClauseMassager.js";
-import { recursiveMassageWhereClause } from './_APIQueryWhereClauseMassager.js';
+import { APIGenericAssociations } from "./APIGenericAssociations.js";
+import { recursiveMassageIncludeClause } from "./APIQueryIncludeClauseMassager.js";
+import { recursiveMassageWhereClause } from './APIQueryWhereClauseMassager.js';
 
 export const _APIGenericCRUD = {
     initialize: ({
@@ -244,7 +244,7 @@ export const _APIGenericCRUD = {
             }
         });
 
-        _APIGenericAssociations.initialize({
+        APIGenericAssociations.initialize({
             app,
             appWithMeta,
             collectionName,

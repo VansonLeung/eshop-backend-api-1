@@ -1,6 +1,6 @@
 import { METHODS } from 'node:http';
 
-export const _routerWithMeta = ({router, meta}) => {
+export const routerWithMeta = ({router, meta}) => {
     const routerWithMeta = {};
 
     for (var k in METHODS) {

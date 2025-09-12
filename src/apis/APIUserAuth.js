@@ -1,5 +1,4 @@
 import { UserAuthDao } from "../dao/user/UserAuthDao.js";
-import { _APIGenericMiddlewaresACL } from "./_incl/index.js";
 
 export const APIUserAuth = {
     initialize: ({ app, appWithMeta, models }) => {
@@ -17,7 +16,7 @@ export const APIUserAuth = {
         
         appWithMeta.post(`/api/auth/logout`, {}, 
 
-            _APIGenericMiddlewaresACL.applyMiddlewareACL({ 
+            APIGenericMiddlewaresACL.applyMiddlewareACL({ 
                 models, 
                 apiName: `auth`, 
                 requiredPermission: `logout`, 

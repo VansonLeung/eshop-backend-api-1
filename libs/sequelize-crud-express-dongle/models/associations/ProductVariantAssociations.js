@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize";
-import { Settings } from "../_settings/Settings.js"
+import { Settings } from "../../../../src/models/settings/Settings.js"
 
 export const ProductVariantAssociations = ({Me, Product}) => {
 

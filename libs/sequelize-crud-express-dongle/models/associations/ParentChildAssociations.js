@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize";
-import { Settings } from "../_settings/index.js";
+import { Settings } from "../../../../src/models/settings/index.js";
 
 export const ParentChildAssociations = ({Me}) => {
     const MeParent = Me.belongsTo(Me, {

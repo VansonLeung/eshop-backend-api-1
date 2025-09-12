@@ -1,5 +1,5 @@
 import express from 'express';
-import { _routerWithMeta } from './_incl/index.js';
+import { routerWithMeta } from '@vanport/sequelize-crud-express-dongle/apis/incl/routerWithMeta.js';
 import { APIOrder } from "./APIOrder.js";
 import { APIOrderItem } from "./APIOrderItem.js";
 import { APIProduct } from "./APIProduct.js";
@@ -15,7 +15,7 @@ export const Router = {
     initialize: ({ app, models }) => {
         const router = express.Router()
         const meta = {}
-        const routerWithMeta = _routerWithMeta({ router, meta });
+        const routerWithMeta = routerWithMeta({ router, meta });
 
         APIUserAuth.initialize({ app: router, appWithMeta: routerWithMeta, models });
         APIUser.initialize({ app: router, appWithMeta: routerWithMeta, models });
