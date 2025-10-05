@@ -7,7 +7,15 @@
       "Bash(timeout:*)",
       "Read(//private/tmp/**)",
       "Bash(node:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(find:*)",
+      "Bash(perl:*)",
+      "Bash(curl:*)",
+      "Bash(pkill:*)",
+      "Bash(npm install)",
+      "Bash(killall:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)"
     ],
     "deny": [],
     "ask": []

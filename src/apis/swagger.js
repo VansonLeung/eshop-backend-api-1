@@ -31,42 +31,72 @@ export const initializeSwagger = ({
   const swaggerDocs = swaggerJsDoc(swaggerOptions);
   
   
-  // Sample API endpoints
-  const apiEndpoints = [];
-  
-  // Generate Swagger paths
-  const meta = app.meta;
-  const paths = expressListRoutes(app, { logger: true });
-  paths.forEach((endpoint) => {
-    endpoint.path = endpoint.path.substring(2);
-    apiEndpoints.push({
-      url: endpoint.path,
-      method: endpoint.method,
-    });
-  });
-  console.log(`Total API count: ${paths.length}`)
-  
-  apiEndpoints.forEach((endpoint) => {
-    const { url, method, description } = endpoint;
-    paths[url] = {
-      ...paths[url],
-      [method.toLowerCase()]: {
-        summary: description,
-        responses: {
-          200: {
-            description: 'Successful response',
-          },
-          404: {
-            description: 'Not found',
-          },
+  // Generate Swagger paths from metadata
+  const meta = app.meta || {};
+  const routes = expressListRoutes(app, { logger: true });
+  console.log(`Total API count: ${routes.length}`)
+
+  const swaggerPaths = {};
+
+  routes.forEach((route) => {
+    const path = route.path.substring(2); // Remove /~ prefix
+    const method = route.method.toLowerCase();
+    const metaKey = `${route.method} ${path}`;
+
+    // Extract model name from path for grouping
+    // e.g., /api/User, /api/User/:id, /api/auth/login
+    const pathParts = path.split('/');
+    let tag = 'Other';
+    if (pathParts[1] === 'api' && pathParts[2]) {
+      tag = pathParts[2].split(':')[0].split('?')[0]; // Remove :id or query params
+    } else if (pathParts[1] === 'api') {
+      tag = 'API';
+    }
+
+    // Initialize path object if it doesn't exist
+    if (!swaggerPaths[path]) {
+      swaggerPaths[path] = {};
+    }
+
+    // Add method with metadata from appWithMeta
+    swaggerPaths[path][method] = {
+      summary: `${route.method} ${path}`,
+      tags: [tag],
+      responses: {
+        200: {
+          description: 'Successful response',
         },
-        ...meta[`${method} ${url}`],
+        404: {
+          description: 'Not found',
+        },
       },
+      ...meta[metaKey], // Merge metadata from RouterWithMeta
     };
   });
-  
+
   // Add paths to Swagger documentation
-  swaggerDocs.paths = { ...swaggerDocs.paths, ...paths };
+  swaggerDocs.paths = { ...swaggerDocs.paths, ...swaggerPaths };
+
+  // Generate tags from registered models for grouping
+  swaggerDocs.tags = swaggerDocs.tags || [];
+  const uniqueTags = new Set();
+
+  // Collect all unique tags from paths
+  Object.values(swaggerPaths).forEach(pathObj => {
+    Object.values(pathObj).forEach(methodObj => {
+      if (methodObj.tags) {
+        methodObj.tags.forEach(tag => uniqueTags.add(tag));
+      }
+    });
+  });
+
+  // Add tag descriptions
+  uniqueTags.forEach(tag => {
+    swaggerDocs.tags.push({
+      name: tag,
+      description: `Endpoints for ${tag} operations`
+    });
+  });
 
 
   const schemaTypeMapping = {

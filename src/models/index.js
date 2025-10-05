@@ -1,53 +1,51 @@
 import { writeFileSync, mkdirSync } from 'fs';
 import { Sequelize, Op } from "sequelize";
 import sequelizeErd from 'sequelize-erd';
-import { SequelizeSchemaHelper as SchemaToIndexes } from "./_helpers/index.js";
-import {
-    // EBARefOrderStatusCodes,
-    EBCustomerOrderMapping,
-    EBDiscountCampaign,
-    EBLang,
-    EBOrder,
-    EBOrderBilling,
-    EBOrderInvoice,
-    EBOrderItem,
-    EBOrderItemStatus,
-    EBOrderPayment,
-    EBOrderShipping,
-    EBOrderStatus,
-    // EBParty,
-    EBPost,
-    EBPostType,
-    EBPostTypePostMapping,
-    EBProduct,
-    EBProductType,
-    EBProductTypeProductMapping,
-    EBProductVariableField,
-    EBProductVariableFieldValue,
-    EBProductVariant,
-    EBProductVariantVarMapping,
-    EBShop,
-    EBShopOrderMapping,
-    EBShopOwnerMapping,
-    EBShopProductMapping,
-    EBShopProductTypeMapping,
-    EBUser,
-    EBUserBilling,
-    EBUserCartItem,
-    EBUserContact,
-    EBUserCredential,
-    EBUserPayment,
-    EBUserPermission,
-    EBUserRole,
-    EBUserRolePermissionMapping,
-    EBUserSession,
-    EBUserShipping,
-    EBUserStatus,
-} from './stores/index.js';
+import { SchemaToIndexes, modelRegistry } from 'sequelize-rest-framework';
+
+// Direct imports from model files
+import { EBCustomerOrderMapping } from './stores/EBCustomerOrderMapping.js';
+import { EBDiscountCampaign } from './stores/EBDiscountCampaign.js';
+import { EBLang } from './stores/EBLang.js';
+import { EBOrder } from './stores/EBOrder.js';
+import { EBOrderBilling } from './stores/EBOrderBilling.js';
+import { EBOrderInvoice } from './stores/EBOrderInvoice.js';
+import { EBOrderItem } from './stores/EBOrderItem.js';
+import { EBOrderItemStatus } from './stores/EBOrderItemStatus.js';
+import { EBOrderPayment } from './stores/EBOrderPayment.js';
+import { EBOrderShipping } from './stores/EBOrderShipping.js';
+import { EBOrderStatus } from './stores/EBOrderStatus.js';
+import { EBPost } from './stores/EBPost.js';
+import { EBPostType } from './stores/EBPostType.js';
+import { EBPostTypePostMapping } from './stores/EBPostTypePostMapping.js';
+import { EBProduct } from './stores/EBProduct.js';
+import { EBProductType } from './stores/EBProductType.js';
+import { EBProductTypeProductMapping } from './stores/EBProductTypeProductMapping.js';
+import { EBProductVariableField } from './stores/EBProductVariableField.js';
+import { EBProductVariableFieldValue } from './stores/EBProductVariableFieldValue.js';
+import { EBProductVariant } from './stores/EBProductVariant.js';
+import { EBProductVariantVarMapping } from './stores/EBProductVariantVarMapping.js';
+import { EBShop } from './stores/EBShop.js';
+import { EBShopOrderMapping } from './stores/EBShopOrderMapping.js';
+import { EBShopOwnerMapping } from './stores/EBShopOwnerMapping.js';
+import { EBShopProductMapping } from './stores/EBShopProductMapping.js';
+import { EBShopProductTypeMapping } from './stores/EBShopProductTypeMapping.js';
+import { EBUser } from './stores/EBUser.js';
+import { EBUserBilling } from './stores/EBUserBilling.js';
+import { EBUserCartItem } from './stores/EBUserCartItem.js';
+import { EBUserContact } from './stores/EBUserContact.js';
+import { EBUserCredential } from './stores/EBUserCredential.js';
+import { EBUserPayment } from './stores/EBUserPayment.js';
+import { EBUserPermission } from './stores/EBUserPermission.js';
+import { EBUserRole } from './stores/EBUserRole.js';
+import { EBUserRolePermissionMapping } from './stores/EBUserRolePermissionMapping.js';
+import { EBUserSession } from './stores/EBUserSession.js';
+import { EBUserShipping } from './stores/EBUserShipping.js';
+import { EBUserStatus } from './stores/EBUserStatus.js';
 
 export const initializeModels = async () => 
 {
-    const sequelize = new Sequelize('eshopcms1_dev', 'root', 'password', {
+    const sequelize = new Sequelize('eshopcms2_dev', 'root', 'password', {
         dialect: 'mysql',
         host: "127.0.0.1",
         dialectOptions: {
@@ -169,6 +167,25 @@ export const initializeModels = async () =>
             alter: false,
         });
 
+        // Auto-register all models for CRUD endpoints
+        const modelsToRegister = {
+            User, UserRole, UserPermission, UserRolePermissionMapping,
+            UserCredential, UserSession, UserContact, UserShipping,
+            UserBilling, UserPayment, UserCartItem,
+            Shop, ShopOwnerMapping, ShopProductMapping, ShopProductTypeMapping, ShopOrderMapping,
+            Product, ProductType, ProductVariableField, ProductVariableFieldValue,
+            ProductVariant, ProductVariantVarMapping, ProductTypeProductMapping,
+            Lang, Post, PostType, PostTypePostMapping,
+            Order, OrderItem, OrderBilling, OrderShipping, OrderPayment,
+            OrderInvoice, OrderStatus, OrderItemStatus,
+            CustomerOrderMapping,
+        };
+
+        Object.entries(modelsToRegister).forEach(([name, model]) => {
+            if (model) {
+                modelRegistry.register(name, model);
+            }
+        });
 
         (async function(){
             mkdirSync('./doc', { recursive: true });
@@ -185,45 +202,48 @@ export const initializeModels = async () =>
 
 
         return {
-            UserPermission,
-            UserRole,
-            UserRolePermissionMapping,
-            User,
-            UserCredential,
-            UserSession,
-            UserContact,
-            UserShipping,
-            UserBilling,
-            UserPayment,
-            UserCartItem,
-            Shop,
-            ShopOwnerMapping,
-            Product,
-            ProductType,
-            ProductVariableField,
-            ProductVariableFieldValue,
-            ProductVariant,
-            ProductVariantVarMapping,
-            ShopProductMapping,
-            ProductTypeProductMapping,
-            ShopProductTypeMapping,
-            Lang,
-            Post,
-            PostType,
-            PostTypePostMapping,
-            Order,
-            OrderItem,
-            OrderBilling,
-            OrderShipping,
-            OrderPayment,
-            OrderInvoice,
-            OrderStatus,
-            OrderItemStatus,
-            ShopOrderMapping,
-            CustomerOrderMapping,
+            models: {
+                UserPermission,
+                UserRole,
+                UserRolePermissionMapping,
+                User,
+                UserCredential,
+                UserSession,
+                UserContact,
+                UserShipping,
+                UserBilling,
+                UserPayment,
+                UserCartItem,
+                Shop,
+                ShopOwnerMapping,
+                Product,
+                ProductType,
+                ProductVariableField,
+                ProductVariableFieldValue,
+                ProductVariant,
+                ProductVariantVarMapping,
+                ShopProductMapping,
+                ProductTypeProductMapping,
+                ShopProductTypeMapping,
+                Lang,
+                Post,
+                PostType,
+                PostTypePostMapping,
+                Order,
+                OrderItem,
+                OrderBilling,
+                OrderShipping,
+                OrderPayment,
+                OrderInvoice,
+                OrderStatus,
+                OrderItemStatus,
+                ShopOrderMapping,
+                CustomerOrderMapping,
+            },
+            sequelize,
         }
-        
-    
+
+
     } catch (error) {
         console.error('Unable to connect to the database:', error);
 

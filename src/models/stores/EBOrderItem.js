@@ -1,11 +1,11 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { AssociationHelpers } from "../../../packages/sequelize-rest-framework/src/index.js";
+import { AssociationHelpers } from 'sequelize-rest-framework';
 import { 
     BasicSeqIdlessAttributes, 
     OrderItemAttributes, 
     ParentChildAssociations, 
     ParentChildAttributes,
-} from "../_incl/index.js";
+} from 'sequelize-rest-framework';
 
 export const EBOrderItem = {
     makeAssociations: ({Me, Order, Product, ProductVariant}) => {

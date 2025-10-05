@@ -5,7 +5,7 @@ import { BasicAttributes,
     ContentAttributes,
     DatedSoftDeleteStatusAttributes,
     DatedStatusAttributes,
-} from "../_incl/index.js";
+} from 'sequelize-rest-framework';
 
 export const EBProduct = {
     makeAssociations: ({Me, Lang}) => {

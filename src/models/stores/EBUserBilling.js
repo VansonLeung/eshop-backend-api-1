@@ -1,11 +1,11 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { AssociationHelpers } from "../../../packages/sequelize-rest-framework/src/index.js";
+import { AssociationHelpers } from 'sequelize-rest-framework';
 import {
     BasicAttributes,
     ContactAttributes,
     DatedSoftDeleteStatusAttributes,
     DatedStatusAttributes,
- } from "../_incl/index.js";
+ } from 'sequelize-rest-framework';
 
 export const EBUserBilling = {
     makeAssociations: ({Me, User}) => {

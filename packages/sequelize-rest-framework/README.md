@@ -10,6 +10,8 @@ A reusable framework for building REST APIs with Sequelize ORM, featuring automa
 - **Reusable Model Attributes**: Pre-built attribute sets for common patterns (timestamps, soft deletes, versioning, etc.)
 - **Schema Helper**: Automatic index generation from schema definitions
 - **Swagger/OpenAPI Ready**: Built-in metadata support for API documentation
+- **🔐 Built-in Authentication & Authorization**: Complete User/Role/Permission system with JWT-style tokens
+- **🔌 Plugin System**: Extensible architecture with ACL plugin for fine-grained access control
 
 ## Installation
 
@@ -285,6 +287,91 @@ import { Settings } from 'sequelize-rest-framework';
 
 Settings.constraints = false;  // Disable foreign key constraints (default: false)
 ```
+
+## Authentication & Authorization System
+
+The framework includes a complete, production-ready authentication and authorization system. See [AUTH_SYSTEM.md](./AUTH_SYSTEM.md) for full documentation.
+
+### Quick Start
+
+```javascript
+import { AuthSystem } from 'sequelize-rest-framework';
+
+// Initialize auth system
+const authSystem = new AuthSystem(sequelize, {
+    modelPrefix: 'EB',
+    tablePrefix: 'eb_',
+    tokenExpiry: 24 * 60 * 60 * 1000, // 24 hours
+});
+
+authSystem.initialize();
+
+// Mount auth routes (login, register, logout, etc.)
+app.use('/api/auth', authSystem.getAuthRoutes());
+
+// Protect your routes
+app.get('/api/profile',
+    authSystem.authenticate(),
+    (req, res) => {
+        res.json({ user: req.user });
+    }
+);
+
+// Role-based access control
+app.delete('/api/products/:id',
+    authSystem.authenticate(),
+    authSystem.authorize('Product', 'delete'),
+    (req, res) => {
+        // Only users with Product:delete permission can access
+    }
+);
+
+// Sync and seed defaults
+await authSystem.sync();
+await authSystem.seedDefaults();
+```
+
+### Built-in Auth Features
+
+- ✅ User registration and login
+- ✅ Password hashing with bcrypt
+- ✅ Token-based authentication (access + refresh tokens)
+- ✅ Role-based permissions (RBAC)
+- ✅ Fine-grained resource/action permissions
+- ✅ Session management with IP/user agent tracking
+- ✅ OAuth support (Google, Facebook, Twitter, GitHub)
+- ✅ Complete REST API endpoints
+
+**[📖 Read Full Auth Documentation](./AUTH_SYSTEM.md)**
+
+## Plugin System
+
+The framework supports a powerful plugin architecture for extending functionality. See [PLUGIN_USAGE.md](./PLUGIN_USAGE.md) for full documentation.
+
+### ACL Plugin Example
+
+```javascript
+import { ACLPlugin, pluginManager } from 'sequelize-rest-framework';
+
+// Configure ACL
+const aclPlugin = new ACLPlugin({
+    Product: {
+        create: ['admin', 'manager'],
+        read: ['admin', 'manager', 'user'],
+        update: ['admin', 'manager'],
+        delete: ['admin'],
+    },
+}, {
+    roleResolver: async (req) => req.userRole?.code || 'guest',
+});
+
+pluginManager.use(aclPlugin);
+
+// ACL automatically filters JOINs based on read permissions
+// Users without Order:read permission won't see order details in Product queries
+```
+
+**[📖 Read Full Plugin Documentation](./PLUGIN_USAGE.md)**
 
 ## Association Endpoints
 

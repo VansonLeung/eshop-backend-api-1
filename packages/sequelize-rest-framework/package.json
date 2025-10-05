@@ -1,13 +1,15 @@
 {
   "name": "sequelize-rest-framework",
   "version": "1.0.0",
-  "description": "A reusable framework for building REST APIs with Sequelize ORM, featuring automatic CRUD operations, association endpoints, and query builders",
+  "description": "A reusable framework for building REST APIs with Sequelize ORM, featuring automatic CRUD operations, association endpoints, query builders, and built-in authentication/authorization",
   "type": "module",
   "main": "src/index.js",
   "exports": {
     ".": "./src/index.js",
     "./api": "./src/api/index.js",
-    "./models": "./src/models/index.js"
+    "./models": "./src/models/index.js",
+    "./auth": "./src/auth/index.js",
+    "./plugins": "./src/plugins/index.js"
   },
   "keywords": [
     "sequelize",
@@ -16,7 +18,13 @@
     "crud",
     "express",
     "framework",
-    "orm"
+    "orm",
+    "authentication",
+    "authorization",
+    "rbac",
+    "acl",
+    "jwt",
+    "user-management"
   ],
   "author": "",
   "license": "ISC",
@@ -24,6 +32,8 @@
     "express": "^5.0.0",
     "sequelize": "^6.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bcrypt": "^5.1.1"
+  },
   "devDependencies": {}
 }
