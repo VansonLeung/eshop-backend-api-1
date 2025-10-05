@@ -13,7 +13,7 @@ export const DatedSoftDeleteStatusAttributes = () => {
             index: true,
         },
         deletedAt: DataTypes.DATE,
-        deletedBy: { 
+        deletedBy: {
             type: DataTypes.UUID,
             index: true,
         },

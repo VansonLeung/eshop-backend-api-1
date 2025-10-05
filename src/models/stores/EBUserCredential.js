@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings/index.js";
+import { AssociationHelpers } from "../../../packages/sequelize-rest-framework/src/index.js";
 import { 
     BasicAttributes,
     DatedSoftDeleteStatusAttributes,
@@ -8,15 +8,13 @@ import {
 
 export const EBUserCredential = {
     makeAssociations: ({Me, User}) => {
-        Me.belongsTo(User, {
+        AssociationHelpers.belongsTo(Me, User, {
             foreignKey: 'userId',
             as: 'user',
-            constraints: Settings.constraints,
         });
-        User.hasMany(Me, {
+        AssociationHelpers.hasMany(User, Me, {
             foreignKey: 'userId',
             as: 'credentials',
-            constraints: Settings.constraints,
         });
     },
 

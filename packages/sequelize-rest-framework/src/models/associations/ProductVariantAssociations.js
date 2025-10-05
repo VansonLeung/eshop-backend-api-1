@@ -1,16 +1,14 @@
 import Sequelize, { DataTypes } from "sequelize";
-import { Settings } from "../_settings/Settings.js"
+import { AssociationHelpers } from "../helpers/AssociationHelpers.js"
 
 export const ProductVariantAssociations = ({Me, Product}) => {
 
-    Me.belongsTo(Product, {
+    AssociationHelpers.belongsTo(Me, Product, {
         as: 'product',
         foreignKey: 'productId',
-        constraints: Settings.constraints,
     });
-    Product.hasMany(Me, {
+    AssociationHelpers.hasMany(Product, Me, {
         as: 'variants',
         foreignKey: 'productId',
-        constraints: Settings.constraints,
     });
 }

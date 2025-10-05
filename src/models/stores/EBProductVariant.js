@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings/index.js";
+import { AssociationHelpers } from "../../../packages/sequelize-rest-framework/src/index.js";
 import { 
     BasicAttributes, 
     CodeAttributes, 

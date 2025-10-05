@@ -1,25 +1,22 @@
 import Sequelize, { DataTypes } from "sequelize";
-import { Settings } from "../_settings/index.js";
+import { AssociationHelpers } from "../helpers/AssociationHelpers.js";
 
 export const ContentAssociations = ({Me, Lang}) => {
-    const MeBase = Me.belongsTo(Me, {
+    const MeBase = AssociationHelpers.belongsTo(Me, Me, {
         as: 'base',
         foreignKey: 'baseId',
-        constraints: Settings.constraints,
-    });
-    
-    const MeDerivatives = Me.hasMany(Me, {
-        as: 'derivatives',
-        foreignKey: 'baseId',
-        constraints: Settings.constraints,
     });
 
-    const MeLang = Me.belongsTo(Lang, {
+    const MeDerivatives = AssociationHelpers.hasMany(Me, Me, {
+        as: 'derivatives',
+        foreignKey: 'baseId',
+    });
+
+    const MeLang = AssociationHelpers.belongsTo(Me, Lang, {
         foreignKey: 'langId',
         as: 'lang',
-        constraints: Settings.constraints,
     });
-    
+
     return {
         MeBase,
         MeDerivatives,

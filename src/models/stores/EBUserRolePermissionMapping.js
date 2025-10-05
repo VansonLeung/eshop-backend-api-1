@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings/index.js";
+import { AssociationHelpers } from "../../../packages/sequelize-rest-framework/src/index.js";
 import {
     BasicAttributes,
     DatedStatusAttributes,
@@ -7,17 +7,15 @@ import {
 
 export const EBUserRolePermissionMapping = {
     makeAssociations: ({Me, UserPermission, UserRole}) => {
-        UserPermission.belongsToMany(UserRole, { 
+        AssociationHelpers.belongsToMany(UserPermission, UserRole, { 
             through: Me,
             as: 'userRoles',
             foreignKey: 'userPermissionId',
-            constraints: Settings.constraints,
         });
-        UserRole.belongsToMany(UserPermission, { 
+        AssociationHelpers.belongsToMany(UserRole, UserPermission, { 
             through: Me,
             as: 'userPermissions',
             foreignKey: 'userRoleId',
-            constraints: Settings.constraints,
         });
     },
 

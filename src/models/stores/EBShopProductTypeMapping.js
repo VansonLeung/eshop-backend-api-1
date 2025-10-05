@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings/index.js";
+import { AssociationHelpers } from "../../../packages/sequelize-rest-framework/src/index.js";
 import { 
     BasicAttributes,
     DatedStatusAttributes,
@@ -7,17 +7,15 @@ import {
 
 export const EBShopProductTypeMapping = {
     makeAssociations: ({Me, Shop, ProductType}) => {
-        Shop.belongsToMany(ProductType, { 
+        AssociationHelpers.belongsToMany(Shop, ProductType, { 
             through: Me,
             as: 'productTypes',
             foreignKey: 'shopId',
-            constraints: Settings.constraints,
         });
-        ProductType.belongsToMany(Shop, { 
+        AssociationHelpers.belongsToMany(ProductType, Shop, { 
             through: Me,
             as: 'shops',
             foreignKey: 'productTypeId',
-            constraints: Settings.constraints,
         });
     },
 

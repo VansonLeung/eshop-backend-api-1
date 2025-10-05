@@ -12,11 +12,11 @@ export const DatedStatusAttributes = () => {
             defaultValue: DataTypes.NOW,
             index: true,
         },
-        createdBy: { 
+        createdBy: {
             type: DataTypes.UUID,
             index: true,
         },
-        updatedBy: { 
+        updatedBy: {
             type: DataTypes.UUID,
             index: true,
         },

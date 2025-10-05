@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { Router } from './router.js';
-import { _APIGenericUseRequestResponse } from './_incl/_APIGenericUseRequestResponse.js';
+import { _APIGenericUseRequestResponse } from './_incl/index.js';
 
 export const initializeAPIs = ({
     models,

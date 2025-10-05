@@ -9,4 +9,3 @@ export const CodeAttributes = ({length = 64} = {}) => {
         },
     }
 }
-

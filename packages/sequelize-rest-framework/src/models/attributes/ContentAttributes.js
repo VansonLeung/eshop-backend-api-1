@@ -4,11 +4,11 @@ export const ContentAttributes = () => {
     return {
         desc: DataTypes.TEXT,
         json: DataTypes.JSON,
-        baseId: { 
+        baseId: {
             type: DataTypes.UUID,
             index: true,
         },
-        langId: { 
+        langId: {
             type: DataTypes.UUID,
             index: true,
         },
@@ -20,7 +20,7 @@ export const ContentAttributes = () => {
             type: DataTypes.DATE,
             index: true,
         },
-        publishedBy: { 
+        publishedBy: {
             type: DataTypes.UUID,
             index: true,
         },

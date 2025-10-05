@@ -1,11 +1,11 @@
 import { Op } from 'sequelize';
-import { recursiveMassageWhereClause } from './_APIQueryWhereClauseMassager.js';
+import { recursiveMassageWhereClause } from './QueryWhereClauseMassager.js';
 
 export const recursiveMassageIncludeClause = (includeClause) => {
     if (includeClause) {
         for (var k in includeClause) {
             const bundle = includeClause[k];
-            
+
             const {
                 include,
                 where,

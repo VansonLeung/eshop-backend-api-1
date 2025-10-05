@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings/index.js";
+import { AssociationHelpers } from "../../../packages/sequelize-rest-framework/src/index.js";
 import { 
     BasicSeqIdlessAttributes, 
     OrderItemAttributes, 
@@ -9,37 +9,31 @@ import {
 
 export const EBOrderItem = {
     makeAssociations: ({Me, Order, Product, ProductVariant}) => {
-        Me.belongsTo(Order, {
+        AssociationHelpers.belongsTo(Me, Order, {
             foreignKey: 'orderId',
             as: 'order',
-            constraints: Settings.constraints,
         });
-        Order.hasMany(Me, {
+        AssociationHelpers.hasMany(Order, Me, {
             foreignKey: 'orderId',
             as: 'orderItems',
-            constraints: Settings.constraints,
         });
 
-        Me.belongsTo(Product, {
+        AssociationHelpers.belongsTo(Me, Product, {
             foreignKey: 'productId',
             as: 'product',
-            constraints: Settings.constraints,
         });
-        Product.hasMany(Me, {
+        AssociationHelpers.hasMany(Product, Me, {
             foreignKey: 'productId',
             as: 'orderItems',
-            constraints: Settings.constraints,
         });
 
-        Me.belongsTo(ProductVariant, {
+        AssociationHelpers.belongsTo(Me, ProductVariant, {
             foreignKey: 'productVariantId',
             as: 'productVariant',
-            constraints: Settings.constraints,
         });
-        ProductVariant.hasMany(Me, {
+        AssociationHelpers.hasMany(ProductVariant, Me, {
             foreignKey: 'productVariantId',
             as: 'orderItems',
-            constraints: Settings.constraints,
         });
 
         ParentChildAssociations({ Me });

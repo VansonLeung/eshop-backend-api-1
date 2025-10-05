@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings/index.js";
+import { AssociationHelpers } from "../../../packages/sequelize-rest-framework/src/index.js";
 import { 
     BasicAttributes,
     DatedStatusAttributes,
@@ -7,17 +7,15 @@ import {
 
 export const EBPostTypePostMapping = {
     makeAssociations: ({Me, PostType, Post}) => {
-        PostType.belongsToMany(Post, { 
+        AssociationHelpers.belongsToMany(PostType, Post, { 
             through: Me,
             as: 'posts',
             foreignKey: 'postTypeId',
-            constraints: Settings.constraints,
         });
-        Post.belongsToMany(PostType, { 
+        AssociationHelpers.belongsToMany(Post, PostType, { 
             through: Me,
             as: 'postTypes',
             foreignKey: 'postId',
-            constraints: Settings.constraints,
         });
     },
 

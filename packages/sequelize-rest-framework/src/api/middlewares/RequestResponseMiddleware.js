@@ -1,4 +1,4 @@
-export const _APIGenericUseRequestResponse = {
+export const RequestResponseMiddleware = {
     apply: () => {
 
         return (req, res, next) => {
@@ -26,4 +26,3 @@ export const _APIGenericUseRequestResponse = {
         };
     },
 }
-

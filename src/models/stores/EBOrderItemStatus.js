@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings/index.js";
+import { AssociationHelpers } from "../../../packages/sequelize-rest-framework/src/index.js";
 import { 
     BasicSeqIdlessAttributes, 
     ContentAttributes, 
@@ -8,15 +8,13 @@ import {
 
 export const EBOrderItemStatus = {
     makeAssociations: ({Me, OrderItem}) => {
-        Me.belongsTo(OrderItem, {
+        AssociationHelpers.belongsTo(Me, OrderItem, {
             foreignKey: 'orderItemId',
             as: 'orderItem',
-            constraints: Settings.constraints,
         });
-        OrderItem.hasMany(Me, {
+        AssociationHelpers.hasMany(OrderItem, Me, {
             foreignKey: 'orderItemId',
             as: 'orderItemStatuses',
-            constraints: Settings.constraints,
         });
     },
 

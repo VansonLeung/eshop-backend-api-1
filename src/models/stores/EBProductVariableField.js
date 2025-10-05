@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings/index.js";
+import { AssociationHelpers } from "../../../packages/sequelize-rest-framework/src/index.js";
 import { 
     BasicAttributes, 
     ContentAttributes, 
@@ -9,15 +9,13 @@ import {
 
 export const EBProductVariableField = {
     makeAssociations: ({Me, Product}) => {
-        Me.belongsTo(Product, {
+        AssociationHelpers.belongsTo(Me, Product, {
             foreignKey: 'productId',
             as: 'product',
-            constraints: Settings.constraints,
         });
-        Product.hasMany(Me, {
+        AssociationHelpers.hasMany(Product, Me, {
             foreignKey: 'productId',
             as: 'productVariableFields',
-            constraints: Settings.constraints,
         });
     },
 

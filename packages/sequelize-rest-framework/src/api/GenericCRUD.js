@@ -1,8 +1,8 @@
-import { _APIGenericAssociations } from "./_APIGenericAssociations.js";
-import { recursiveMassageIncludeClause } from "./_APIQueryIncludeClauseMassager.js";
-import { recursiveMassageWhereClause } from './_APIQueryWhereClauseMassager.js';
+import { GenericAssociations } from "./GenericAssociations.js";
+import { recursiveMassageIncludeClause } from "./utils/QueryIncludeClauseMassager.js";
+import { recursiveMassageWhereClause } from './utils/QueryWhereClauseMassager.js';
 
-export const _APIGenericCRUD = {
+export const GenericCRUD = {
     initialize: ({
         app,
         appWithMeta,
@@ -46,7 +46,7 @@ export const _APIGenericCRUD = {
         }, async (req, res) => {
             try {
                 const { filter, sort, group, join, offset, limit, isCount = false,  } = req.query; // Extract filter, sort, and join from query parameters
-        
+
                 // Build the where clause for filtering
                 const whereClause = filter ? JSON.parse(filter) : undefined; // Assuming filter is a JSON string
 
@@ -61,7 +61,7 @@ export const _APIGenericCRUD = {
 
                 // Build the group clause for grouping
                 const groupClause = group || undefined;
-                
+
                 // Build the include clause for joining
                 const includeClause = join ? JSON.parse(join) : undefined;
 
@@ -71,7 +71,7 @@ export const _APIGenericCRUD = {
 
                 // Build the offset clause for offseting
                 const offsetClause = offset || undefined;
-                
+
                 // Build the limit clause for limiting
                 const limitClause = limit || undefined;
 
@@ -221,7 +221,7 @@ export const _APIGenericCRUD = {
         appWithMeta.delete(`/api/${collectionName}/:ids/bulk`, {
             parameters: [
                 { name: 'ids', in: 'path', required: true, schema: { type: 'array', default: [] } }
-            ],  
+            ],
         }, async (req, res) => {
             try {
                 if (!req.params.ids || req.params.ids.length === 0) {
@@ -244,7 +244,7 @@ export const _APIGenericCRUD = {
             }
         });
 
-        _APIGenericAssociations.initialize({
+        GenericAssociations.initialize({
             app,
             appWithMeta,
             collectionName,
@@ -252,4 +252,3 @@ export const _APIGenericCRUD = {
         });
     }
 }
-

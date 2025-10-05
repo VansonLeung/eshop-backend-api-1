@@ -7,7 +7,7 @@ export const SchemaToIndexes = (schema) => {
 
     for (var key in schema) {
         const attribute = schema[key] || {};
-        
+
         const index = attribute.index;
         const indexGroups = attribute.indexGroups;
         const uniqueGroups = attribute.uniqueGroups;

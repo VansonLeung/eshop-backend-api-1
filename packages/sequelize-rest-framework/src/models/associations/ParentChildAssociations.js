@@ -1,16 +1,14 @@
 import Sequelize, { DataTypes } from "sequelize";
-import { Settings } from "../_settings/index.js";
+import { AssociationHelpers } from "../helpers/AssociationHelpers.js";
 
 export const ParentChildAssociations = ({Me}) => {
-    const MeParent = Me.belongsTo(Me, {
+    const MeParent = AssociationHelpers.belongsTo(Me, Me, {
         as: 'parent',
         foreignKey: 'parentId',
-        constraints: Settings.constraints,
     });
-    const MeChilds = Me.hasMany(Me, {
+    const MeChilds = AssociationHelpers.hasMany(Me, Me, {
         as: 'childs',
         foreignKey: 'parentId',
-        constraints: Settings.constraints,
     });
 
     return {

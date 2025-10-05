@@ -1,5 +1,5 @@
 import Sequelize, { DataTypes } from "sequelize"
-import { Settings } from "../_settings/index.js";
+import { AssociationHelpers } from "../../../packages/sequelize-rest-framework/src/index.js";
 import { 
     BasicAttributes,
     DatedStatusAttributes,
@@ -7,17 +7,15 @@ import {
 
 export const EBProductVariantVarMapping = {
     makeAssociations: ({Me, ProductVariant, ProductVariableFieldValue}) => {
-        ProductVariant.belongsToMany(ProductVariableFieldValue, { 
+        AssociationHelpers.belongsToMany(ProductVariant, ProductVariableFieldValue, { 
             through: Me,
             as: 'variableFieldValues',
             foreignKey: 'variantId',
-            constraints: Settings.constraints,
         });
-        ProductVariableFieldValue.belongsToMany(ProductVariant, { 
+        AssociationHelpers.belongsToMany(ProductVariableFieldValue, ProductVariant, { 
             through: Me,
             as: 'variants',
             foreignKey: 'variableFieldValueId',
-            constraints: Settings.constraints,
         });
     },
 

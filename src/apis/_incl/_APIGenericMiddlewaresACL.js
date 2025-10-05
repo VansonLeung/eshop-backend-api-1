@@ -1,6 +1,5 @@
 import { UserAuthDao } from "../../dao/user/UserAuthDao.js";
 import { UserACLDao } from "../../dao/user/UserACLDao.js";
-import { _APIGenericAssociations } from "./_APIGenericAssociations.js";
 import { Op } from 'sequelize';
 
 export const _APIGenericMiddlewaresACL = {

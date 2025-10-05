@@ -15,4 +15,3 @@ export const BasicSeqIdlessAttributes = () => {
         name: DataTypes.STRING(256),
     }
 }
-

@@ -20,4 +20,3 @@ export const BasicAttributes = () => {
         name: DataTypes.STRING(256),
     }
 }
-

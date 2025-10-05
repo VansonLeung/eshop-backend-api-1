@@ -1,7 +1,7 @@
-import { recursiveMassageIncludeClause } from './_APIQueryIncludeClauseMassager.js';
-import { recursiveMassageWhereClause } from './_APIQueryWhereClauseMassager.js';
+import { recursiveMassageIncludeClause } from './utils/QueryIncludeClauseMassager.js';
+import { recursiveMassageWhereClause } from './utils/QueryWhereClauseMassager.js';
 
-export const _APIGenericAssociations = {
+export const GenericAssociations = {
     initialize: ({
         app,
         appWithMeta,
@@ -14,7 +14,7 @@ export const _APIGenericAssociations = {
         }
 
         const associations = collectionModel.associations || {};
-        
+
         for (var key in associations) {
             const targetName = associations[key].target.name;
             const targetModel = associations[key].target;
@@ -74,34 +74,34 @@ export const _APIGenericAssociations = {
                         try {
                             if (isMultiple) {
                                 const srcItem = await collectionModel.findByPk(req.params.id);
-    
+
                                 if (!srcItem) {
                                     res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
                                     return;
                                 }
 
                                 const targetItemIds = req.params.targetIds.split(",");
-    
+
                                 const response = await srcItem[itemActionFnKey](targetItemIds);
                                 res.sendResponse({status: 201, data: response, });
-    
+
                             } else {
                                 const srcItem = await collectionModel.findByPk(req.params.id);
                                 const targetItem = await targetModel.findByPk(req.params.targetIds);
-    
+
                                 if (!srcItem) {
                                     res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
                                     return;
                                 }
-    
+
                                 if (!targetItem) {
                                     res.sendError({status: 404, error: new Error(`${key} ${req.params.targetIds} not found`), });
                                     return;
                                 }
-    
+
                                 const response = await srcItem[itemActionFnKey](targetItem);
                                 res.sendResponse({status: 201, data: response, });
-    
+
                             }
                         } catch (error) {
                             res.sendError({error, });
@@ -158,7 +158,7 @@ export const _APIGenericAssociations = {
                         console.log(req.route.path);
                         try {
                             const srcItem = await collectionModel.findByPk(req.params.id);
-    
+
                             if (!srcItem) {
                                 res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
                                 return;
@@ -175,7 +175,7 @@ export const _APIGenericAssociations = {
                             } else {
                                 res.sendResponse({status: 200, });
                             }
-    
+
                         } catch (error) {
                             res.sendError({error, });
                         }
@@ -206,35 +206,35 @@ export const _APIGenericAssociations = {
 
 
                             const { filter, sort, group, join, offset, limit  } = req.query; // Extract filter, sort, and join from query parameters
-    
+
                             // Build the where clause for filtering
                             const whereClause = filter ? JSON.parse(filter) : undefined; // Assuming filter is a JSON string
-            
+
                             if (whereClause) {
                                 recursiveMassageWhereClause(whereClause);
                             }
-        
+
                             // Build the order clause for sorting
                             // format: ['title', 'DESC']
                             // format: [['title', 'DESC'], ['max(age)', 'DESC']]
                             const orderClause = sort ? JSON.parse(sort) : undefined; // Split by comma for multiple fields
-            
+
                             // Build the group clause for grouping
                             const groupClause = group || undefined;
-                            
+
                             // Build the include clause for joining
                             const includeClause = join ? JSON.parse(join) : undefined;
-            
+
                             if (includeClause) {
                                 recursiveMassageIncludeClause(includeClause);
                             }
-            
+
                             // Build the offset clause for offseting
                             const offsetClause = offset || undefined;
-                            
+
                             // Build the limit clause for limiting
                             const limitClause = limit || undefined;
-            
+
 
 
                             const targetItems = await srcItem[itemActionFnKey]({
@@ -270,7 +270,7 @@ export const _APIGenericAssociations = {
                             console.log(req.route.path);
                             try {
                                 const srcItem = await collectionModel.findByPk(req.params.id);
-    
+
                                 if (!srcItem) {
                                     res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
                                     return;
@@ -278,37 +278,38 @@ export const _APIGenericAssociations = {
 
 
                                 const { filter, sort, group, join, offset, limit  } = req.query; // Extract filter, sort, and join from query parameters
-        
+
                                 // Build the where clause for filtering
                                 const whereClause = filter ? JSON.parse(filter) : undefined; // Assuming filter is a JSON string
-                
+
                                 if (whereClause) {
                                     recursiveMassageWhereClause(whereClause);
                                 }
-                
+
                                 // Build the order clause for sorting
                                 // format: ['title', 'DESC']
                                 // format: [['title', 'DESC'], ['max(age)', 'DESC']]
                                 const orderClause = sort ? JSON.parse(sort) : undefined; // Split by comma for multiple fields
-                
+
                                 // Build the group clause for grouping
                                 const groupClause = group || undefined;
-                                
+
                                 // Build the include clause for joining
                                 const includeClause = join ? JSON.parse(join) : undefined;
-                
+
                                 if (includeClause) {
                                     recursiveMassageIncludeClause(includeClause);
                                 }
 
                                 // Build the offset clause for offseting
                                 const offsetClause = offset || undefined;
-                                
+
                                 // Build the limit clause for limiting
                                 const limitClause = limit || undefined;
-                
 
-    
+
+
+
                                 const targetItems = await srcItem[itemActionFnKey]({
                                     ...whereClause ? {where: whereClause} : null,
                                     ...orderClause ? {order: orderClause} : null,
@@ -318,12 +319,12 @@ export const _APIGenericAssociations = {
                                     ...limitClause !== undefined ? {limit: Number(limitClause)} : null,
                                 });
                                 res.sendResponse({status: 200, data: targetItems, });
-    
+
                             } catch (error) {
                                 res.sendError({error, });
                             }
                         });
-    
+
                     } else {
                         appWithMeta.get(`/api/${collectionName}/:id/${key}/get`, {
                             parameters: [
@@ -345,26 +346,26 @@ export const _APIGenericAssociations = {
                                 const srcItem = await collectionModel.findByPk(req.params.id, {
                                     ...includeClause ? {include: includeClause} : null,
                                 });
-    
+
                                 if (!srcItem) {
                                     res.sendError({status: 404, error: new Error(`${collectionName} ${req.params.id} not found`), });
                                     return;
                                 }
-    
+
                                 const targetItem = await srcItem[itemActionFnKey]();
-    
+
                                 if (!targetItem) {
                                     res.sendError({status: 404, error: new Error(`${key} not found`), });
                                     return;
                                 }
 
                                 res.sendResponse({status: 200, data: targetItem, });
-    
+
                             } catch (error) {
                                 res.sendError({error, });
                             }
                         });
-    
+
                     }
 
                 }
@@ -372,4 +373,3 @@ export const _APIGenericAssociations = {
         }
     }
 }
-
