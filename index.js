@@ -12,13 +12,20 @@ const app = await (async () => {
   const { models, sequelize } = await initializeModels();
   await initializeMigrations({ models });
 
-  // Initialize AuthSystem from library
+  // Initialize AuthSystem from library with existing models
   const authSystem = new AuthSystem(sequelize, {
     modelPrefix: 'EB',
     tablePrefix: 'eb_',
     tokenExpiry: 24 * 60 * 60 * 1000, // 24 hours
   });
-  authSystem.initialize();
+  authSystem.initialize({
+    User: models.User,
+    UserRole: models.UserRole,
+    UserPermission: models.UserPermission,
+    UserRolePermissionMapping: models.UserRolePermissionMapping,
+    UserCredential: models.UserCredential,
+    UserSession: models.UserSession,
+  });
 
   const app = await initializeAPIs({ models, authSystem });
   initializeSwagger({ app, models, packageJson });

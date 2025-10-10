@@ -6,6 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const testFiles = [
+    'test-auth.js',
     'test-product.js',
     'test-order.js',
     'test-user.js',

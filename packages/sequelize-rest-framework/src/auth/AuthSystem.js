@@ -42,10 +42,18 @@ export class AuthSystem {
 
     /**
      * Initialize all models and services
+     * @param {object} existingModels - Optional existing models to use instead of creating new ones
      */
-    initialize() {
-        this.defineModels();
-        this.createAssociations();
+    initialize(existingModels = {}) {
+        if (existingModels.User) {
+            // Use existing models from the app
+            this.models = existingModels;
+        } else {
+            // Create new models
+            this.defineModels();
+            this.createAssociations();
+        }
+
         this.initializeServices();
         this.initializeMiddleware();
         this.initializeRoutes();

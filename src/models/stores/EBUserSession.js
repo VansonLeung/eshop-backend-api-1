@@ -43,7 +43,13 @@ export const EBUserSession = {
                 type: DataTypes.STRING(256),
                 allowNull: false,
                 unique: true,
-            },    
+            },
+            expiresAt: {
+                type: DataTypes.DATE,
+                allowNull: true,
+            },
+            ipAddress: DataTypes.STRING(45),
+            userAgent: DataTypes.TEXT,
         }
     },
 };

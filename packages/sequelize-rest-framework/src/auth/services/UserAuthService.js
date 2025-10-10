@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
+import { Op } from 'sequelize';
 
 /**
  * UserAuth Service
@@ -22,7 +23,7 @@ export class UserAuthService {
         // Check if user already exists
         const existingUser = await this.User.findOne({
             where: {
-                $or: [{ username }, { email }]
+                [Op.or]: [{ username }, { email }]
             }
         });
 
@@ -40,7 +41,8 @@ export class UserAuthService {
             firstName,
             lastName,
             userRoleId,
-            status: 'active',
+            isDisabled: false,
+            isDeleted: false,
         });
 
         // Create credential
@@ -48,7 +50,8 @@ export class UserAuthService {
             userId: user.id,
             type: 'password',
             password: hashedPassword,
-            status: 'active',
+            isDisabled: false,
+            isDeleted: false,
         });
 
         return user;
@@ -61,16 +64,17 @@ export class UserAuthService {
         // Find user by username or email
         const user = await this.User.findOne({
             where: {
-                $or: [
+                [Op.or]: [
                     { username: login },
                     { email: login }
                 ],
-                status: 'active',
+                isDisabled: false,
+                isDeleted: false,
             },
             include: [{
                 model: this.UserCredential,
                 as: 'credentials',
-                where: { type: 'password', status: 'active' },
+                where: { type: 'password', isDisabled: false, isDeleted: false },
                 required: true,
             }]
         });
@@ -120,15 +124,16 @@ export class UserAuthService {
         const session = await this.UserSession.findOne({
             where: {
                 accessToken,
-                status: 'active',
+                isDisabled: false,
+                isDeleted: false,
                 expiresAt: {
-                    $gt: new Date()
+                    [Op.gt]: new Date()
                 }
             },
             include: [{
                 model: this.User,
                 as: 'user',
-                where: { status: 'active' },
+                where: { isDisabled: false, isDeleted: false },
                 include: [{
                     model: this.UserRole,
                     as: 'userRole',
@@ -150,12 +155,13 @@ export class UserAuthService {
         const session = await this.UserSession.findOne({
             where: {
                 refreshToken,
-                status: 'active',
+                isDisabled: false,
+                isDeleted: false,
             },
             include: [{
                 model: this.User,
                 as: 'user',
-                where: { status: 'active' },
+                where: { isDisabled: false, isDeleted: false },
             }]
         });
 
@@ -194,7 +200,7 @@ export class UserAuthService {
         });
 
         if (session) {
-            await session.update({ status: 'inactive' });
+            await session.update({ isDisabled: true });
         }
 
         return true;
@@ -205,8 +211,8 @@ export class UserAuthService {
      */
     async logoutAll(userId) {
         await this.UserSession.update(
-            { status: 'inactive' },
-            { where: { userId, status: 'active' } }
+            { isDisabled: true },
+            { where: { userId, isDisabled: false, isDeleted: false } }
         );
 
         return true;
@@ -220,7 +226,8 @@ export class UserAuthService {
             where: {
                 userId,
                 type: 'password',
-                status: 'active',
+                isDisabled: false,
+                isDeleted: false,
             }
         });
 
