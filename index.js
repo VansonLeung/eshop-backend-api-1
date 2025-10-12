@@ -1,5 +1,5 @@
 import packageJson from './package.json' assert { type: 'json' };
-import { AuthSystem } from './packages/sequelize-rest-framework/src/index.js';
+import { AuthSystem } from 'sequelize-rest-framework';
 
 import { initializeModels } from "./src/models/index.js";
 import { initializeAPIs } from "./src/apis/index.js";
