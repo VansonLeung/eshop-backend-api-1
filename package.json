@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "start": "node --experimental-specifier-resolution=node index.js",
     "dev": "nodemon --exec node  --experimental-specifier-resolution=node index.js",

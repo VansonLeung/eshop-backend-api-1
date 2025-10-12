@@ -1,24 +1,6 @@
-import { METHODS } from 'node:http';
+import { RouterWithMeta } from '../../../packages/sequelize-rest-framework/src/middleware/RouterWithMeta.js';
 
 export const _routerWithMeta = ({router, meta}) => {
-    const routerWithMeta = {};
-
-    for (var k in METHODS) {
-        const method = METHODS[k].toLowerCase();
-        routerWithMeta[method] = function() {
-            const path = arguments[0];
-            const metadata = Object.assign({}, arguments[1]);
-
-            meta[`${method.toUpperCase()} ${path}`] = {...metadata};
-
-            var routerArguments = [
-                ...arguments,
-            ];
-            routerArguments.splice(1, 1);
-
-            return router[method].apply(router, routerArguments);
-        }
-    }
-
-    return routerWithMeta;
-}
+    const routerWithMetaInstance = new RouterWithMeta({router, meta});
+    return routerWithMetaInstance.getRouter();
+};

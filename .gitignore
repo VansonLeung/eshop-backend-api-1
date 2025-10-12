@@ -134,4 +134,12 @@ dist
 
 .vscode/
 
+# Monorepo patterns
+packages/*/dist/
+packages/*/build/
+packages/*/coverage/
+packages/*/.nyc_output/
+packages/*/node_modules/
+packages/*/*.tgz
+
 

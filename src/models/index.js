@@ -1,7 +1,7 @@
 import { writeFileSync, mkdirSync } from 'fs';
 import { Sequelize, Op } from "sequelize";
 import sequelizeErd from 'sequelize-erd';
-import { SchemaToIndexes } from "./_helpers/SequelizeSchemaHelper.js";
+import { SchemaToIndexes } from "sequelize-rest-framework/models/SchemaHelper.js";
 import {
     // EBARefOrderStatusCodes,
     EBCustomerOrderMapping,

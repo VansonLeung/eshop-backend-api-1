@@ -1,5 +1,5 @@
-import { recursiveMassageIncludeClause } from './_APIQueryIncludeClauseMassager.js';
-import { recursiveMassageWhereClause } from './_APIQueryWhereClauseMassager.js';
+import { recursiveMassageIncludeClause } from "sequelize-rest-framework/api/utils/QueryIncludeClauseMassager.js";
+import { recursiveMassageWhereClause } from "sequelize-rest-framework/api/utils/QueryWhereClauseMassager.js";
 
 export const _APIGenericAssociations = {
     initialize: ({
