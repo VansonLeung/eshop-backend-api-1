@@ -79,6 +79,7 @@ As an eshop manager, I want to perform CRUD operations on users so that I can ma
 - **FR-016**: System MUST use sidebar navigation with collapsible menu for accessing different entity management sections.
 - **FR-017**: System MUST display loading spinners during data fetching and show user-friendly error messages for API failures.### Key Entities *(include if feature involves data)*
 
+#### Core User Management Entities
 - **User**: Represents system users with authentication and profile information.
 - **UserRole**: Defines roles for users (e.g., admin, manager, customer).
 - **UserPermission**: Defines specific permissions that can be assigned to roles.
@@ -90,32 +91,205 @@ As an eshop manager, I want to perform CRUD operations on users so that I can ma
 - **UserBilling**: Stores user billing information.
 - **UserPayment**: Stores user payment methods.
 - **UserCartItem**: Represents items in a user's shopping cart.
+
+#### Shop Management Entities
 - **Shop**: Represents an e-commerce shop/store.
 - **ShopOwnerMapping**: Links shops to their owners.
 - **ShopProductMapping**: Links shops to their products.
 - **ShopProductTypeMapping**: Links shops to product types.
 - **ShopOrderMapping**: Links shops to orders.
-- **Product**: Represents items for sale with attributes like name, description, price.
-- **ProductType**: Categorizes products (e.g., electronics, clothing).
-- **ProductVariableField**: Defines custom fields for products.
-- **ProductVariableFieldValue**: Stores values for custom product fields.
-- **ProductVariant**: Represents product variations (e.g., size, color).
-- **ProductVariantVarMapping**: Links product variants to their mappings.
-- **ProductTypeProductMapping**: Links product types to products.
-- **Lang**: Represents supported languages for localization.
-- **Post**: Represents blog posts or content articles.
+
+#### Product Management Entities (Complete ProductVariant System)
+
+**Core Product Entities:**
+- **Product**: Base product entity with standard attributes (name, description, price, etc.).
+- **ProductType**: Categorizes products (e.g., electronics, clothing) with hierarchical support via parentId.
+- **ProductTypeProductMapping**: Links products to their product types (many-to-many relationship).
+
+**ProductVariant System (Complex Product Configurations):**
+- **ProductVariableField**: Defines custom variable fields for products (e.g., "Size", "Color", "Material").
+  - Linked to specific products (productId).
+- **ProductVariableFieldValue**: Stores possible values for variable fields (e.g., "Small", "Medium", "Large" for Size field).
+  - Linked to ProductVariableField (productVariableFieldId).
+- **ProductVariant**: Represents specific product variations with unique SKU, price, and inventory.
+  - Contains: productId, sku, price, quantity, name, description.
+  - Each variant represents a unique combination of variable field values.
+- **ProductVariantVarMapping**: Junction table linking ProductVariants to ProductVariableFieldValues.
+  - Defines which values make up each variant (e.g., "Large" + "Red" = "Red Large T-Shirt").
+
+**ProductVariant Relationships:**
+```
+Product (1) ────→ (N) ProductVariableField
+    │                      │
+    │                      │
+    └───→ (N) ProductVariant ←─── (N) ProductVariantVarMapping
+           │                                      │
+           │                                      │
+           └───→ (1) OrderItem                    └───→ (1) ProductVariableFieldValue
+```
+
+**Example ProductVariant Configuration:**
+For a T-Shirt product with Size and Color variants:
+- ProductVariableField: "Size", "Color"
+- ProductVariableFieldValue: "Small", "Medium", "Large" (Size); "Red", "Blue", "Green" (Color)
+- ProductVariant: "Red Medium T-Shirt" (SKU: "TS-RM-001", price: $19.99, qty: 25)
+- ProductVariantVarMapping: Links variant to "Medium" and "Red" values
+
+#### Order Management Entities
+- **Order**: Represents customer purchases with status, dates, and customer information.
+- **OrderItem**: Individual items within orders, linking to both Product and ProductVariant.
+- **OrderBilling**: Billing information for orders.
+- **OrderShipping**: Shipping information for orders.
+- **OrderPayment**: Payment information for orders.
+- **OrderInvoice**: Invoices for orders.
+- **OrderStatus**: Order status tracking.
+- **OrderItemStatus**: Individual order item status tracking.
+- **CustomerOrderMapping**: Links customers to their orders.
+
+#### Content Management Entities
+- **Lang**: Supported languages for localization.
+- **Post**: Blog posts or content articles.
 - **PostType**: Categorizes posts (e.g., blog, news).
 - **PostTypePostMapping**: Links post types to posts.
-- **Order**: Represents customer purchases with items, status, billing, shipping.
-- **OrderItem**: Represents individual items within an order.
-- **OrderBilling**: Stores billing information for orders.
-- **OrderShipping**: Stores shipping information for orders.
-- **OrderPayment**: Stores payment information for orders.
-- **OrderInvoice**: Represents invoices for orders.
-- **OrderStatus**: Tracks the status of orders.
-- **OrderItemStatus**: Tracks the status of individual order items.
-- **CustomerOrderMapping**: Links customers to their orders.
-- **Shop**: Represents the eshop entity that owns products and orders.
+
+### Data Model Relationships *(ER Diagram)*
+
+```
+┌─────────────────┐     ┌─────────────────────┐     ┌─────────────────┐
+│     Shop        │     │ ShopProductMapping  │     │    Product      │
+│                 │     │                     │     │                 │
+│ • id            │◄────┤ • shopId            │────►│ • id            │
+│ • name          │     │ • productId         │     │ • name          │
+│ • desc          │     └─────────────────────┘     │ • desc          │
+│ • ...           │                                 │ • json          │
+└─────────────────┘                                 │ • ...           │
+                                                   └─────────────────┘
+                                                            │
+                                                            │ 1:N
+                                                            ▼
+┌─────────────────┐     ┌─────────────────────┐     ┌─────────────────┐
+│  ProductType    │     │ProductTypeProduct- │     │ProductVariable- │
+│                 │     │      Mapping       │     │     Field       │
+│ • id            │◄────┤ • productTypeId    │     │                 │
+│ • name          │     │ • productId        │     │ • id            │
+│ • desc          │     └─────────────────────┘     │ • name          │
+│ • parentId      │                                 │ • productId     │
+└─────────────────┘                                 │ • desc          │
+         ▲                                         │ • ...           │
+         │                                         └─────────────────┘
+         │ 1:N                                              │
+         │                                                  │ 1:N
+┌─────────────────┐     ┌─────────────────────┐            ▼
+│ShopProductType- │     │                     │     ┌─────────────────┐
+│    Mapping      │     │                     │     │ProductVariable- │
+│                 │     │                     │     │ FieldValue      │
+│ • shopId        │────►│                     │     │                 │
+│ • productTypeId │     │                     │     │ • id            │
+└─────────────────┘     │                     │     │ • name          │
+                        │                     │     │ • productVar-   │
+                        │                     │     │   iableFieldId  │
+                        │                     │     │ • desc          │
+                        │                     │     │ • ...           │
+                        │                     │     └─────────────────┘
+                        │                     │             │
+                        │                     │             │ 1:N
+                        │                     │             ▼
+                        └─────────────────────┘     ┌─────────────────┐
+                                                     │ProductVariant- │
+                                                     │ VarMapping     │
+                                                     │                │
+                                                     │ • variantId    │
+                                                     │ • variableField│
+                                                     │   ValueId      │
+                                                     └─────────────────┘
+                                                               ▲
+                                                               │
+                                                               │ 1:N
+┌─────────────────┐     ┌─────────────────────┐            ▼
+│  ProductVariant │     │                     │     ┌─────────────────┐
+│                 │     │                     │     │   OrderItem     │
+│ • id            │◄────┤ • productVariantId  │◄────┤ • id            │
+│ • productId     │     │ • productId         │     │ • orderId       │
+│ • sku           │     │ • orderedItemPrice  │     │ • productId     │
+│ • price         │     │ • orderedItemQty    │     │ • productVar-   │
+│ • quantity      │     └─────────────────────┘     │   iantId        │
+│ • name          │                                 │ • ...           │
+│ • desc          │                                 └─────────────────┘
+│ • ...           │                                         │
+└─────────────────┘                                         │
+                                                            │ 1:N
+                                                            ▼
+                                                     ┌─────────────────┐
+                                                     │     Order       │
+                                                     │                 │
+                                                     │ • id            │
+                                                     │ • customerId    │
+                                                     │ • orderStatus   │
+                                                     │ • orderDate     │
+                                                     │ • ...           │
+                                                     └─────────────────┘
+```
+
+### ProductVariant System Architecture
+
+**Key Relationships:**
+1. **Product → ProductVariant** (1:N): Each product can have multiple variants
+2. **ProductVariant → ProductVariantVarMapping** (1:N): Each variant is defined by multiple variable field combinations
+3. **ProductVariantVarMapping → ProductVariableFieldValue** (N:1): Links variants to specific values
+4. **ProductVariableFieldValue → ProductVariableField** (N:1): Values belong to specific variable fields
+5. **Product → ProductVariableField** (1:N): Products define their own variable fields
+6. **OrderItem → ProductVariant** (N:1): Order items reference specific product variants
+
+**Business Logic:**
+- Products can be simple (no variants) or complex (with variants)
+- ProductVariant represents a unique combination of ProductVariableFieldValues
+- Each ProductVariant has its own SKU, price, and inventory quantity
+- OrderItem references both Product and ProductVariant for complete item specification
+
+### ProductVariant Schema Details
+
+**ProductVariant Entity:**
+```json
+{
+  "type": "object",
+  "properties": {
+    "id": {"type": "string"},
+    "productId": {"type": "string"},
+    "sku": {"type": "string"},
+    "price": {"type": "number", "format": "double"},
+    "quantity": {"type": "integer"},
+    "name": {"type": "string"},
+    "desc": {"type": "string"},
+    "json": {"type": "object"},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"},
+    "createdBy": {"type": "string"},
+    "updatedBy": {"type": "string"}
+  }
+}
+```
+
+**ProductVariantVarMapping Entity:**
+```json
+{
+  "type": "object",
+  "properties": {
+    "variantId": {"type": "string"},
+    "variableFieldValueId": {"type": "string"},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"}
+  }
+}
+```
+
+**Example Implementation:**
+For a T-Shirt with Size and Color variants:
+- **ProductVariableField**: [{"name": "Size"}, {"name": "Color"}]
+- **ProductVariableFieldValue**: [{"name": "Small"}, {"name": "Medium"}, {"name": "Red"}, {"name": "Blue"}]
+- **ProductVariant**: {"sku": "TS-RM-001", "name": "Red Medium T-Shirt", "price": 19.99, "quantity": 25}
+- **ProductVariantVarMapping**: Links variant to "Medium" and "Red" values
+
+**Note**: This comprehensive ProductVariant system documentation was derived from analysis of the API specification in `.references/swagger.json` and represents the complete backend data model beyond the current frontend CMS implementation.
 
 ## Success Criteria *(mandatory)*
 

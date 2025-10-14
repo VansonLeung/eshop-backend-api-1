@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eshop CMS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div class="uk-offcanvas-content">
+            <!-- Sidebar Navigation -->
+            <div id="sidebar" class="uk-width-1-4@m uk-visible@m" role="navigation" aria-label="Main navigation">
+                <ul class="uk-nav uk-nav-default" role="menubar">
+                    <li class="uk-nav-header">Eshop CMS</li>
+                    <li><a href="#" data-page="products" role="menuitem">Products</a></li>
+                    <li><a href="#" data-page="orders" role="menuitem">Orders</a></li>
+                    <li><a href="#" data-page="users" role="menuitem">Users</a></li>
+                </ul>
+            </div>
+            <!-- Main Content -->
+            <div id="main-content" class="uk-width-3-4@m uk-margin-left">
+                <div id="page-content">
+                    <h1>Welcome to Eshop CMS</h1>
+                    <p>Select a section from the sidebar to manage your eshop data.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"></script>
+    <script src="app.js" type="module"></script>
+</body>
+</html>

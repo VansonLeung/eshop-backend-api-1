@@ -1,0 +1,26 @@
+/* Basic styles for Eshop CMS */
+
+/* UIKit variable overrides if needed */
+:root {
+    --uk-primary: #1e87f0;
+}
+
+/* Custom styles */
+.cms-header {
+    background-color: var(--uk-primary);
+    color: white;
+    padding: 10px;
+}
+
+.cms-content {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: var(--uk-primary);
+    color: white;
+}
