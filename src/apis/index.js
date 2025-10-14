@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import { Router } from './router.js';
 import { RequestResponseMiddleware } from 'sequelize-rest-framework';
 
@@ -9,6 +10,7 @@ export const initializeAPIs = async ({
 }) =>
 {
     const app = express();
+    app.use(cors());
 
     // Middleware to parse JSON requests
     app.use(express.static('public'))
