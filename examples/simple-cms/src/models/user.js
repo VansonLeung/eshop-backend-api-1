@@ -30,13 +30,14 @@ export class User {
             errors.push('Valid email is required');
         }
 
-        if (!this.firstName || this.firstName.trim().length === 0) {
-            errors.push('First name is required');
-        }
+        // First name and last name are optional in current API
+        // if (!this.firstName || this.firstName.trim().length === 0) {
+        //     errors.push('First name is required');
+        // }
 
-        if (!this.lastName || this.lastName.trim().length === 0) {
-            errors.push('Last name is required');
-        }
+        // if (!this.lastName || this.lastName.trim().length === 0) {
+        //     errors.push('Last name is required');
+        // }
 
         const validRoles = ['admin', 'manager', 'customer'];
         if (!validRoles.includes(this.role)) {
@@ -68,6 +69,14 @@ export class User {
      * @returns {User}
      */
     static fromAPI(data) {
-        return new User(data);
+        return new User({
+            id: data.id,
+            email: data.email,
+            firstName: data.firstName || '', // May not be provided by API
+            lastName: data.lastName || '',   // May not be provided by API
+            role: data.role || 'customer',
+            createdAt: data.createdAt,
+            updatedAt: data.updatedAt
+        });
     }
 }

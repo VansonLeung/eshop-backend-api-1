@@ -116,7 +116,8 @@ async function apiRequest(url, options = {}) {
             throw new Error(`API Error: ${response.status} ${response.statusText}`);
         }
 
-        return await response.json();
+        const jsonData = await response.json();
+        return jsonData;
     } catch (error) {
         // If fetch fails (network error), return mock data for testing
         if (error.name === 'TypeError' && error.message.includes('fetch')) {

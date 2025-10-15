@@ -58,57 +58,68 @@ export const initializeModels = async () =>
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
 
-        const UserPermission = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('UserPermission', EBUserPermission.makeSchema());
-        const UserRole = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('UserRole', EBUserRole.makeSchema());
-        const UserRolePermissionMapping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('UserRolePermissionMapping', EBUserRolePermissionMapping.makeSchema());
-    
-        const User = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('User', EBUser.makeSchema());
-        const UserCredential = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('UserCredential', EBUserCredential.makeSchema());
-        const UserSession = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('UserSession', EBUserSession.makeSchema());
-        const UserContact = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('UserContact', EBUserContact.makeSchema());
-        const UserShipping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('UserShipping', EBUserShipping.makeSchema());
-        const UserBilling = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('UserBilling', EBUserBilling.makeSchema());
-        const UserPayment = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('UserPayment', EBUserPayment.makeSchema());
-        const UserCartItem = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('UserCartItem', EBUserCartItem.makeSchema());
-    
-        const Shop = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('Shop', EBShop.makeSchema());
-        const ShopOwnerMapping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ShopOwnerMapping', EBShopOwnerMapping.makeSchema());
-        
-        const Product = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('Product', EBProduct.makeSchema());
-        const ProductType = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ProductType', EBProductType.makeSchema(), { indexes: SchemaToIndexes(EBProductType.makeSchema()), });
-    
-        const ProductVariableField = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ProductVariableField', EBProductVariableField.makeSchema());
-        const ProductVariableFieldValue = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ProductVariableFieldValue', EBProductVariableFieldValue.makeSchema());
+        const defineModel = (tableName, ModelDef) => { 
+            const { 
+                makeSchema, 
+                makeIndex = () => [],
+            } = ModelDef;
 
-        const ProductVariant = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ProductVariant', EBProductVariant.makeSchema());
-        const ProductVariantVarMapping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ProductVariantVarMapping', EBProductVariantVarMapping.makeSchema());
+            return ((tableName, schema) => { 
+                return sequelize.define(tableName, schema, {
+                    indexes: [
+                        ...SchemaToIndexes(schema), 
+                        ...makeIndex(), 
+                    ], 
+                }); 
+            })(tableName, makeSchema());
+        }
 
-        const ShopProductMapping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ShopProductMapping', EBShopProductMapping.makeSchema());
-        
-        const ProductTypeProductMapping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ProductTypeProductMapping', EBProductTypeProductMapping.makeSchema());
+        const UserPermission = defineModel('UserPermission', EBUserPermission);
+        const UserRole = defineModel('UserRole', EBUserRole);
+        const UserRolePermissionMapping = defineModel('UserRolePermissionMapping', EBUserRolePermissionMapping);
+        const User = defineModel('User', EBUser);
+        const UserCredential = defineModel('UserCredential', EBUserCredential);
+        const UserSession = defineModel('UserSession', EBUserSession);
+        const UserContact = defineModel('UserContact', EBUserContact);
+        const UserShipping = defineModel('UserShipping', EBUserShipping);
+        const UserBilling = defineModel('UserBilling', EBUserBilling);
+        const UserPayment = defineModel('UserPayment', EBUserPayment);
+        const UserCartItem = defineModel('UserCartItem', EBUserCartItem);
 
-        const ShopProductTypeMapping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ShopProductTypeMapping', EBShopProductTypeMapping.makeSchema());
+        const Shop = defineModel('Shop', EBShop);
+        const ShopOwnerMapping = defineModel('ShopOwnerMapping', EBShopOwnerMapping);
 
-        const Lang = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('Lang', EBLang.makeSchema());
+        const Product = defineModel('Product', EBProduct);
+        const ProductType = defineModel('ProductType', EBProductType);
+        const ProductVariableField = defineModel('ProductVariableField', EBProductVariableField);
+        const ProductVariableFieldValue = defineModel('ProductVariableFieldValue', EBProductVariableFieldValue);
 
-        const Post = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('Post', EBPost.makeSchema());
-        const PostType = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('PostType', EBPostType.makeSchema());
-        const PostTypePostMapping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('PostTypePostMapping', EBPostTypePostMapping.makeSchema());
-        
-        const Order = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('Order', EBOrder.makeSchema());
-        const OrderItem = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('OrderItem', EBOrderItem.makeSchema());
-        
-        const OrderBilling = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('OrderBilling', EBOrderBilling.makeSchema());
-        const OrderShipping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('OrderShipping', EBOrderShipping.makeSchema());
-        const OrderPayment = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('OrderPayment', EBOrderPayment.makeSchema());
-        const OrderInvoice = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('OrderInvoice', EBOrderInvoice.makeSchema());
+        const ProductVariant = defineModel('ProductVariant', EBProductVariant);
+        const ProductVariantVarMapping = defineModel('ProductVariantVarMapping', EBProductVariantVarMapping);
 
-        const OrderStatus = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('OrderStatus', EBOrderStatus.makeSchema());
-        const OrderItemStatus = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('OrderItemStatus', EBOrderItemStatus.makeSchema());
+        const ShopProductMapping = defineModel('ShopProductMapping', EBShopProductMapping);
 
-        const ShopOrderMapping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('ShopOrderMapping', EBShopOrderMapping.makeSchema());
+        const ProductTypeProductMapping = defineModel('ProductTypeProductMapping', EBProductTypeProductMapping);
 
-        const CustomerOrderMapping = ((tableName, schema) => { return sequelize.define(tableName, schema, { indexes: SchemaToIndexes(schema), }); })('CustomerOrderMapping', EBCustomerOrderMapping.makeSchema());
+        const ShopProductTypeMapping = defineModel('ShopProductTypeMapping', EBShopProductTypeMapping);
+
+        const Lang = defineModel('Lang', EBLang);
+
+        const Post = defineModel('Post', EBPost);
+        const PostType = defineModel('PostType', EBPostType);
+        const PostTypePostMapping = defineModel('PostTypePostMapping', EBPostTypePostMapping);
+
+        const Order = defineModel('Order', EBOrder);
+        const OrderItem = defineModel('OrderItem', EBOrderItem);
+        const OrderBilling = defineModel('OrderBilling', EBOrderBilling);
+        const OrderShipping = defineModel('OrderShipping', EBOrderShipping);
+        const OrderPayment = defineModel('OrderPayment', EBOrderPayment);
+        const OrderInvoice = defineModel('OrderInvoice', EBOrderInvoice);
+        const OrderStatus = defineModel('OrderStatus', EBOrderStatus);
+        const OrderItemStatus = defineModel('OrderItemStatus', EBOrderItemStatus);
+
+        const ShopOrderMapping = defineModel('ShopOrderMapping', EBShopOrderMapping);
+        const CustomerOrderMapping = defineModel('CustomerOrderMapping', EBCustomerOrderMapping);
 
     
         EBUserPermission.makeAssociations({Me: UserPermission, });

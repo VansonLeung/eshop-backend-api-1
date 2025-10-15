@@ -60,6 +60,15 @@ export class Product {
      * @returns {Product}
      */
     static fromAPI(data) {
-        return new Product(data);
+        return new Product({
+            id: data.id,
+            name: data.name,
+            description: data.desc || '', // API uses 'desc' field
+            price: data.price || 0, // May not exist in current API
+            sku: data.sku || '', // May not exist in current API
+            typeId: data.typeId || '',
+            createdAt: data.createdAt,
+            updatedAt: data.updatedAt
+        });
     }
 }

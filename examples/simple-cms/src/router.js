@@ -69,12 +69,15 @@ export function navigateTo(page) {
  */
 export function initRouter() {
     // Handle initial load
-    const initialPage = window.location.hash.substring(1) || 'products';
+    const hash = window.location.hash.substring(1);
+    const page = hash.split('?')[0]; // Remove query parameters
+    const initialPage = page || 'products';
     navigateTo(initialPage);
 
     // Handle browser back/forward
     window.addEventListener('hashchange', () => {
-        const page = window.location.hash.substring(1);
+        const hash = window.location.hash.substring(1);
+        const page = hash.split('?')[0]; // Remove query parameters
         navigateTo(page);
     });
 

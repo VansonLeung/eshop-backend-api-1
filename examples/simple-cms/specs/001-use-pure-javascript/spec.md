@@ -77,9 +77,52 @@ As an eshop manager, I want to perform CRUD operations on users so that I can ma
 - **FR-014**: System MUST provide a consistent UI using UIKit components.
 - **FR-015**: System MUST be built with pure JavaScript, HTML, and CSS without external frameworks except UIKit.
 - **FR-016**: System MUST use sidebar navigation with collapsible menu for accessing different entity management sections.
-- **FR-017**: System MUST display loading spinners during data fetching and show user-friendly error messages for API failures.### Key Entities *(include if feature involves data)*
+- **FR-017**: System MUST display loading spinners during data fetching and show user-friendly error messages for API failures.
+- **FR-018**: System MUST handle network timeouts with retry options and clear error messaging.
+- **FR-019**: System MUST handle server errors (5xx) with appropriate user guidance and retry mechanisms.
+- **FR-020**: System MUST handle validation errors (4xx) by displaying specific field-level error messages.
+- **FR-021**: System MUST enforce valid order status transitions: pending → processing → shipped → delivered.
+
+### Non-Functional Requirements
+
+- **NFR-001**: System MUST use session-based authentication with JWT tokens for secure manager access.
+- **NFR-002**: System MUST handle JWT token expiration and automatic refresh.
+- **NFR-003**: System MUST redirect unauthenticated users to login page (401 responses).
+- **NFR-004**: System MUST validate manager permissions for all CRUD operations.
+- **NFR-005**: System MUST handle concurrent edits using last-write-wins with optimistic locking.
+
+### Key Entities *(include if feature involves data)*
 
 **Note**: This CMS focuses on CRUD operations for the following core entities. Other entities listed below are part of the broader eshop system but out-of-scope for this feature.
+
+**Entity Relationships** (Foreign Key Constraints):
+- UserRolePermissionMapping: userRoleId → UserRole.id, permissionId → UserPermission.id
+- UserCredential: userId → User.id
+- UserSession: userId → User.id
+- UserContact: userId → User.id
+- UserShipping: userId → User.id
+- UserBilling: userId → User.id
+- UserPayment: userId → User.id
+- UserCartItem: userId → User.id, productId → Product.id
+- ShopOwnerMapping: shopId → Shop.id, userId → User.id
+- ShopProductMapping: shopId → Shop.id, productId → Product.id
+- ShopProductTypeMapping: shopId → Shop.id, productTypeId → ProductType.id
+- ShopOrderMapping: shopId → Shop.id, orderId → Order.id
+- ProductVariableField: productTypeId → ProductType.id
+- ProductVariableFieldValue: productId → Product.id, fieldId → ProductVariableField.id
+- ProductVariant: productId → Product.id
+- ProductVariantVarMapping: variantId → ProductVariant.id, relatedVariantId → ProductVariant.id
+- ProductTypeProductMapping: productId → Product.id, productTypeId → ProductType.id
+- Post: authorId → User.id
+- PostTypePostMapping: postId → Post.id, postTypeId → PostType.id
+- OrderItem: orderId → Order.id, productId → Product.id
+- OrderBilling: orderId → Order.id
+- OrderShipping: orderId → Order.id
+- OrderPayment: orderId → Order.id
+- OrderInvoice: orderId → Order.id
+- OrderStatus: orderId → Order.id, changedBy → User.id
+- OrderItemStatus: orderItemId → OrderItem.id
+- CustomerOrderMapping: userId → User.id, orderId → Order.id
 
 - **User**: Represents system users with authentication and profile information. (IN-SCOPE for CRUD)
 - **UserRole**: Defines roles for users (e.g., admin, manager, customer).
@@ -138,3 +181,8 @@ As an eshop manager, I want to perform CRUD operations on users so that I can ma
 - Q: Which entities should the CMS support CRUD operations for? → A: C
 - Q: What navigation structure should the CMS use? → A: A
 - Q: How should the CMS handle loading states and error messages? → A: A
+- Q: How should user authentication and authorization be handled in the CMS? → A: Session-based authentication with JWT tokens
+- Q: What are the key relationships between entities (foreign keys, constraints)? → A: Foreign key relationships with referential integrity
+- Q: What specific API failure scenarios should be handled? → A: Network timeouts, server errors (5xx), and validation errors (4xx)
+- Q: How should concurrent edits to the same entity be handled? → A: Last-write-wins with optimistic locking
+- Q: What are the valid order status transitions? → A: pending → processing → shipped → delivered
