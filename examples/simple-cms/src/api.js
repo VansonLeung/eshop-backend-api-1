@@ -1,6 +1,8 @@
 // API Client Module
 
-const API_BASE_URL = 'http://localhost:3000/api';
+import { getApiBaseUrl } from './config.js';
+
+const API_BASE_URL = getApiBaseUrl();
 
 /**
  * Mock data for testing when backend is not available

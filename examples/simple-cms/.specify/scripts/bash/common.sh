@@ -81,7 +81,21 @@ check_feature_branch() {
     return 0
 }
 
-get_feature_dir() { echo "$1/specs/$2"; }
+get_feature_dir() {
+    local repo_root="$1"
+    local branch="$2"
+    local examples_dir="$repo_root/examples/simple-cms/specs/$branch"
+    local specs_dir="$repo_root/specs/$branch"
+
+    # Check if the examples directory exists first (for moved files)
+    if [[ -d "$examples_dir" ]]; then
+        echo "$examples_dir"
+    elif [[ -d "$specs_dir" ]]; then
+        echo "$specs_dir"
+    else
+        echo "$specs_dir"  # Default to specs dir
+    fi
+}
 
 get_feature_paths() {
     local repo_root=$(get_repo_root)

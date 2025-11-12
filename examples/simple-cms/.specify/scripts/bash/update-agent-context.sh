@@ -72,8 +72,12 @@ ROO_FILE="$REPO_ROOT/.roo/rules/specify-rules.md"
 CODEBUDDY_FILE="$REPO_ROOT/.codebuddy/rules/specify-rules.md"
 Q_FILE="$REPO_ROOT/AGENTS.md"
 
-# Template file
-TEMPLATE_FILE="$REPO_ROOT/.specify/templates/agent-file-template.md"
+# Template file - check examples directory first, then main repo
+if [[ -f "$REPO_ROOT/examples/simple-cms/.specify/templates/agent-file-template.md" ]]; then
+    TEMPLATE_FILE="$REPO_ROOT/examples/simple-cms/.specify/templates/agent-file-template.md"
+else
+    TEMPLATE_FILE="$REPO_ROOT/.specify/templates/agent-file-template.md"
+fi
 
 # Global variables for parsed plan data
 NEW_LANG=""

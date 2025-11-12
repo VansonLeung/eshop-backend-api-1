@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import packageJson from './package.json' assert { type: 'json' };
 import { AuthSystem } from 'sequelize-rest-framework';
 
@@ -33,10 +34,11 @@ const app = await (async () => {
   return app;
 })();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, (e) => {
   console.log(`Server is running on http://localhost:${PORT}`, e);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
 
 

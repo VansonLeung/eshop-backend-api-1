@@ -1,0 +1,3070 @@
+openapi: 3.0.3
+info:
+  title: Eshop CMS API
+  description: RESTful API for comprehensive eshop content management system with 23 entities
+  version: 1.0.0
+  contact:
+    name: Eshop CMS Development Team
+
+servers:
+  - url: https://api.eshop-cms.com/v1
+    description: Production server
+  - url: http://localhost:3000/api
+    description: Development server
+
+security:
+  - bearerAuth: []
+  - cookieAuth: []
+
+paths:
+  # User Management Endpoints
+  /api/user-roles:
+    get:
+      summary: List user roles
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: name
+          in: query
+          schema:
+            type: string
+          description: Filter by role name
+      responses:
+        '200':
+          $ref: '#/components/responses/UserRoleList'
+    post:
+      summary: Create user role
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRoleCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/UserRoleResponse'
+
+  /api/user-roles/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get user role by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/UserRoleResponse'
+    put:
+      summary: Update user role
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRoleUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserRoleResponse'
+    delete:
+      summary: Delete user role
+      responses:
+        '204':
+          description: User role deleted successfully
+
+  /api/user-credentials:
+    get:
+      summary: List user credentials
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserCredentialList'
+    post:
+      summary: Create user credential
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCredentialCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/UserCredentialResponse'
+
+  /api/user-credentials/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get user credential by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/UserCredentialResponse'
+    put:
+      summary: Update user credential
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCredentialUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserCredentialResponse'
+    delete:
+      summary: Delete user credential
+      responses:
+        '204':
+          description: User credential deleted successfully
+
+  /api/user-contacts:
+    get:
+      summary: List user contacts
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: userId
+          in: query
+          schema:
+            type: integer
+          description: Filter by user ID
+      responses:
+        '200':
+          $ref: '#/components/responses/UserContactList'
+    post:
+      summary: Create user contact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserContactCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/UserContactResponse'
+
+  /api/user-contacts/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get user contact by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/UserContactResponse'
+    put:
+      summary: Update user contact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserContactUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserContactResponse'
+    delete:
+      summary: Delete user contact
+      responses:
+        '204':
+          description: User contact deleted successfully
+
+  /api/user-shipping:
+    get:
+      summary: List user shipping addresses
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: userId
+          in: query
+          schema:
+            type: integer
+          description: Filter by user ID
+      responses:
+        '200':
+          $ref: '#/components/responses/UserShippingList'
+    post:
+      summary: Create user shipping address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserShippingCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/UserShippingResponse'
+
+  /api/user-shipping/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get user shipping address by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/UserShippingResponse'
+    put:
+      summary: Update user shipping address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserShippingUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserShippingResponse'
+    delete:
+      summary: Delete user shipping address
+      responses:
+        '204':
+          description: User shipping address deleted successfully
+
+  /api/user-billing:
+    get:
+      summary: List user billing addresses
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: userId
+          in: query
+          schema:
+            type: integer
+          description: Filter by user ID
+      responses:
+        '200':
+          $ref: '#/components/responses/UserBillingList'
+    post:
+      summary: Create user billing address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserBillingCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/UserBillingResponse'
+
+  /api/user-billing/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get user billing address by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/UserBillingResponse'
+    put:
+      summary: Update user billing address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserBillingUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserBillingResponse'
+    delete:
+      summary: Delete user billing address
+      responses:
+        '204':
+          description: User billing address deleted successfully
+
+  /api/user-sessions:
+    get:
+      summary: List user sessions
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: userId
+          in: query
+          schema:
+            type: integer
+          description: Filter by user ID
+      responses:
+        '200':
+          $ref: '#/components/responses/UserSessionList'
+    post:
+      summary: Create user session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSessionCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/UserSessionResponse'
+
+  /api/user-sessions/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get user session by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/UserSessionResponse'
+    delete:
+      summary: Delete user session
+      responses:
+        '204':
+          description: User session deleted successfully
+
+  # Shop Management Endpoints
+  /api/shops:
+    get:
+      summary: List shops
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/ShopList'
+    post:
+      summary: Create shop
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShopCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/ShopResponse'
+
+  /api/shops/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get shop by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ShopResponse'
+    put:
+      summary: Update shop
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShopUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/ShopResponse'
+    delete:
+      summary: Delete shop
+      responses:
+        '204':
+          description: Shop deleted successfully
+
+  /api/shop-owner-mappings:
+    get:
+      summary: List shop owner mappings
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: shopId
+          in: query
+          schema:
+            type: integer
+          description: Filter by shop ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ShopOwnerMappingList'
+    post:
+      summary: Create shop owner mapping
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShopOwnerMappingCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/ShopOwnerMappingResponse'
+
+  /api/shop-owner-mappings/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get shop owner mapping by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ShopOwnerMappingResponse'
+    delete:
+      summary: Delete shop owner mapping
+      responses:
+        '204':
+          description: Shop owner mapping deleted successfully
+
+  # Product Management Endpoints
+  /api/product-types:
+    get:
+      summary: List product types
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: parentId
+          in: query
+          schema:
+            type: integer
+            nullable: true
+          description: Filter by parent ID (null for root level)
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductTypeList'
+    post:
+      summary: Create product type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductTypeCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/ProductTypeResponse'
+
+  /api/product-types/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get product type by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductTypeResponse'
+    put:
+      summary: Update product type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductTypeUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductTypeResponse'
+    delete:
+      summary: Delete product type
+      responses:
+        '204':
+          description: Product type deleted successfully
+
+  /api/product-types/{id}/children:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get child product types
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductTypeList'
+
+  /api/product-variants:
+    get:
+      summary: List product variants
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: productId
+          in: query
+          schema:
+            type: integer
+          description: Filter by product ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductVariantList'
+    post:
+      summary: Create product variant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductVariantCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/ProductVariantResponse'
+
+  /api/product-variants/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get product variant by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductVariantResponse'
+    put:
+      summary: Update product variant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductVariantUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductVariantResponse'
+    delete:
+      summary: Delete product variant
+      responses:
+        '204':
+          description: Product variant deleted successfully
+
+  /api/product-variable-fields:
+    get:
+      summary: List product variable fields
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: productId
+          in: query
+          schema:
+            type: integer
+          description: Filter by product ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductVariableFieldList'
+    post:
+      summary: Create product variable field
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductVariableFieldCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/ProductVariableFieldResponse'
+
+  /api/product-variable-fields/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get product variable field by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductVariableFieldResponse'
+    put:
+      summary: Update product variable field
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductVariableFieldUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductVariableFieldResponse'
+    delete:
+      summary: Delete product variable field
+      responses:
+        '204':
+          description: Product variable field deleted successfully
+
+  /api/product-variable-field-values:
+    get:
+      summary: List product variable field values
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: fieldId
+          in: query
+          schema:
+            type: integer
+          description: Filter by field ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductVariableFieldValueList'
+    post:
+      summary: Create product variable field value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductVariableFieldValueCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/ProductVariableFieldValueResponse'
+
+  /api/product-variable-field-values/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get product variable field value by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductVariableFieldValueResponse'
+    put:
+      summary: Update product variable field value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductVariableFieldValueUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductVariableFieldValueResponse'
+    delete:
+      summary: Delete product variable field value
+      responses:
+        '204':
+          description: Product variable field value deleted successfully
+
+  /api/product-variant-var-mappings:
+    get:
+      summary: List product variant variable mappings
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: variantId
+          in: query
+          schema:
+            type: integer
+          description: Filter by variant ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductVariantVarMappingList'
+    post:
+      summary: Create product variant variable mapping
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductVariantVarMappingCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/ProductVariantVarMappingResponse'
+
+  /api/product-variant-var-mappings/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get product variant variable mapping by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductVariantVarMappingResponse'
+    delete:
+      summary: Delete product variant variable mapping
+      responses:
+        '204':
+          description: Product variant variable mapping deleted successfully
+
+  # Mapping Entity Endpoints (Indirect Management)
+  /api/shop-product-mappings:
+    get:
+      summary: List shop product mappings
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: shopId
+          in: query
+          schema:
+            type: integer
+          description: Filter by shop ID
+        - name: productId
+          in: query
+          schema:
+            type: integer
+          description: Filter by product ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ShopProductMappingList'
+    post:
+      summary: Create shop product mapping
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShopProductMappingCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/ShopProductMappingResponse'
+
+  /api/shop-product-mappings/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get shop product mapping by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ShopProductMappingResponse'
+    delete:
+      summary: Delete shop product mapping
+      responses:
+        '204':
+          description: Shop product mapping deleted successfully
+
+  /api/shop-product-type-mappings:
+    get:
+      summary: List shop product type mappings
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: shopId
+          in: query
+          schema:
+            type: integer
+          description: Filter by shop ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ShopProductTypeMappingList'
+    post:
+      summary: Create shop product type mapping
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShopProductTypeMappingCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/ShopProductTypeMappingResponse'
+
+  /api/shop-product-type-mappings/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    delete:
+      summary: Delete shop product type mapping
+      responses:
+        '204':
+          description: Shop product type mapping deleted successfully
+
+  /api/product-type-product-mappings:
+    get:
+      summary: List product type product mappings
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: productTypeId
+          in: query
+          schema:
+            type: integer
+          description: Filter by product type ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductTypeProductMappingList'
+    post:
+      summary: Create product type product mapping
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductTypeProductMappingCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/ProductTypeProductMappingResponse'
+
+  /api/product-type-product-mappings/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    delete:
+      summary: Delete product type product mapping
+      responses:
+        '204':
+          description: Product type product mapping deleted successfully
+
+  # Order Management Endpoints
+  /api/order-items:
+    get:
+      summary: List order items
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: orderId
+          in: query
+          schema:
+            type: integer
+          description: Filter by order ID
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderItemList'
+    post:
+      summary: Create order item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderItemCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/OrderItemResponse'
+
+  /api/order-items/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get order item by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderItemResponse'
+    put:
+      summary: Update order item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderItemUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderItemResponse'
+    delete:
+      summary: Delete order item
+      responses:
+        '204':
+          description: Order item deleted successfully
+
+  /api/order-billing:
+    get:
+      summary: List order billing addresses
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: orderId
+          in: query
+          schema:
+            type: integer
+          description: Filter by order ID
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderBillingList'
+    post:
+      summary: Create order billing address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderBillingCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/OrderBillingResponse'
+
+  /api/order-billing/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get order billing address by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderBillingResponse'
+    put:
+      summary: Update order billing address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderBillingUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderBillingResponse'
+    delete:
+      summary: Delete order billing address
+      responses:
+        '204':
+          description: Order billing address deleted successfully
+
+  /api/order-shipping:
+    get:
+      summary: List order shipping addresses
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: orderId
+          in: query
+          schema:
+            type: integer
+          description: Filter by order ID
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderShippingList'
+    post:
+      summary: Create order shipping address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderShippingCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/OrderShippingResponse'
+
+  /api/order-shipping/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get order shipping address by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderShippingResponse'
+    put:
+      summary: Update order shipping address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderShippingUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderShippingResponse'
+    delete:
+      summary: Delete order shipping address
+      responses:
+        '204':
+          description: Order shipping address deleted successfully
+
+  /api/order-payments:
+    get:
+      summary: List order payments
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: orderId
+          in: query
+          schema:
+            type: integer
+          description: Filter by order ID
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderPaymentList'
+    post:
+      summary: Create order payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderPaymentCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/OrderPaymentResponse'
+
+  /api/order-payments/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get order payment by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderPaymentResponse'
+    put:
+      summary: Update order payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderPaymentUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderPaymentResponse'
+    delete:
+      summary: Delete order payment
+      responses:
+        '204':
+          description: Order payment deleted successfully
+
+  # Content Management Endpoints
+  /api/posts:
+    get:
+      summary: List posts
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: authorId
+          in: query
+          schema:
+            type: integer
+          description: Filter by author ID
+        - name: typeId
+          in: query
+          schema:
+            type: integer
+          description: Filter by post type ID
+      responses:
+        '200':
+          $ref: '#/components/responses/PostList'
+    post:
+      summary: Create post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/PostResponse'
+
+  /api/posts/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get post by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/PostResponse'
+    put:
+      summary: Update post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/PostResponse'
+    delete:
+      summary: Delete post
+      responses:
+        '204':
+          description: Post deleted successfully
+
+  /api/post-types:
+    get:
+      summary: List post types
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PostTypeList'
+    post:
+      summary: Create post type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTypeCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/PostTypeResponse'
+
+  /api/post-types/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get post type by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/PostTypeResponse'
+    put:
+      summary: Update post type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTypeUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/PostTypeResponse'
+    delete:
+      summary: Delete post type
+      responses:
+        '204':
+          description: Post type deleted successfully
+
+  /api/langs:
+    get:
+      summary: List languages
+      parameters:
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/LangList'
+    post:
+      summary: Create language
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LangCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/LangResponse'
+
+  /api/langs/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get language by ID
+      responses:
+        '200':
+          $ref: '#/components/responses/LangResponse'
+    put:
+      summary: Update language
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LangUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/LangResponse'
+    delete:
+      summary: Delete language
+      responses:
+        '204':
+          description: Language deleted successfully
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: session_token
+
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Entity ID
+    pageParam:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+      description: Page number for pagination
+    limitParam:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      description: Number of items per page
+
+  schemas:
+    # Common Schemas
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: string
+          description: Error code
+        details:
+          type: object
+          description: Additional error details
+      required:
+        - error
+        - code
+
+    PaginationMeta:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+      required:
+        - page
+        - limit
+        - total
+        - totalPages
+
+    # User Management Schemas
+    UserRole:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - permissions
+
+    UserRoleCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 500
+        permissions:
+          type: array
+          items:
+            type: string
+            enum: [create_product, read_product, update_product, delete_product, create_order, read_order, update_order, delete_order, create_user, read_user, update_user, delete_user, manage_shops, manage_posts, manage_content, system_admin]
+      required:
+        - name
+        - permissions
+
+    UserRoleUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 500
+        permissions:
+          type: array
+          items:
+            type: string
+            enum: [create_product, read_product, update_product, delete_product, create_order, read_order, update_order, delete_order, create_user, read_user, update_user, delete_user, manage_shops, manage_posts, manage_content, system_admin]
+
+    UserCredential:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        username:
+          type: string
+        passwordHash:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - userId
+        - username
+
+    UserCredentialCreate:
+      type: object
+      properties:
+        userId:
+          type: integer
+        username:
+          type: string
+          minLength: 3
+          maxLength: 50
+        password:
+          type: string
+          minLength: 8
+          maxLength: 128
+      required:
+        - userId
+        - username
+        - password
+
+    UserCredentialUpdate:
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 3
+          maxLength: 50
+        password:
+          type: string
+          minLength: 8
+          maxLength: 128
+
+    UserContact:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - userId
+        - email
+
+    UserContactCreate:
+      type: object
+      properties:
+        userId:
+          type: integer
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+      required:
+        - userId
+        - email
+
+    UserContactUpdate:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+
+    UserShipping:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - userId
+        - name
+        - address
+        - city
+        - zip
+        - country
+
+    UserShippingCreate:
+      type: object
+      properties:
+        userId:
+          type: integer
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        address:
+          type: string
+          minLength: 1
+          maxLength: 255
+        city:
+          type: string
+          minLength: 1
+          maxLength: 100
+        state:
+          type: string
+          maxLength: 100
+        zip:
+          type: string
+          minLength: 1
+          maxLength: 20
+        country:
+          type: string
+          minLength: 1
+          maxLength: 100
+      required:
+        - userId
+        - name
+        - address
+        - city
+        - zip
+        - country
+
+    UserShippingUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        address:
+          type: string
+          minLength: 1
+          maxLength: 255
+        city:
+          type: string
+          minLength: 1
+          maxLength: 100
+        state:
+          type: string
+          maxLength: 100
+        zip:
+          type: string
+          minLength: 1
+          maxLength: 20
+        country:
+          type: string
+          minLength: 1
+          maxLength: 100
+
+    UserBilling:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - userId
+        - name
+        - address
+        - city
+        - zip
+        - country
+
+    UserBillingCreate:
+      type: object
+      properties:
+        userId:
+          type: integer
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        address:
+          type: string
+          minLength: 1
+          maxLength: 255
+        city:
+          type: string
+          minLength: 1
+          maxLength: 100
+        state:
+          type: string
+          maxLength: 100
+        zip:
+          type: string
+          minLength: 1
+          maxLength: 20
+        country:
+          type: string
+          minLength: 1
+          maxLength: 100
+      required:
+        - userId
+        - name
+        - address
+        - city
+        - zip
+        - country
+
+    UserBillingUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        address:
+          type: string
+          minLength: 1
+          maxLength: 255
+        city:
+          type: string
+          minLength: 1
+          maxLength: 100
+        state:
+          type: string
+          maxLength: 100
+        zip:
+          type: string
+          minLength: 1
+          maxLength: 20
+        country:
+          type: string
+          minLength: 1
+          maxLength: 100
+
+    UserSession:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        token:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - userId
+        - token
+        - expiresAt
+
+    UserSessionCreate:
+      type: object
+      properties:
+        userId:
+          type: integer
+        token:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
+      required:
+        - userId
+        - token
+        - expiresAt
+
+    # Shop Management Schemas
+    Shop:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+
+    ShopCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 500
+      required:
+        - name
+
+    ShopUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 500
+
+    ShopOwnerMapping:
+      type: object
+      properties:
+        id:
+          type: integer
+        shopId:
+          type: integer
+        userId:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - shopId
+        - userId
+
+    ShopOwnerMappingCreate:
+      type: object
+      properties:
+        shopId:
+          type: integer
+        userId:
+          type: integer
+      required:
+        - shopId
+        - userId
+
+    # Product Management Schemas
+    ProductType:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        parentId:
+          type: integer
+          nullable: true
+        path:
+          type: string
+          description: Materialized path for hierarchy (e.g., "/1/2/")
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - path
+
+    ProductTypeCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 500
+        parentId:
+          type: integer
+          nullable: true
+      required:
+        - name
+
+    ProductTypeUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 500
+        parentId:
+          type: integer
+          nullable: true
+
+    ProductVariant:
+      type: object
+      properties:
+        id:
+          type: integer
+        productId:
+          type: integer
+        name:
+          type: string
+        sku:
+          type: string
+        price:
+          type: number
+          format: float
+        stock:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - productId
+        - name
+        - sku
+        - price
+
+    ProductVariantCreate:
+      type: object
+      properties:
+        productId:
+          type: integer
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        sku:
+          type: string
+          minLength: 1
+          maxLength: 50
+        price:
+          type: number
+          format: float
+          minimum: 0
+        stock:
+          type: integer
+          minimum: 0
+          default: 0
+      required:
+        - productId
+        - name
+        - sku
+        - price
+
+    ProductVariantUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        sku:
+          type: string
+          minLength: 1
+          maxLength: 50
+        price:
+          type: number
+          format: float
+          minimum: 0
+        stock:
+          type: integer
+          minimum: 0
+
+    ProductVariableField:
+      type: object
+      properties:
+        id:
+          type: integer
+        productId:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+          enum: [text, number, boolean, date, select]
+        required:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - productId
+        - name
+        - type
+        - required
+
+    ProductVariableFieldCreate:
+      type: object
+      properties:
+        productId:
+          type: integer
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        type:
+          type: string
+          enum: [text, number, boolean, date, select]
+        required:
+          type: boolean
+          default: false
+      required:
+        - productId
+        - name
+        - type
+
+    ProductVariableFieldUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        type:
+          type: string
+          enum: [text, number, boolean, date, select]
+        required:
+          type: boolean
+
+    ProductVariableFieldValue:
+      type: object
+      properties:
+        id:
+          type: integer
+        fieldId:
+          type: integer
+        value:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - fieldId
+        - value
+
+    ProductVariableFieldValueCreate:
+      type: object
+      properties:
+        fieldId:
+          type: integer
+        value:
+          type: string
+          minLength: 1
+          maxLength: 1000
+      required:
+        - fieldId
+        - value
+
+    ProductVariableFieldValueUpdate:
+      type: object
+      properties:
+        value:
+          type: string
+          minLength: 1
+          maxLength: 1000
+
+    ProductVariantVarMapping:
+      type: object
+      properties:
+        id:
+          type: integer
+        variantId:
+          type: integer
+        fieldValueId:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - variantId
+        - fieldValueId
+
+    ProductVariantVarMappingCreate:
+      type: object
+      properties:
+        variantId:
+          type: integer
+        fieldValueId:
+          type: integer
+      required:
+        - variantId
+        - fieldValueId
+
+    # Mapping Entity Schemas
+    ShopProductMapping:
+      type: object
+      properties:
+        id:
+          type: integer
+        shopId:
+          type: integer
+        productId:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - shopId
+        - productId
+
+    ShopProductMappingCreate:
+      type: object
+      properties:
+        shopId:
+          type: integer
+        productId:
+          type: integer
+      required:
+        - shopId
+        - productId
+
+    ShopProductTypeMapping:
+      type: object
+      properties:
+        id:
+          type: integer
+        shopId:
+          type: integer
+        productTypeId:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - shopId
+        - productTypeId
+
+    ShopProductTypeMappingCreate:
+      type: object
+      properties:
+        shopId:
+          type: integer
+        productTypeId:
+          type: integer
+      required:
+        - shopId
+        - productTypeId
+
+    ProductTypeProductMapping:
+      type: object
+      properties:
+        id:
+          type: integer
+        productTypeId:
+          type: integer
+        productId:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - productTypeId
+        - productId
+
+    ProductTypeProductMappingCreate:
+      type: object
+      properties:
+        productTypeId:
+          type: integer
+        productId:
+          type: integer
+      required:
+        - productTypeId
+        - productId
+
+    # Order Management Schemas
+    OrderItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        orderId:
+          type: integer
+        productId:
+          type: integer
+        variantId:
+          type: integer
+          nullable: true
+        quantity:
+          type: integer
+        price:
+          type: number
+          format: float
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - orderId
+        - productId
+        - quantity
+        - price
+
+    OrderItemCreate:
+      type: object
+      properties:
+        orderId:
+          type: integer
+        productId:
+          type: integer
+        variantId:
+          type: integer
+          nullable: true
+        quantity:
+          type: integer
+          minimum: 1
+        price:
+          type: number
+          format: float
+          minimum: 0
+      required:
+        - orderId
+        - productId
+        - quantity
+        - price
+
+    OrderItemUpdate:
+      type: object
+      properties:
+        variantId:
+          type: integer
+          nullable: true
+        quantity:
+          type: integer
+          minimum: 1
+        price:
+          type: number
+          format: float
+          minimum: 0
+
+    OrderBilling:
+      type: object
+      properties:
+        id:
+          type: integer
+        orderId:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - orderId
+        - name
+        - address
+        - city
+        - zip
+        - country
+
+    OrderBillingCreate:
+      type: object
+      properties:
+        orderId:
+          type: integer
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        address:
+          type: string
+          minLength: 1
+          maxLength: 255
+        city:
+          type: string
+          minLength: 1
+          maxLength: 100
+        state:
+          type: string
+          maxLength: 100
+        zip:
+          type: string
+          minLength: 1
+          maxLength: 20
+        country:
+          type: string
+          minLength: 1
+          maxLength: 100
+      required:
+        - orderId
+        - name
+        - address
+        - city
+        - zip
+        - country
+
+    OrderBillingUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        address:
+          type: string
+          minLength: 1
+          maxLength: 255
+        city:
+          type: string
+          minLength: 1
+          maxLength: 100
+        state:
+          type: string
+          maxLength: 100
+        zip:
+          type: string
+          minLength: 1
+          maxLength: 20
+        country:
+          type: string
+          minLength: 1
+          maxLength: 100
+
+    OrderShipping:
+      type: object
+      properties:
+        id:
+          type: integer
+        orderId:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - orderId
+        - name
+        - address
+        - city
+        - zip
+        - country
+
+    OrderShippingCreate:
+      type: object
+      properties:
+        orderId:
+          type: integer
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        address:
+          type: string
+          minLength: 1
+          maxLength: 255
+        city:
+          type: string
+          minLength: 1
+          maxLength: 100
+        state:
+          type: string
+          maxLength: 100
+        zip:
+          type: string
+          minLength: 1
+          maxLength: 20
+        country:
+          type: string
+          minLength: 1
+          maxLength: 100
+      required:
+        - orderId
+        - name
+        - address
+        - city
+        - zip
+        - country
+
+    OrderShippingUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        address:
+          type: string
+          minLength: 1
+          maxLength: 255
+        city:
+          type: string
+          minLength: 1
+          maxLength: 100
+        state:
+          type: string
+          maxLength: 100
+        zip:
+          type: string
+          minLength: 1
+          maxLength: 20
+        country:
+          type: string
+          minLength: 1
+          maxLength: 100
+
+    OrderPayment:
+      type: object
+      properties:
+        id:
+          type: integer
+        orderId:
+          type: integer
+        method:
+          type: string
+          enum: [credit_card, paypal, bank_transfer, cash]
+        status:
+          type: string
+          enum: [pending, processing, completed, failed, refunded]
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+          default: USD
+        transactionId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - orderId
+        - method
+        - status
+        - amount
+
+    OrderPaymentCreate:
+      type: object
+      properties:
+        orderId:
+          type: integer
+        method:
+          type: string
+          enum: [credit_card, paypal, bank_transfer, cash]
+        status:
+          type: string
+          enum: [pending, processing, completed, failed, refunded]
+          default: pending
+        amount:
+          type: number
+          format: float
+          minimum: 0
+        currency:
+          type: string
+          default: USD
+        transactionId:
+          type: string
+      required:
+        - orderId
+        - method
+        - amount
+
+    OrderPaymentUpdate:
+      type: object
+      properties:
+        method:
+          type: string
+          enum: [credit_card, paypal, bank_transfer, cash]
+        status:
+          type: string
+          enum: [pending, processing, completed, failed, refunded]
+        amount:
+          type: number
+          format: float
+          minimum: 0
+        currency:
+          type: string
+        transactionId:
+          type: string
+
+    # Content Management Schemas
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        content:
+          type: string
+          description: HTML content (sanitized)
+        authorId:
+          type: integer
+        typeId:
+          type: integer
+        langId:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - title
+        - content
+        - authorId
+
+    PostCreate:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+        content:
+          type: string
+          description: HTML content to be sanitized
+        authorId:
+          type: integer
+        typeId:
+          type: integer
+        langId:
+          type: integer
+      required:
+        - title
+        - content
+        - authorId
+
+    PostUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+        content:
+          type: string
+          description: HTML content to be sanitized
+        authorId:
+          type: integer
+        typeId:
+          type: integer
+        langId:
+          type: integer
+
+    PostType:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+
+    PostTypeCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 500
+      required:
+        - name
+
+    PostTypeUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 500
+
+    Lang:
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+          description: ISO language code (e.g., 'en', 'es', 'fr')
+        name:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - code
+        - name
+
+    LangCreate:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 2
+          maxLength: 10
+          pattern: '^[a-zA-Z]{2,3}(-[a-zA-Z]{2})?$'
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+      required:
+        - code
+        - name
+
+    LangUpdate:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 2
+          maxLength: 10
+          pattern: '^[a-zA-Z]{2,3}(-[a-zA-Z]{2})?$'
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+
+  responses:
+    # Common Response Components
+    UserRoleList:
+      description: List of user roles
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserRole'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    UserRoleResponse:
+      description: User role response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserRole'
+
+    UserCredentialList:
+      description: List of user credentials
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserCredential'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    UserCredentialResponse:
+      description: User credential response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserCredential'
+
+    UserContactList:
+      description: List of user contacts
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserContact'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    UserContactResponse:
+      description: User contact response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserContact'
+
+    UserShippingList:
+      description: List of user shipping addresses
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserShipping'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    UserShippingResponse:
+      description: User shipping address response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserShipping'
+
+    UserBillingList:
+      description: List of user billing addresses
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserBilling'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    UserBillingResponse:
+      description: User billing address response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserBilling'
+
+    UserSessionList:
+      description: List of user sessions
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserSession'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    UserSessionResponse:
+      description: User session response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserSession'
+
+    ShopList:
+      description: List of shops
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Shop'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    ShopResponse:
+      description: Shop response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Shop'
+
+    ShopOwnerMappingList:
+      description: List of shop owner mappings
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ShopOwnerMapping'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    ShopOwnerMappingResponse:
+      description: Shop owner mapping response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShopOwnerMapping'
+
+    ProductTypeList:
+      description: List of product types
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductType'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    ProductTypeResponse:
+      description: Product type response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductType'
+
+    ProductVariantList:
+      description: List of product variants
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductVariant'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    ProductVariantResponse:
+      description: Product variant response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductVariant'
+
+    ProductVariableFieldList:
+      description: List of product variable fields
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductVariableField'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    ProductVariableFieldResponse:
+      description: Product variable field response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductVariableField'
+
+    ProductVariableFieldValueList:
+      description: List of product variable field values
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductVariableFieldValue'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    ProductVariableFieldValueResponse:
+      description: Product variable field value response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductVariableFieldValue'
+
+    ProductVariantVarMappingList:
+      description: List of product variant variable mappings
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductVariantVarMapping'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    ProductVariantVarMappingResponse:
+      description: Product variant variable mapping response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductVariantVarMapping'
+
+    ShopProductMappingList:
+      description: List of shop product mappings
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ShopProductMapping'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    ShopProductMappingResponse:
+      description: Shop product mapping response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShopProductMapping'
+
+    ShopProductTypeMappingList:
+      description: List of shop product type mappings
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ShopProductTypeMapping'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    ProductTypeProductMappingList:
+      description: List of product type product mappings
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductTypeProductMapping'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    ProductTypeProductMappingResponse:
+      description: Product type product mapping response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductTypeProductMapping'
+
+    OrderItemList:
+      description: List of order items
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderItem'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    OrderItemResponse:
+      description: Order item response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrderItem'
+
+    OrderBillingList:
+      description: List of order billing addresses
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderBilling'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    OrderBillingResponse:
+      description: Order billing address response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrderBilling'
+
+    OrderShippingList:
+      description: List of order shipping addresses
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderShipping'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    OrderShippingResponse:
+      description: Order shipping address response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrderShipping'
+
+    OrderPaymentList:
+      description: List of order payments
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderPayment'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    OrderPaymentResponse:
+      description: Order payment response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrderPayment'
+
+    PostList:
+      description: List of posts
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    PostResponse:
+      description: Post response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Post'
+
+    PostTypeList:
+      description: List of post types
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostType'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    PostTypeResponse:
+      description: Post type response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PostType'
+
+    LangList:
+      description: List of languages
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lang'
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            required:
+              - data
+              - meta
+
+    LangResponse:
+      description: Language response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Lang'
